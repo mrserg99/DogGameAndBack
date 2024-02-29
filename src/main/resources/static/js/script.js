@@ -5,7 +5,7 @@ var time_out = 1; // задержка смены изображений
 var i = 0;
 var timeout;
 var opacity = 100;
-let name22;
+let name22 ="o";
 
 function fade_to_next() {
     opacity--;
@@ -63,7 +63,9 @@ var uName = uName||function log() {
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
+
             name22=xmlhttp.responseText;
+
 
           //  user_name = xmlhttp.responseText;
             // window.user_name;
