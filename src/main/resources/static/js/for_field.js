@@ -1,4 +1,4 @@
-user = 0;
+let user = 0;
 
 function getXmlHttp() {
     var x = false;
@@ -955,13 +955,16 @@ function one_one() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (window.user===0){
+    if (user<=0){
+       // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=user+1;
+               // alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.remove("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
@@ -981,7 +984,7 @@ function one_one() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                window.user=1;
+
                 answer = xmlhttp.responseText;
                 resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
                 numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
@@ -1010,13 +1013,17 @@ function one_two() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (window.user<2){
+    if (user<2){
+       // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("new_cell u2=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=user+1;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.remove("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1034,8 +1041,7 @@ function one_two() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
-                window.user=2;
+
                 answer = xmlhttp.responseText;
                 resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
                 numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
