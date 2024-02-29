@@ -6,6 +6,7 @@ import org.springframework.boot.runApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -49,10 +50,25 @@ class Main {
         }
     }
 
-//    @PostMapping(value = ["/field"])
-//    fun field(@RequestBody status: String): ResponseEntity<HttpStatus> {
-//        return ResponseEntity(HttpStatus.OK)
-//    }
+    @GetMapping(value = ["/game"])
+    fun game(): ResponseEntity<HttpStatus> {
+        // TODO: Запрос к БД, создание лобби, создание поля, ресурсов на поле и подключение игроков
+        // TODO: возвращаем ресурсы
+        return ResponseEntity(HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/move"])
+    fun move(@RequestParam(value = "position") position: String): ResponseEntity<HttpStatus> {
+        log.info("Ход - position = $position")
+        if(true){ //TODO: обращение к БД, присваиваем ресурсы игроку
+            log.info("Ход - успешно")
+//            return ResponseEntity(login, HttpStatus.OK)
+            return ResponseEntity(HttpStatus.OK)
+        } else {
+            log.error("Ход - неудачно")
+            return ResponseEntity(HttpStatus.UNAUTHORIZED)
+        }
+    }
 
 
 }
