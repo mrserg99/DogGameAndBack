@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Прогулки с собаками</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/pawprint.png" type="image/png">
+    <link rel="stylesheet" href="style/style_2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <div class="blocks">
+        <div class="main_block">
+            <div class="main_block_wrapper">
+                <h2 id="winner" class="main_block_title">Поздравляем coffin-bean!</h2>
+                <h3 id="numb" class="main_block_text">Вы заняли<br>2 место</h3>
+            </div>
+
+            <div class="main_block_buttons">
+                <div class="btn_wrapper">
+                    <button onclick="play()" class="main_block_button_btn">Играть снова</button>
+                    <button onclick="exit()" class="main_block_button_btn">Выйти</button>
+                </div>
+                <img src="./img/Nina.png" alt="" class="dog_img">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    function play(){
+        window.location.href = 'game_field.html';
+    }
+    function exit(){
+        window.location.href = 'login.html';
+    }
+
+    function getXmlHttp() {
+        var x = false;
+        try {
+            x = new XMLHttpRequest();
+        }catch(e) {
+            try {
+                x = new ActiveXObject("Microsoft.XMLHTTP");
+            }catch(ex) {
+                try {
+                    req = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch(e1) {
+                    x = false;
+                }
+            }
+        }
+        return x;
+    }
+    function name() {
+        var a = name;
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
+        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+            xmlhttp.onload = function () {
+                if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                    alert("Oops!")
+                } else { // если всё прошло гладко, выводим результат
+
+                    document.getElementById("winner").innerHTML = xmlhttp.responseText; // Выводим ответ сервера
+                }
+            }
+        };
+    }
+    function numb() {
+        var a = numb;
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
+        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+            xmlhttp.onload = function () {
+                if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                    alert("Oops!")
+                } else { // если всё прошло гладко, выводим результат
+
+                    document.getElementById("numb").innerHTML = xmlhttp.responseText; // Выводим ответ сервера
+                }
+            }
+        };
+    }
+</script>
+</html>

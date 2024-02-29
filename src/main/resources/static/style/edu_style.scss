@@ -1,0 +1,120 @@
+//@import "global";
+.wrapper{
+  //z-index: 2;
+}
+.paw{
+  //z-index: 1;
+}
+.wrapper_8{
+  z-index: 8;
+  //background-color: $dark;
+  background-color: rgb(8,17,29);
+  opacity: 0.79;
+  width: 100%;
+  //position: absolute;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  //position: absolute;
+}
+.wrapper_9{
+  position: fixed;
+  top:0;
+  z-index: 9;
+  //position: absolute;
+  &_nina{
+    position: fixed;
+    width: 445px;
+    z-index: 10;
+    margin-left: 1120px;
+    margin-top: -390px;
+  }
+  &_bubbles{
+    margin-top: 247px;
+    margin-left: 613px;
+    width: 665px;
+    &_text1{
+      margin-top: -200px;
+      font-size: 20px;
+      color: #000;
+      //width: 675px;
+      margin-left: 20px;
+      width: 600px;
+      margin-bottom: 130px;
+    }
+
+    &_text{
+      margin-top: -48px;
+      margin-left: 290px;
+      font-size: 20px;
+      color: #000;
+    }
+    &_bubble_text{
+      margin-left: 31px;
+      margin-top: -120px;
+      z-index: 10;
+      margin-bottom: 155px;
+      font-size: 20px;
+      color: #000;
+    }
+    &_2{
+      margin-top: 125px;
+      margin-left: 270px;
+    }
+    &_link{
+      margin-bottom: 80px;
+      margin-top: 55px;
+
+      &_1{
+        background-color: #8EB6CC;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #07131B;
+        padding: 12px 42px;
+        &:hover{
+          color: #07131B;
+          scale: 1.2;
+
+        }
+      }
+      &_2{
+        background-color: #8EB6CC;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #07131B;
+        padding: 12px 61px;
+        &:hover{
+          color: #07131B;
+          scale: 1.2;
+
+        }
+      }
+
+    }
+  }
+}
+.wrapper_9_bubbles_bubble_text2{
+  margin-left: 31px;
+  margin-top: -120px;
+  z-index: 10;
+ // margin-bottom: 155px;
+  font-size: 20px;
+  color: #000;
+  //margin-bottom: -32px;
+}
+.wrapper_9_btn{
+  margin-top: 232px;
+  margin-left: -323px;
+  margin-bottom: -44px;
+}
+.none{
+  visibility: hidden;
+}
+.wrapper_9_bubbles_bubble_text4{
+  font-size: 20px;
+  color: #000;
+
+}
+
+
+
