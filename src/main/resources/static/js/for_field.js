@@ -957,7 +957,7 @@ function one_one() {
     var numbRes = 0;
     if (window.user===0){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
@@ -1011,7 +1011,7 @@ function one_two() {
     var numbRes = 0;
     if (window.user<2){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("new_cell u2=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
@@ -1065,7 +1065,7 @@ function one_tree() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1118,7 +1118,7 @@ function one_four() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1173,7 +1173,7 @@ function one_five() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1228,7 +1228,7 @@ function one_six() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1285,7 +1285,7 @@ function one_seven() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1340,7 +1340,7 @@ function one_eith() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1393,7 +1393,7 @@ function one_nine() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1448,7 +1448,7 @@ function one_ten() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1501,7 +1501,7 @@ function two_one() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1554,7 +1554,7 @@ function two_two() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1608,7 +1608,7 @@ function two_free() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1660,7 +1660,7 @@ function tree_zero() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
@@ -1727,7 +1727,7 @@ function tree_one() {
     var resourseID = 0;
     var numbRes = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', ' /service/move', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
     xmlhttp.onload = function () {
