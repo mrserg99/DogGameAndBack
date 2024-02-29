@@ -64,16 +64,13 @@ var uName = uName||function log() {
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
           resp = xmlhttp.responseText;
-
-            // сделать информацию о текущем пользователе глобальной, для предоставления доступа всем скриптам
-
-
-// где угодно в коде
+          alert(resp)
 
 
             //  user_name = xmlhttp.responseText;
             // window.user_name;
             window.location.href = 'main.html';
+            document.getElementById("user_name").innerHTML =  resp;
         }
     }
 }
@@ -81,7 +78,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    document.getElementById("user_name").innerHTML =  resp;
+   // document.getElementById("user_name").innerHTML =  resp;
 }
 
 
