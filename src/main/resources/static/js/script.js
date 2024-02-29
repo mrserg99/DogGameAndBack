@@ -63,11 +63,17 @@ var uName = uName||function log() {
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
+          //  let window.resp = xmlhttp.responseText;
 
-            name22=xmlhttp.responseText;
+            // сделать информацию о текущем пользователе глобальной, для предоставления доступа всем скриптам
+            window.currentUser = {
+                name: xmlhttp.responseText
+            };
+
+// где угодно в коде
 
 
-          //  user_name = xmlhttp.responseText;
+            //  user_name = xmlhttp.responseText;
             // window.user_name;
             window.location.href = 'main.html';
         }
@@ -77,7 +83,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    document.getElementById("user_name").innerHTML = window.name22;
+    document.getElementById("user_name").innerHTML =  currentUser.name;
 }
 
 
