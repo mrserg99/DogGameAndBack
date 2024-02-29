@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style/style_2.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -32,10 +33,11 @@
 
 </body>
 <script>
-    function play(){
+    function play() {
         window.location.href = 'game_field.html';
     }
-    function exit(){
+
+    function exit() {
         window.location.href = 'login.html';
     }
 
@@ -43,27 +45,27 @@
         var x = false;
         try {
             x = new XMLHttpRequest();
-        }catch(e) {
+        } catch (e) {
             try {
                 x = new ActiveXObject("Microsoft.XMLHTTP");
-            }catch(ex) {
+            } catch (ex) {
                 try {
                     req = new ActiveXObject("Msxml2.XMLHTTP");
-                }
-                catch(e1) {
+                } catch (e1) {
                     x = false;
                 }
             }
         }
         return x;
     }
+
     function name() {
         var a = name;
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
             xmlhttp.onload = function () {
                 if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                     alert("Oops!")
@@ -74,13 +76,14 @@
             }
         };
     }
+
     function numb() {
         var a = numb;
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
             xmlhttp.onload = function () {
                 if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                     alert("Oops!")
