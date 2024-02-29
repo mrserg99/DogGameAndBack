@@ -64,7 +64,7 @@ var uName = uName||function log() {
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
 
-            name22=xmlhttp.responseText;
+            window.name22=xmlhttp.responseText;
 
 
           //  user_name = xmlhttp.responseText;
@@ -77,7 +77,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    document.getElementById("user_name").innerHTML = name22;
+    document.getElementById("user_name").innerHTML = window.name22;
 }
 
 
