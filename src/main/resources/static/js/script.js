@@ -51,7 +51,7 @@ function getXmlHttp() {
 }
 
 /* POST-запрос */
-function log() {
+var uName = uName||function log() {
     var login = document.getElementById("login").value; // Считываем значение
     var password = document.getElementById("password").value; // Считываем значение
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
@@ -71,21 +71,9 @@ function log() {
 }
 
 
-/*
-function foo() {
-    var location = 'location';
-    alert(location); // вернет 'location'
-    alert(window.location); // вернет window.location
-    window.a = 'переменная из функции';
-}
-alert(a); // undefined
-foo();
-alert(a); // переменная из функции
-*/
-
 
 function name() {
-    document.getElementById("user_name").innerHTML = window.userName;
+    document.getElementById("user_name").innerHTML = uName.userName;
 }
 
 
