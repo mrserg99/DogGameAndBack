@@ -5,7 +5,7 @@ var time_out = 1; // задержка смены изображений
 var i = 0;
 var timeout;
 var opacity = 100;
-
+let name;
 
 function fade_to_next() {
     opacity--;
@@ -24,7 +24,7 @@ function fade_to_next() {
     }
 }
 
-let userName="milly";
+
 setInterval(
     function () {
         i++;
@@ -62,7 +62,9 @@ var uName = uName||function log() {
         if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
-           window.userName= xmlhttp.responseText;
+           //window.userName= xmlhttp.responseText;
+            name=xmlhttp.responseText;
+
           //  user_name = xmlhttp.responseText;
             // window.user_name;
             window.location.href = 'main.html';
@@ -73,7 +75,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    document.getElementById("user_name").innerHTML = uName.userName;
+    document.getElementById("user_name").innerHTML = name;
 }
 
 
