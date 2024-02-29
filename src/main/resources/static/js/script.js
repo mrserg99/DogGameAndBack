@@ -30,7 +30,7 @@ function name() {
 }
 function uname(){
     //id="u00_name" class="user_name"
-    document.getElementsByClassName("u00_name").innerHTML =  document.cookie.slice(6, document.cookie.length);
+    document.getElementById("u00_name").innerHTML =  document.cookie.slice(6, document.cookie.length);
 }
 
 
