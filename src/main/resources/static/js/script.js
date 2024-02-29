@@ -5,7 +5,7 @@ var time_out = 1; // задержка смены изображений
 var i = 0;
 var timeout;
 var opacity = 100;
-let name22 ="o";
+
 
 function fade_to_next() {
     opacity--;
@@ -62,20 +62,14 @@ var uName = uName||function log() {
         if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
-           //window.userName= xmlhttp.responseText;
+
 
             let login = "login"
             let value = xmlhttp.responseText;
 
-            document.cookie = login + '='+value
-            //document.cookie =+ //xmlhttp.responseText;
-              alert(resp)
+            document.cookie =login +"="+ value
 
-
-            //  user_name = xmlhttp.responseText;
-            // window.user_name;
             window.location.href = 'main.html';
-            //document.getElementById("user_name").innerHTML =  resp;
         }
     }
 }
@@ -84,7 +78,7 @@ var uName = uName||function log() {
 
 function name() {
 
-    document.getElementById("user_name").innerHTML =  document.cookie;
+    document.getElementById("user_name").innerHTML =  document.cookie.slice(6,200);
 }
 
 
