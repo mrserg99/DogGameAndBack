@@ -63,14 +63,19 @@ var uName = uName||function log() {
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
-          resp = xmlhttp.responseText;
-          alert(resp)
+
+            let login = "login"
+            let value = xmlhttp.responseText;
+
+            document.cookie = login + '='+value
+            //document.cookie =+ //xmlhttp.responseText;
+              alert(resp)
 
 
             //  user_name = xmlhttp.responseText;
             // window.user_name;
             window.location.href = 'main.html';
-            document.getElementById("user_name").innerHTML =  resp;
+            //document.getElementById("user_name").innerHTML =  resp;
         }
     }
 }
@@ -78,7 +83,8 @@ var uName = uName||function log() {
 
 
 function name() {
-   // document.getElementById("user_name").innerHTML =  resp;
+    
+    document.getElementById("user_name").innerHTML =  document.cookie;
 }
 
 
