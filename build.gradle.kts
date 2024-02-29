@@ -1,4 +1,4 @@
-	import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	war
@@ -23,9 +23,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 //	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-web") {
-		exclude("org.springframework.boot", "spring-boot-starter-logging")
-	}
+	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
@@ -43,6 +41,10 @@ dependencies {
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+}
+
+configurations.implementation {
+	exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
 }
 
 tasks.withType<KotlinCompile> {
