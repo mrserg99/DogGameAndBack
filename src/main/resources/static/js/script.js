@@ -29,7 +29,8 @@ function name() {
     document.getElementById("user_name").innerHTML =  document.cookie.slice(6, document.cookie.length)+"\u{1F43E}";
 }
 function uname(){
-    document.getElementsByClassName("user_name").innerHTML =  document.cookie.slice(6, document.cookie.length);
+    //id="u00_name" class="user_name"
+    document.getElementsByClassName("u00_name").innerHTML =  document.cookie.slice(6, document.cookie.length);
 }
 
 
