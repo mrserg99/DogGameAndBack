@@ -914,7 +914,7 @@ function codeAddress() {
 
 
 function zero_zero() {
-    alert(' /service/move');
+     
     var cell = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', ' /service/move11', true); // Открываем асинхронное соединение
@@ -949,7 +949,7 @@ function zero_zero() {
 
 function one_one() {
     var cell = 11;
-    alert(' /service/move');
+     
 
    // var flag = 0;
     var answer;
@@ -962,6 +962,7 @@ function one_one() {
         xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.remove("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -979,7 +980,7 @@ function one_one() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
+
                 window.user=1;
                 answer = xmlhttp.responseText;
                 resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
@@ -1003,7 +1004,7 @@ function one_one() {
 
 function one_two() {
     var cell = 12;
-    alert(' /service/move');
+     
 
     // var flag = 0;
     var answer;
@@ -1016,24 +1017,24 @@ function one_two() {
         xmlhttp.send("new_cell u2=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                document.getElementById("u2_11").classList.remove("nothing");
-                document.getElementById("u2_12").classList.add("nothing");
-                document.getElementById("u2_13").classList.add("nothing");
-                document.getElementById("u2_14").classList.add("nothing");
-                document.getElementById("u2_15").classList.add("nothing");
-                document.getElementById("u2_16").classList.add("nothing");
-                document.getElementById("u2_17").classList.add("nothing");
-                document.getElementById("u2_18").classList.add("nothing");
-                document.getElementById("u2_19").classList.add("nothing");
-                document.getElementById("u2_1A").classList.add("nothing");
+                document.getElementById("u1_11").classList.add("nothing");
+                document.getElementById("u1_12").classList.remove("nothing");
+                document.getElementById("u1_13").classList.add("nothing");
+                document.getElementById("u1_14").classList.add("nothing");
+                document.getElementById("u1_15").classList.add("nothing");
+                document.getElementById("u1_16").classList.add("nothing");
+                document.getElementById("u1_17").classList.add("nothing");
+                document.getElementById("u1_18").classList.add("nothing");
+                document.getElementById("u1_19").classList.add("nothing");
+                document.getElementById("u1_1A").classList.add("nothing");
 
-                document.getElementById("u2_21").classList.add("nothing");
-                document.getElementById("u2_22").classList.add("nothing");
-                document.getElementById("u2_23").classList.add("nothing");
+                document.getElementById("u1_21").classList.add("nothing");
+                document.getElementById("u1_22").classList.add("nothing");
+                document.getElementById("u1_23").classList.add("nothing");
 
-                document.getElementById("u2_31").classList.add("nothing");
-                document.getElementById("u2_30").classList.add("nothing");
-                document.getElementById("u2_00").classList.add("nothing");
+                document.getElementById("u1_31").classList.add("nothing");
+                document.getElementById("u1_30").classList.add("nothing");
+                document.getElementById("u1_00").classList.add("nothing");
                 window.user=2;
                 answer = xmlhttp.responseText;
                 resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
@@ -1058,7 +1059,7 @@ function one_two() {
 function one_tree() {
 
     var cell = 13;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1111,7 +1112,7 @@ function one_tree() {
 
 function one_four() {
     var cell = 14;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1166,7 +1167,7 @@ function one_four() {
 
 function one_five() {
     var cell = 15;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1221,7 +1222,7 @@ function one_five() {
 
 function one_six() {
     var cell = 16;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1278,7 +1279,7 @@ function one_seven() {
     alert('17');
 
     var cell = 17;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1333,7 +1334,7 @@ function one_seven() {
 
 function one_eith() {
     var cell = 18;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1386,7 +1387,7 @@ function one_eith() {
 
 function one_nine() {
     var cell = 19;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1441,7 +1442,7 @@ function one_nine() {
 
 function one_ten() {
     var cell = '1a';
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1494,7 +1495,7 @@ function one_ten() {
 
 function two_one() {
     var cell = 21;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1547,7 +1548,7 @@ function two_one() {
 
 function two_two() {
     var cell = 22;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1601,7 +1602,7 @@ function two_two() {
 function two_free() {
 
     var cell = 23;
-    alert(' /service/move');
+     
 
     var flag = 0;
     var answer;
@@ -1654,7 +1655,7 @@ function two_free() {
 
 function tree_zero() {
     var cell = 30;
-    alert(' /service/move');
+     
     var flag = 0;
     var answer;
     var resourseID = 0;
@@ -1721,7 +1722,7 @@ function tree_zero() {
 
 function tree_one() {
     var cell = 30;
-    alert(' /service/move');
+     
     var flag = 0;
     var answer;
     var resourseID = 0;
