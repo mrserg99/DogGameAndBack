@@ -63,12 +63,10 @@ var uName = uName||function log() {
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
            //window.userName= xmlhttp.responseText;
-          //  let window.resp = xmlhttp.responseText;
+          resp = xmlhttp.responseText;
 
             // сделать информацию о текущем пользователе глобальной, для предоставления доступа всем скриптам
-            window.currentUser = {
-                name: xmlhttp.responseText
-            };
+
 
 // где угодно в коде
 
@@ -83,7 +81,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    document.getElementById("user_name").innerHTML =  currentUser.name;
+    document.getElementById("user_name").innerHTML =  resp;
 }
 
 
