@@ -77,8 +77,10 @@ var uName = uName||function log() {
 
 
 function name() {
-
     document.getElementById("user_name").innerHTML =  document.cookie.slice(6, document.cookie.length)+"\u{1F43E}";
+}
+function uname(){
+    document.getElementsByClassName("user_name").innerHTML =  document.cookie.slice(6, document.cookie.length);
 }
 
 
