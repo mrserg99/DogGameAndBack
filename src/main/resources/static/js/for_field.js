@@ -960,10 +960,10 @@ function one_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
+        xmlhttp.send("position" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                user=user+1;
+                user=1
                // alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.remove("nothing");
@@ -1007,9 +1007,6 @@ function one_one() {
 
 function one_two() {
     var cell = 12;
-     
-
-    // var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
@@ -1018,10 +1015,10 @@ function one_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("new_cell u2=" + encodeURIComponent(cell));
+        xmlhttp.send("position" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                user=user+1;
+                user=2;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
@@ -1063,28 +1060,21 @@ function one_two() {
 }
 
 function one_tree() {
-
     var cell = 13;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //     alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<3){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=3;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.remove("nothing");
@@ -1102,8 +1092,10 @@ function one_tree() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1111,33 +1103,32 @@ function one_tree() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_four() {
     var cell = 14;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //   alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<4 && user>1){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=4;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1155,8 +1146,10 @@ function one_four() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1164,35 +1157,32 @@ function one_four() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_five() {
     var cell = 15;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //  alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<5 && user<2){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=5;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1210,8 +1200,10 @@ function one_five() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1219,35 +1211,32 @@ function one_five() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_six() {
     var cell = 16;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //   alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<6 && user>3){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=6;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1265,8 +1254,10 @@ function one_six() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1274,37 +1265,33 @@ function one_six() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_seven() {
-    alert('17');
-
     var cell = 17;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //   alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
+    if (user<7 && user<4){
 
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=7;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1322,8 +1309,10 @@ function one_seven() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1331,35 +1320,33 @@ function one_seven() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
+
 }
 
 function one_eith() {
     var cell = 18;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //    alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<8 && user>5){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=8;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1377,8 +1364,10 @@ function one_eith() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1386,33 +1375,32 @@ function one_eith() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_nine() {
     var cell = 19;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //  alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<9 && user<6){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=9;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1430,8 +1418,10 @@ function one_nine() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1439,35 +1429,32 @@ function one_nine() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function one_ten() {
     var cell = '1a';
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //    alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<10 && user<5){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=10;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1477,7 +1464,7 @@ function one_ten() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.remove("nothing");
+                document.getElementById("u1_1a").classList.remove("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1485,8 +1472,10 @@ function one_ten() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1494,33 +1483,32 @@ function one_ten() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function two_one() {
     var cell = 21;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //  alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user==7 || user==6){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=30;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1530,7 +1518,7 @@ function two_one() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.remove("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1538,8 +1526,10 @@ function two_one() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1547,33 +1537,32 @@ function two_one() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function two_two() {
     var cell = 22;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //  alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<31){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=user+1;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1583,7 +1572,7 @@ function two_two() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.remove("nothing");
@@ -1591,8 +1580,10 @@ function two_two() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1600,34 +1591,32 @@ function two_two() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function two_free() {
-
     var cell = 23;
-     
-
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //   alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user<32){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=user+1;
+                //alert(user)
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1637,7 +1626,7 @@ function two_free() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1645,8 +1634,10 @@ function two_free() {
 
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1654,32 +1645,33 @@ function two_free() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
+            } else {
+                alert("serv trouble")
             }
         }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function tree_zero() {
     var cell = 30;
-     
-    var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            // alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user==8 || user==9|| user==10){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=45;
+                //alert(user)
+                document.getElementById("u1_30").classList.remove("nothing");
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1696,9 +1688,11 @@ function tree_zero() {
                 document.getElementById("u1_23").classList.add("nothing");
 
                 document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.remove("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
 
+
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1706,47 +1700,33 @@ function tree_zero() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
-    }
-    var m_id = 202;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', '/service/win', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send(encodeURIComponent(m_id));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //   alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            document.getElementById("m_count").innerHTML = +16;
-        }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
 function tree_one() {
-    var cell = 30;
-     
-    var flag = 0;
+    var cell = 31;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("new_cell u1=" + encodeURIComponent(cell));
-    xmlhttp.onload = function () {
-        if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            //  alert("Oops!")
-        } else { // если всё прошло гладко, выводим результат
-
-            answer = xmlhttp.responseText;
-            flag = answer.substring(0, 1);//первая цифра можно или нельзя походить на эту клетку
-            resourseID = answer.substring(1, 3); //ID ресурса 3 цифры
-            numbRes = answer.substring(3, 4); //количество которое нужно прибавлять 1 цифра
-            if (flag === 1) { // перемещение игрока
+    if (user==30 || user==31|| user==32 || user==33){
+        // alert(user)
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.onload = function () {
+            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                user=45;
+                //alert(user)
+                document.getElementById("u1_31").classList.remove("nothing");
+                document.getElementById("u1_00").classList.add("nothing");
                 document.getElementById("u1_11").classList.add("nothing");
                 document.getElementById("u1_12").classList.add("nothing");
                 document.getElementById("u1_13").classList.add("nothing");
@@ -1762,10 +1742,12 @@ function tree_one() {
                 document.getElementById("u1_22").classList.add("nothing");
                 document.getElementById("u1_23").classList.add("nothing");
 
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.remove("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
+                document.getElementById("u1_30").classList.add("nothing");
 
+
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
                 if (parseInt(resourseID) === 201) {//проверка на ID ресурса
                     document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
                 } else {
@@ -1773,20 +1755,13 @@ function tree_one() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+
             } else {
-                alert('вы пытаетесь пройти назад, идти нужно вперед')
+                alert("serv trouble")
             }
         }
-    }
-    var m_id = 202;
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', '/service/win', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send(encodeURIComponent(m_id));
-    if (xmlhttp.readyState == 4) { // Ответ пришёл
-        if (xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
-            document.getElementById("m_count").innerHTML = +16;
-        }
+    }else {
+        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
 }
 
