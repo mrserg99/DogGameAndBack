@@ -1172,7 +1172,7 @@ function one_five() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (user<5 && user<2){
+    if (user<5 && user>2){
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -1192,7 +1192,7 @@ function one_five() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1280,7 +1280,7 @@ function one_seven() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (user<7 && user<4){
+    if (user<7 && user>4){
 
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
@@ -1390,7 +1390,7 @@ function one_nine() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (user<9 && user<6){
+    if (user<9 && user>6){
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -1444,7 +1444,7 @@ function one_ten() {
     var answer;
     var resourseID = 0;
     var numbRes = 0;
-    if (user<10 && user<5){
+    if (user<10 && user>5){
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -1681,7 +1681,7 @@ function tree_zero() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1736,7 +1736,7 @@ function tree_one() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
