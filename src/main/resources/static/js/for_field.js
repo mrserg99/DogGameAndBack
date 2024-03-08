@@ -960,7 +960,7 @@ function one_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=1
@@ -1015,7 +1015,7 @@ function one_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=2;
@@ -1069,7 +1069,7 @@ function one_tree() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=3;
@@ -1123,7 +1123,7 @@ function one_four() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=4;
@@ -1177,7 +1177,7 @@ function one_five() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=5;
@@ -1231,7 +1231,7 @@ function one_six() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=6;
@@ -1286,7 +1286,7 @@ function one_seven() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=7;
@@ -1341,7 +1341,7 @@ function one_eith() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=8;
@@ -1395,7 +1395,7 @@ function one_nine() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=9;
@@ -1449,7 +1449,7 @@ function one_ten() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=10;
@@ -1503,7 +1503,7 @@ function two_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=30;
@@ -1557,7 +1557,7 @@ function two_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
@@ -1611,7 +1611,7 @@ function two_free() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
@@ -1665,7 +1665,7 @@ function tree_zero() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
@@ -1720,7 +1720,7 @@ function tree_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position" + encodeURIComponent(cell));
+        xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
             if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
