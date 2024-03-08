@@ -23,7 +23,7 @@
             <div class="main_block_buttons">
                 <div class="btn_wrapper">
                     <button onclick="play()" class="main_block_button_btn">Играть снова</button>
-                    <button  class="main_block_button_btn">Выйти</button><!--onclick="exit()"-->
+                    <button onclick="exit()" class="main_block_button_btn">Выйти</button><!---->
                 </div>
                 <img src="./img/Nina.png" alt="" class="dog_img">
             </div>
@@ -34,7 +34,7 @@
 </body>
 <script>
     function place(){
-        var place_player = "Text" + document.cookie.slice(6, 7)+" место";
+        var place_player = "Вы заняли "+<br></br> + document.cookie.slice(6, 7)+" место";
         var name_p = "Поздравляем, " + document.cookie.slice(20, document.cookie.length)+"!";
         document.getElementById("numb").innerHTML = place_player;
         document.getElementById("winner").innerHTML = name_p;
