@@ -1793,5 +1793,6 @@ function win() {
 }
 
 function place(){
-    document.getElementById("numb").innerHTML = document.cookie.slice(6, document.cookie.length);
+    document.getElementById("numb").innerHTML = document.cookie.slice(6, 7);
+    document.getElementById("winner").innerHTML =  document.cookie.slice(12, document.cookie.length);
 }
