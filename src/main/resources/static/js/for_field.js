@@ -962,7 +962,7 @@ function one_one() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=1
                // alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
