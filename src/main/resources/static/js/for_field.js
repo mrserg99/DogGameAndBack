@@ -1794,6 +1794,6 @@ function win() {
 
 function place(){
     //p=1; login=sehtdrtfgj
-    document.getElementById("numb").innerHTML ="Вы заняли"+ <br></br> +document.cookie.slice(2, 4)+" место";
-    document.getElementById("winner").innerHTML ="Поздравляем, " + document.cookie.slice(11, document.cookie.length)+"!";
+    document.getElementById("numb").innerHTML ="Вы заняли" +document.cookie.slice(2, 4)+" место";
+    document.getElementById("winner").innerHTML ="Поздравляем, " + document.cookie.slice(14, document.cookie.length)+"!";
 }
