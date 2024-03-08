@@ -559,5 +559,19 @@ button:hover{
   margin-top: 40px!important;
 }
 .nothing{
-  opacity: 0;
+  opacity: 0 !important;
+}
+.wrapper_34{
+  z-index: 8;
+  //background-color: $dark;
+  background-color: rgb(8,17,29);
+  opacity: 0.79;
+  width: 100%;
+  //position: absolute;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  //position: absolute;
+  text-align: center;
+  padding-top: 25%;
 }

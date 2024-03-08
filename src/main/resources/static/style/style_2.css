@@ -584,7 +584,19 @@ button:hover {
 }
 
 .nothing {
-  opacity: 0;
+  opacity: 0 !important;
+}
+
+.wrapper_34 {
+  z-index: 8;
+  background-color: rgb(8, 17, 29);
+  opacity: 0.79;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  padding-top: 25%;
 }
 
 /*# sourceMappingURL=style_2.css.map */
