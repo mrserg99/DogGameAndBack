@@ -884,7 +884,7 @@ function player_place(){
         if (xmlhttp.status === 200) {
             let p_p = xmlhttp.responseText;
 
-            let place = "p"
+            let place = "place"
 
             document.cookie =place +"="+ p_p
             win();
