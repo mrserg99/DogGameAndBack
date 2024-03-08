@@ -12,7 +12,7 @@
           rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper" onload="place()">
     <div class="blocks">
         <div class="main_block">
             <div class="main_block_wrapper">
@@ -31,67 +31,7 @@
 </div>
 
 </body>
-<script>
+<script src="js/for_field.js">
 
-    function getXmlHttp() {
-        var x = false;
-        try {
-            x = new XMLHttpRequest();
-        } catch (e) {
-            try {
-                x = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (ex) {
-                try {
-                    req = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e1) {
-                    x = false;
-                }
-            }
-        }
-        return x;
-    }
-
-    function play() {
-        window.location.href = 'game_field.html';
-    }
-
-    function exit() {
-        window.location.href = 'login.html';
-    }
-
-    function name() {
-        var a = name;
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
-            xmlhttp.onload = function () {
-                if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                    alert("Oops!")
-                } else { // если всё прошло гладко, выводим результат
-                    document.getElementById("winner").innerHTML = xmlhttp.responseText; // Выводим ответ сервера
-                }
-            }
-        };
-    }
-
-    function numb() {
-        var a = numb;
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', 'test.php', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("name=" + encodeURIComponent(a)); // Отправляем POST-запрос
-        xmlhttp.onreadystatechange = function () { // Ждём ответа от сервера
-            xmlhttp.onload = function () {
-                if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                    alert("Oops!")
-                } else { // если всё прошло гладко, выводим результат
-
-                    document.getElementById("numb").innerHTML = xmlhttp.responseText; // Выводим ответ сервера
-                }
-            }
-        };
-    }
 </script>
 </html>

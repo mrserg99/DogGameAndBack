@@ -1700,6 +1700,7 @@ function tree_zero() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+                player_place();
 
             } else {
                 alert("serv trouble")
@@ -1755,6 +1756,7 @@ function tree_one() {
                         document.getElementById("c_count").innerHTML = +parseInt(numbRes);
                     }
                 }
+                player_place();
 
             } else {
                 alert("serv trouble")
@@ -1765,3 +1767,31 @@ function tree_one() {
     }
 }
 
+function player_place(){
+    var login = document.cookie.slice(6, document.cookie.length);
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login=" + encodeURIComponent(login));
+    xmlhttp.onload = function () {
+        if (xmlhttp.status === 200) {
+            let p_p = xmlhttp.responseText;
+
+            let place = "place"
+
+            document.cookie =place +"="+ p_p
+            win();
+        }else {
+
+        }
+    }
+}
+
+function win() {
+
+    window.location.href = 'win.html';
+}
+
+function place(){
+    document.getElementById("numb").innerHTML = document.cookie.slice(6, document.cookie.length);
+}
