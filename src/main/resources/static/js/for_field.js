@@ -962,7 +962,7 @@ function one_one() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=1
                // alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -975,7 +975,7 @@ function one_one() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1017,7 +1017,7 @@ function one_two() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=2;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1030,7 +1030,7 @@ function one_two() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1071,7 +1071,7 @@ function one_tree() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=3;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1084,7 +1084,7 @@ function one_tree() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1125,7 +1125,7 @@ function one_four() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=4;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1138,7 +1138,7 @@ function one_four() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1179,7 +1179,7 @@ function one_five() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=5;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1233,7 +1233,7 @@ function one_six() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=6;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1246,7 +1246,7 @@ function one_six() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1288,7 +1288,7 @@ function one_seven() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=7;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1301,7 +1301,7 @@ function one_seven() {
                 document.getElementById("u1_17").classList.remove("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1343,7 +1343,7 @@ function one_eith() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=8;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1356,7 +1356,7 @@ function one_eith() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.remove("nothing");
                 document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1397,7 +1397,7 @@ function one_nine() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=9;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1410,7 +1410,7 @@ function one_nine() {
                 document.getElementById("u1_17").classList.add("nothing");
                 document.getElementById("u1_18").classList.add("nothing");
                 document.getElementById("u1_19").classList.remove("nothing");
-                document.getElementById("u1_1A").classList.add("nothing");
+                document.getElementById("u1_1a").classList.add("nothing");
 
                 document.getElementById("u1_21").classList.add("nothing");
                 document.getElementById("u1_22").classList.add("nothing");
@@ -1451,7 +1451,7 @@ function one_ten() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=10;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1505,7 +1505,7 @@ function two_one() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=30;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1559,7 +1559,7 @@ function two_two() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1613,7 +1613,7 @@ function two_free() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
                 //alert(user)
                 document.getElementById("u1_00").classList.add("nothing");
@@ -1667,7 +1667,7 @@ function tree_zero() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
                 //alert(user)
                 document.getElementById("u1_30").classList.remove("nothing");
@@ -1722,7 +1722,7 @@ function tree_one() {
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("position=" + encodeURIComponent(cell));
         xmlhttp.onload = function () {
-            if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
                 //alert(user)
                 document.getElementById("u1_31").classList.remove("nothing");
