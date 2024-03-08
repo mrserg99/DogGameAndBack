@@ -41,6 +41,12 @@ function uname(){
     document.getElementById("u18_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
     document.getElementById("u19_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
     document.getElementById("u1a_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
+
+
+    document.getElementById("u21_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
+    document.getElementById("u22_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
+    document.getElementById("u23_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
+
     document.getElementById("u30_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
     document.getElementById("u31_name").innerHTML =  document.cookie.slice(15, document.cookie.length);
 
