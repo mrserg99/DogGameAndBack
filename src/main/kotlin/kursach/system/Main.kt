@@ -70,7 +70,24 @@ class Main {
         }
     }
 
-
+    @PostMapping(value = ["/finish"])
+    fun finish(@RequestParam(value = "login") login: String): ResponseEntity<String> {
+        log.info("Финиш - login = $login")
+        if(true){ //TODO: обращение к БД, получаем итоговую сумму очков
+            if(true){ //TODO: обращение к БД, если все игроки пришли то возвращаем страницу результатов
+                log.info("Финиш - результат")
+                val pos = 1
+                return ResponseEntity(pos.toString(),HttpStatus.OK)
+            } else {
+                log.info("Финиш - успешно")
+//            return ResponseEntity(login, HttpStatus.OK)
+                return ResponseEntity(HttpStatus.OK)
+            }
+        } else {
+            log.error("Финиш - неудачно")
+            return ResponseEntity(HttpStatus.UNAUTHORIZED)
+        }
+    }
 }
 
 fun main(args: Array<String>) {
