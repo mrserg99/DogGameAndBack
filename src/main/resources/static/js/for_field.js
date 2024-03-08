@@ -887,11 +887,12 @@ function player_place(){
             let place = "place"
 
             document.cookie =place +"="+ p_p
-            win();
+
         }else {
 
         }
     }
+    win();
 }
 
 function win() {
