@@ -875,7 +875,7 @@ function tree_one() {
 }
 
 function player_place(){
-    var login = document.cookie.slice(15, document.cookie.length);
+    var login = document.cookie.slice(20, document.cookie.length);
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
@@ -900,8 +900,8 @@ function win() {
 }
 
 function place(){
-    var place_player = "Text" + document.cookie.slice(2, 4)+" место";
-    var name_p = "Поздравляем, " + document.cookie.slice(15, document.cookie.length)+"!";
+    var place_player = "Text" + document.cookie.slice(6, 7)+" место";
+    var name_p = "Поздравляем, " + document.cookie.slice(20, document.cookie.length)+"!";
     document.getElementById("numb").innerHTML = place_player;
     document.getElementById("winner").innerHTML = name_p;
 }
