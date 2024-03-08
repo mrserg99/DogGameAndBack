@@ -1777,7 +1777,7 @@ function player_place(){
         if (xmlhttp.status === 200) {
             let p_p = xmlhttp.responseText;
 
-            let place = "place"
+            let place = "p"
 
             document.cookie =place +"="+ p_p
             win();
@@ -1793,6 +1793,7 @@ function win() {
 }
 
 function place(){
-    document.getElementById("numb").innerHTML = document.cookie.slice(6, 7);
-    document.getElementById("winner").innerHTML =  document.cookie.slice(12, document.cookie.length);
+    //p=1; login=sehtdrtfgj
+    document.getElementById("numb").innerHTML ="Вы заняли"+ <br></br> +document.cookie.slice(2, 4)+" место";
+    document.getElementById("winner").innerHTML ="Поздравляем, " + document.cookie.slice(11, document.cookie.length)+"!";
 }
