@@ -587,6 +587,10 @@ button:hover {
   opacity: 0 !important;
 }
 
+.dis_none {
+  display: none !important;
+}
+
 .wrapper_34 {
   z-index: 8;
   background-color: rgb(8, 17, 29);
