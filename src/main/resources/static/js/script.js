@@ -26,7 +26,7 @@ var uName = uName||function log() {
 
 
 function name() {
-    let per = "login="
+    let per = "login"
   //  document.getElementById("user_name").innerHTML =  document.cookie.slice(20, document.cookie.length)+"\u{1F43E}";
     //document.getElementById("user_name").innerHTML =  document.cookie.split("login=")+"\u{1F43E}";
       document.getElementById("user_name").innerHTML =  getCookie(per)+"\u{1F43E}";
