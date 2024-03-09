@@ -1,3 +1,7 @@
+//@import("core")
+
+
+
 let user = 0;
 
 function getXmlHttp() {
