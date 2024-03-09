@@ -900,9 +900,6 @@ function player_place(){
 }
 
 function win() {
-
     window.location.href = 'win.html';
-
 }
-
 
