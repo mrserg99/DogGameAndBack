@@ -1,6 +1,7 @@
 package kursach.system.repository
 
 import kursach.system.annotation.Procedures
+import kursach.system.dto.Cell
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -11,22 +12,24 @@ import java.sql.ResultSet
 @Repository
 class Query() {
 
-    companion object{
+    companion object {
         val log = LoggerFactory.getLogger(Query::class.java)
         val walker = StackWalker.getInstance()
     }
 
     init {
-        Database.connect("jdbc:mysql://localhost:3306",
+        Database.connect(
+            "jdbc:mysql://localhost:3306",
             driver = "com.mysql.cj.jdbc.Driver",
             user = "admin",
-            password = "")
+            password = ""
+        )
     }
 
     @Procedures("call authorisation_user(?, ?)")
-    fun authorisation(login: String, password: String): Boolean{
-        val methodName = walker.walk {
-                frames -> frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+    fun authorisation(login: String, password: String): Boolean {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
         val pr = getProcedure(methodName, String::class.java, String::class.java)
         val query = prepareQuery(pr, login, password)
@@ -38,10 +41,44 @@ class Query() {
         return result[0]
     }
 
+    @Procedures("call registration_user(?, ?)")
+    fun registration(login: String, password: String): Boolean {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+        }.get()
+        val pr = getProcedure(methodName, String::class.java, String::class.java)
+        val query = prepareQuery(pr, login, password)
+        val result = transaction {
+            query.execAndMap { rs ->
+                rs.getBoolean("result")
+            }
+        }
+
+        return result[0]
+    }
+
+    @Procedures("call create_game_field()")
+    fun createGameField(): List<Cell> {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+        }.get()
+        val pr = getProcedure(methodName)
+        val query = prepareQuery(pr)
+        val result = transaction {
+            query.execAndMap {rs ->
+                Cell(cellId = rs.getLong("Cell_ID"),
+                    resourceId = rs.getLong("Resource_ID"),
+                    countOfResources = rs.getInt("Count_of_resources"))
+            }
+        }
+
+        return result
+    }
+
     @Procedures("select * from users where Login=?")
-    fun getUser(login: String){
-        val methodName = walker.walk {
-            frames -> frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+    fun getUser(login: String) {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
         val pr = getProcedure(methodName, String::class.java)
         val query = prepareQuery(pr, login)
@@ -56,9 +93,9 @@ class Query() {
     }
 
     @Procedures("select * from game")
-    fun getGame(){
-        val methodName = walker.walk {
-            frames -> frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+    fun getGame() {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
         val pr = getProcedure(methodName)
         val query = prepareQuery(pr)
@@ -79,14 +116,14 @@ class Query() {
     private fun prepareQuery(procedure: String, vararg arguments: String): String {
         var result = procedure
 
-        for (argument in arguments){
+        for (argument in arguments) {
             result = result.replaceFirst("?", "'$argument'")
         }
 
         return result
     }
 
-    private fun <T:Any> String.execAndMap(transform : (ResultSet) -> T) : List<T> {
+    private fun <T : Any> String.execAndMap(transform: (ResultSet) -> T): List<T> {
         val result = arrayListOf<T>()
         TransactionManager.current().exec(this) { rs ->
             while (rs.next()) {

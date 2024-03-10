@@ -1,16 +1,15 @@
 package kursach.system
 
+import kursach.system.dto.Cell
 import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 
 
 @SpringBootApplication
@@ -40,9 +39,9 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/registration"])
-    fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String?): ResponseEntity<String> {
+    fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
         log.info("Регистрация - Логин = ${login}, Пароль = $pass")
-        if(true){ //TODO: обращение к БД RegisterUser
+        if(query.registration(login, pass)){
             log.info("Регистрация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -51,11 +50,10 @@ class Main(val query: Query) {
         }
     }
 
-    @GetMapping(value = ["/game"])
-    fun game(): ResponseEntity<HttpStatus> {
-        // TODO: Запрос к БД, создание лобби, создание поля, ресурсов на поле и подключение игроков
-        // TODO: возвращаем ресурсы
-        return ResponseEntity(HttpStatus.OK)
+    @RequestMapping(value = ["/game"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun game(): ResponseEntity<List<Cell>> {
+        log.info("Создаём игровое поле")
+        return ResponseEntity(query.createGameField(), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/move"])
