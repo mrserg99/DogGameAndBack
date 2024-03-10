@@ -96,18 +96,18 @@ function one_one() {
                 document.getElementById("u1_30").classList.add("nothing");
 
 
+                resurse = "resurse_1_1"
                 answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = numbRes; //добавление ресурса
-                }
-                if (parseInt(resourseID) === 203) {
-                    document.getElementById("c_count").innerHTML = numbRes;
-                }
-                if (parseInt(resourseID) === 202) {
-                    document.getElementById("m_count").innerHTML = numbRes;
-                }
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+
+
 
 
             } else {
@@ -155,18 +155,18 @@ function one_two() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = numbRes; //добавление ресурса
-                }
-                if (parseInt(resourseID) === 203) {
-                    document.getElementById("c_count").innerHTML = numbRes;
-                }
-                if (parseInt(resourseID) === 202) {
-                    document.getElementById("m_count").innerHTML = numbRes;
-                }
+
+                 resurse = "resurse_1_2"
+                 answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+
 
             } else {
                 alert("serv trouble")
@@ -213,7 +213,18 @@ function one_tree() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[2].resourceId,var_json[2].countOfResources);
+                resurse = "resurse_1_3"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -260,7 +271,18 @@ function one_four() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[3].resourceId,var_json[3].countOfResources);
+                resurse = "resurse_1_4"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
