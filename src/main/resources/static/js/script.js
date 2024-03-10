@@ -33,6 +33,7 @@ function name() {
 function uname(){
 
     let per = "login"
+    let field = "field"
 
     document.getElementById("u00_name").innerHTML =  getCookie(per);
     document.getElementById("u11_name").innerHTML =  getCookie(per);
@@ -53,6 +54,12 @@ function uname(){
     document.getElementById("u30_name").innerHTML =  getCookie(per);
     document.getElementById("u31_name").innerHTML =  getCookie(per);
 
+
+    let arr = getCookie(field)
+
+
+    document.getElementById("wrapper_34").classList.add("dis_none")
+
 }
 
 
@@ -65,20 +72,15 @@ function single() {
     xmlhttp.send();
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
+            let field = "field"
             let text = xmlhttp.responseText;
-            var file = "file.txt"
-            writeTextFile(file,"oop")
+            document.cookie = field+"="+ text
             window.location.href = 'game_field.html';
         }
     }
 }
 
-function  writeTextFile(afilename, output)
-{
-    var txtFile = new File(afilename);
-    txtFile.writeln(output);
-    txtFile.close();
-}
+
 function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
