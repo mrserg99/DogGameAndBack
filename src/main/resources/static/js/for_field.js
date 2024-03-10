@@ -109,6 +109,8 @@ function one_one() {
 }
 
 function one_two() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 12;
     var answer;
     var resourseID = 0;
@@ -154,6 +156,8 @@ function one_two() {
 }
 
 function one_tree() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 13;
     var answer;
     var resourseID = 0;
@@ -199,6 +203,8 @@ function one_tree() {
 }
 
 function one_four() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 14;
     var answer;
     var resourseID = 0;
@@ -244,6 +250,8 @@ function one_four() {
 }
 
 function one_five() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 15;
     var answer;
     var resourseID = 0;
@@ -289,6 +297,8 @@ function one_five() {
 }
 
 function one_six() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 16;
     var answer;
     var resourseID = 0;
@@ -334,6 +344,8 @@ function one_six() {
 }
 
 function one_seven() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 17;
     var answer;
     var resourseID = 0;
@@ -381,6 +393,8 @@ function one_seven() {
 }
 
 function one_eith() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 18;
     var answer;
     var resourseID = 0;
@@ -426,6 +440,9 @@ function one_eith() {
 }
 
 function one_nine() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
+
     var cell = 19;
     var answer;
     var resourseID = 0;
@@ -471,6 +488,10 @@ function one_nine() {
 }
 
 function one_ten() {
+
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
+
     var cell = '1a';
     var answer;
     var resourseID = 0;
@@ -516,6 +537,9 @@ function one_ten() {
 }
 
 function two_one() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
+
     var cell = 21;
     var answer;
     var resourseID = 0;
@@ -561,6 +585,8 @@ function two_one() {
 }
 
 function two_two() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 22;
     var answer;
     var resourseID = 0;
@@ -606,6 +632,8 @@ function two_two() {
 }
 
 function two_free() {
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
     var cell = 23;
     var answer;
     var resourseID = 0;
