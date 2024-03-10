@@ -58,11 +58,11 @@ function uname(){
      var var_json = JSON.parse(getCookie(field));
 
     if(var_json[0].cellId===11){
-        get_one_one(var_json[0].resourceId,var_json[0].countOfResources);
+        get_cell(var_json[0].resourceId,var_json[0].countOfResources,"11_b","11_202","11_c","11_p1","11_p2","11_p3","11_p4");
     }
-
-
-    //get_one_two();
+    if(var_json[1].cellId===12){
+        get_cell(var_json[1].resourceId,var_json[1].countOfResources,"12_b","12_202","12_c","12_p1","12_p2","12_p3","12_p4");
+    }
 
 
     document.getElementById("wrapper_34").classList.add("dis_none")
@@ -95,43 +95,28 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function get_one_one(Res_id, count){
-    let field = "field"
+function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
 
-    if (Res_id ===201){ //getCookie(field).slice(27,30)==="201"){
-        document.getElementById("11_b").classList.remove("dis_none")
-    }else if (Res_id ===202){ //if(getCookie(field).slice(27,30)==="202"){
-        document.getElementById("11_202").classList.remove("dis_none")
-    }else if (Res_id ===203){ //if(getCookie(field).slice(27,30)==="203"){
-        document.getElementById("11_c").classList.remove("dis_none")
-
-    }
-
-    if (count===1){//(getCookie(field).slice(50,51)==="1"){
-        document.getElementById("11_p1").classList.remove("dis_none")
-
-    } else if (count===2){//if((getCookie(field).slice(50,51)==="2")){
-        document.getElementById("11_p2").classList.remove("dis_none")
-
-    } else if (count===3){//if((getCookie(field).slice(50,51)==="3")){
-        document.getElementById("11_p3").classList.remove("dis_none")
-
-    }else if (count===4){//if(getCookie(field).slice(50,51)==="4"){
-        document.getElementById("11_p4").classList.remove("dis_none")
+    if (Res_id ===201){
+        document.getElementById(i1).classList.remove("dis_none")
+    }else if (Res_id ===202){
+        document.getElementById(i2).classList.remove("dis_none")
+    }else if (Res_id ===203){
+        document.getElementById(i3).classList.remove("dis_none")
 
     }
-}
 
-function populateHeader(jsonObj) {
-    var cellId = document.querySelector("cellId");
-    var myH1 = document.createElement("resourceId");
-    var myH2 = document.createElement("countOfResources");
+    if (count===1){
+        document.getElementById(i4_p).classList.remove("dis_none")
 
-    myH1.textContent = jsonObj["squadName"];
-    header.appendChild(myH1);
+    } else if (count===2){
+        document.getElementById(i5_p).classList.remove("dis_none")
 
-    var myPara = document.createElement("p");
-    myPara.textContent =
-        "Hometown: " + jsonObj["homeTown"] + " // Formed: " + jsonObj["formed"];
-    header.appendChild(myPara);
+    } else if (count===3){
+        document.getElementById(i6_p).classList.remove("dis_none")
+
+    }else if (count===4){
+        document.getElementById(i7_p).classList.remove("dis_none")
+
+    }
 }
