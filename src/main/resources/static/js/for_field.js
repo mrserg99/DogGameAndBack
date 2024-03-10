@@ -25,7 +25,7 @@ function getXmlHttp() {
 
 
 function zero_zero() {
-     
+
     var cell = 0;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', ' /service/move11', true); // Открываем асинхронное соединение
@@ -60,9 +60,9 @@ function zero_zero() {
 
 function one_one() {
     var cell = 11;
-     
+    let field = "field"
+    var var_json = JSON.parse(getCookie(field));
 
-   // var flag = 0;
     var answer;
     var resourseID = 0;
     var numbRes = 0;
@@ -96,16 +96,8 @@ function one_one() {
                 document.getElementById("u1_30").classList.add("nothing");
 
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                    if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                        document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                    } else {
-                        if (parseInt(resourseID) === 203) {
-                            document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                        }
-                    }
+                addRes(var_json[0].resourceId,var_json[0].countOfResources);
+
 
             } else {
                 alert("serv trouble")
@@ -150,16 +142,7 @@ function one_two() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[1].resourceId,var_json[1].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -204,16 +187,7 @@ function one_tree() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[2].resourceId,var_json[2].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -258,16 +232,7 @@ function one_four() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[3].resourceId,var_json[3].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -312,16 +277,7 @@ function one_five() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[4].resourceId,var_json[4].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -366,16 +322,7 @@ function one_six() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[5].resourceId,var_json[5].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -421,16 +368,7 @@ function one_seven() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[6].resourceId,var_json[6].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -476,16 +414,7 @@ function one_eith() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[7].resourceId,var_json[7].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -530,16 +459,7 @@ function one_nine() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[8].resourceId,var_json[8].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -584,16 +504,7 @@ function one_ten() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[9].resourceId,var_json[9].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -638,16 +549,7 @@ function two_one() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[10].resourceId,var_json[10].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -692,16 +594,7 @@ function two_two() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[11].resourceId,var_json[11].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -746,16 +639,7 @@ function two_free() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
+                addRes(var_json[12].resourceId,var_json[12].countOfResources);
 
             } else {
                 alert("serv trouble")
@@ -878,6 +762,7 @@ function tree_one() {
     }
 }
 
+
 function player_place(){
     var login = document.cookie.slice(20, document.cookie.length);
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
@@ -897,6 +782,18 @@ function player_place(){
         }
     }
     win();
+}
+
+function addRes(resId, count){
+    if (resId === 201) {//проверка на ID ресурса
+        document.getElementById("b_count").innerHTML = +count; //добавление ресурса
+    }
+    if (resId === 202) {
+        document.getElementById("m_count").innerHTML = +count;
+    }
+    if (resId === 203) {
+        document.getElementById("c_count").innerHTML = +count;
+    }
 }
 
 function win() {
