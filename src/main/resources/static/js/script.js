@@ -57,11 +57,11 @@ function uname(){
 
      var var_json = JSON.parse(getCookie(field));
 
-    if(var_json.cellId[0]==="11"){
-        get_one_one(var_json.resourceId[0],var_json.countOfResources[0]);
+    if(var_json.cellId==="11"){
+        get_one_one(var_json.resourceId,var_json.countOfResources);
     }
-    if(var_json.cellId[1]==="11"){
-        get_one_one(var_json.resourceId[1],var_json.countOfResources[1]);
+    if(var_json.cellId==="11"){
+        get_one_one(var_json.resourceId,var_json.countOfResources);
     }
 
 
