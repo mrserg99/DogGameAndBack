@@ -1,5 +1,6 @@
 package kursach.system
 
+import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @SpringBootApplication
 @Controller
-class Main {
+class Main(val query: Query) {
 
     companion object{
         val log = LoggerFactory.getLogger(Main::class.java)
@@ -27,9 +28,9 @@ class Main {
     }
 
     @PostMapping(value = ["/login"])
-    fun login(@RequestParam(value = "login") login: String, @RequestParam(value = "pass") pass: String?): ResponseEntity<String> {
+    fun login(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
         log.info("Авторизация - Логин = ${login}, Пароль = $pass")
-        if(true){ //TODO: обращение к БД registration_user
+        if(query.authorisation(login, pass)){
             log.info("Авторизация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -39,7 +40,7 @@ class Main {
     }
 
     @PostMapping(value = ["/registration"])
-    fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "pass") pass: String?): ResponseEntity<String> {
+    fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String?): ResponseEntity<String> {
         log.info("Регистрация - Логин = ${login}, Пароль = $pass")
         if(true){ //TODO: обращение к БД RegisterUser
             log.info("Регистрация - вернул $login")
