@@ -819,14 +819,20 @@ function addRes(resId, count){
     let p203= document.getElementById('c_count')
 
     if (resId === 201) {//проверка на ID ресурса
+        let prev1 = 0
+        prev1 = prev1+count;
+        document.getElementById("b_count").innerHTML = prev1; //добавление ресурса
 
-        document.getElementById("b_count").innerHTML = +count; //добавление ресурса
     }
     if (resId === 202) {
-        document.getElementById("m_count").innerHTML = +count;
+        let prev2 = 0
+        prev2 = prev2+count;
+        document.getElementById("m_count").innerHTML = prev2;
     }
     if (resId === 203) {
-        document.getElementById("c_count").innerHTML = +count;
+        let prev3 = 0
+        prev3 = prev3+count;
+        document.getElementById("c_count").innerHTML = prev3;
     }
 }
 
