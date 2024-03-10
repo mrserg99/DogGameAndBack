@@ -248,7 +248,7 @@
         var login = document.getElementById("login").value; // Считываем значение
         var password = document.getElementById("password").value; // Считываем значение
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', '/serves/new_user', true); // Открываем асинхронное соединение
+        xmlhttp.open('POST', 'registration', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("login=" + encodeURIComponent(login) + "&password=" + encodeURIComponent(password)); // Отправляем POST-запрос
         if (xmlhttp.readyState == 4) { // Ответ пришёл
