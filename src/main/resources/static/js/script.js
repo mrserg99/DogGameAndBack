@@ -65,15 +65,19 @@ function single() {
     xmlhttp.send();
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
+            let text = xmlhttp.responseText;
+            var file = "file.txt"
+            writeTextFile(file,text)
             window.location.href = 'game_field.html';
         }
     }
-
-
-
-
 }
 
+function  writeTextFile(afilename, output){
+    var txtFile = newFile(afilename);
+    txtFile.writeln(output);
+    txtFile.close();
+}
 function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
