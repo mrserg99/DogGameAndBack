@@ -59,7 +59,17 @@ function uname(){
 
 
 function single() {
-    window.location.href = 'game_field.html';
+    // alert(user)
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST','game', true); // Открываем асинхронное соединение
+    xmlhttp.onload = function () {
+        if (xmlhttp.status === 200) {
+            window.location.href = 'game_field.html';
+        }
+    }
+
+
+
 
 }
 
