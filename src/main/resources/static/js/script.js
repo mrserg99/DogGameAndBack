@@ -33,7 +33,7 @@ function name() {
 function uname(){
 
     let per = "login"
-
+    let field = "field"
 
     document.getElementById("u00_name").innerHTML =  getCookie(per);
     document.getElementById("u11_name").innerHTML =  getCookie(per);
@@ -55,9 +55,17 @@ function uname(){
     document.getElementById("u31_name").innerHTML =  getCookie(per);
 
 
-    //let arr = getCookie(field)
+     var var_json = JSON.parse(getCookie(field));
 
-    get_one_one()
+    if(var_json.cellId[0]==="11"){
+        get_one_one(var_json.resourceId[0],var_json.countOfResources[0]);
+    }
+    if(var_json.cellId[1]==="11"){
+        get_one_one(var_json.resourceId[1],var_json.countOfResources[1]);
+    }
+
+
+    //get_one_two();
 
 
     document.getElementById("wrapper_34").classList.add("dis_none")
@@ -90,29 +98,43 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-function get_one_one(){
+function get_one_one(Res_id, count){
     let field = "field"
 
-    if (getCookie(field).slice(27,30)==="201"){
+    if (Res_id ==="201"){ //getCookie(field).slice(27,30)==="201"){
         document.getElementById("11_b").classList.remove("dis_none")
-    }else if(getCookie(field).slice(27,30)==="202"){
+    }else if (Res_id ==="202"){ //if(getCookie(field).slice(27,30)==="202"){
         document.getElementById("11_202").classList.remove("dis_none")
-    }else if(getCookie(field).slice(27,30)==="203"){
+    }else if (Res_id ==="203"){ //if(getCookie(field).slice(27,30)==="203"){
         document.getElementById("11_c").classList.remove("dis_none")
 
     }
 
-    if (getCookie(field).slice(50,51)==="1"){
+    if (count==="1"){//(getCookie(field).slice(50,51)==="1"){
         document.getElementById("11_p1").classList.remove("dis_none")
 
-    } else if((getCookie(field).slice(50,51)==="2")){
+    } else if (count==="2"){//if((getCookie(field).slice(50,51)==="2")){
         document.getElementById("11_p2").classList.remove("dis_none")
 
-    } else if((getCookie(field).slice(50,51)==="3")){
+    } else if (count==="3"){//if((getCookie(field).slice(50,51)==="3")){
         document.getElementById("11_p3").classList.remove("dis_none")
 
-    }else if(getCookie(field).slice(50,51)==="4"){
+    }else if (count==="4"){//if(getCookie(field).slice(50,51)==="4"){
         document.getElementById("11_p4").classList.remove("dis_none")
 
     }
+}
+
+function populateHeader(jsonObj) {
+    var cellId = document.querySelector("cellId");
+    var myH1 = document.createElement("resourceId");
+    var myH2 = document.createElement("countOfResources");
+
+    myH1.textContent = jsonObj["squadName"];
+    header.appendChild(myH1);
+
+    var myPara = document.createElement("p");
+    myPara.textContent =
+        "Hometown: " + jsonObj["homeTown"] + " // Formed: " + jsonObj["formed"];
+    header.appendChild(myPara);
 }
