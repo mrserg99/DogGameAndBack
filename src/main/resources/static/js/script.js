@@ -33,7 +33,7 @@ function name() {
 function uname(){
 
     let per = "login"
-    let field = "field"
+
 
     document.getElementById("u00_name").innerHTML =  getCookie(per);
     document.getElementById("u11_name").innerHTML =  getCookie(per);
@@ -55,7 +55,9 @@ function uname(){
     document.getElementById("u31_name").innerHTML =  getCookie(per);
 
 
-    let arr = getCookie(field)
+    //let arr = getCookie(field)
+
+    get_one_one()
 
 
     document.getElementById("wrapper_34").classList.add("dis_none")
@@ -86,4 +88,31 @@ function getCookie(name) {
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function get_one_one(){
+    let field = "field"
+
+    if (getCookie(field).slice(27,30)==="201"){
+        document.getElementById("11_b").classList.remove("dis_none")
+    }else if(getCookie(field).slice(27,30)==="202"){
+        document.getElementById("11_b").classList.remove("dis_none")
+    }else if(getCookie(field).slice(27,30)==="203"){
+        document.getElementById("11_b").classList.remove("dis_none")
+
+    }
+
+    if (getCookie(field).slice(50,51)==="1"){
+        document.getElementById("11_p1").classList.remove("dis_none")
+
+    } else if((getCookie(field).slice(50,51)==="2")){
+        document.getElementById("11_p2").classList.remove("dis_none")
+
+    } else if((getCookie(field).slice(50,51)==="3")){
+        document.getElementById("11_p3").classList.remove("dis_none")
+
+    }else if(getCookie(field).slice(50,51)==="4"){
+        document.getElementById("11_p4").classList.remove("dis_none")
+
+    }
 }
