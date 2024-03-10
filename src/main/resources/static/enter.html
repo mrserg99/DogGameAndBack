@@ -251,12 +251,14 @@
         xmlhttp.open('POST', 'registration', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("login=" + encodeURIComponent(login) + "&password=" + encodeURIComponent(password)); // Отправляем POST-запрос
-        if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-            alert("Вы успешно зарегистрированы");
-            window.location.href = 'login.html';
-        } else { // если всё прошло гладко, выводим результат
-            alert("Вы не смогли зарегистрироваться. Попробуйте еще раз")
+        xmlhttp.onload = function () {
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                alert("Вы успешно зарегистрированы");
+                window.location.href = 'login.html';
+            } else { // если всё прошло гладко, выводим результат
+                alert("Вы не смогли зарегистрироваться. Попробуйте еще раз")
 
+            }
         }
     }
 </script>
