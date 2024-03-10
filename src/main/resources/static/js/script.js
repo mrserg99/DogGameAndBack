@@ -57,7 +57,7 @@ function uname(){
 
      var var_json = JSON.parse(getCookie(field));
 
-    if(var_json[0].cellId==="11"){
+    if(var_json[0].cellId===11){
         get_one_one(var_json[0].resourceId,var_json[0].countOfResources);
     }
 
@@ -98,25 +98,25 @@ function getCookie(name) {
 function get_one_one(Res_id, count){
     let field = "field"
 
-    if (Res_id ==="201"){ //getCookie(field).slice(27,30)==="201"){
+    if (Res_id ===201){ //getCookie(field).slice(27,30)==="201"){
         document.getElementById("11_b").classList.remove("dis_none")
-    }else if (Res_id ==="202"){ //if(getCookie(field).slice(27,30)==="202"){
+    }else if (Res_id ===202){ //if(getCookie(field).slice(27,30)==="202"){
         document.getElementById("11_202").classList.remove("dis_none")
-    }else if (Res_id ==="203"){ //if(getCookie(field).slice(27,30)==="203"){
+    }else if (Res_id ===203){ //if(getCookie(field).slice(27,30)==="203"){
         document.getElementById("11_c").classList.remove("dis_none")
 
     }
 
-    if (count==="1"){//(getCookie(field).slice(50,51)==="1"){
+    if (count===1){//(getCookie(field).slice(50,51)==="1"){
         document.getElementById("11_p1").classList.remove("dis_none")
 
-    } else if (count==="2"){//if((getCookie(field).slice(50,51)==="2")){
+    } else if (count===2){//if((getCookie(field).slice(50,51)==="2")){
         document.getElementById("11_p2").classList.remove("dis_none")
 
-    } else if (count==="3"){//if((getCookie(field).slice(50,51)==="3")){
+    } else if (count===3){//if((getCookie(field).slice(50,51)==="3")){
         document.getElementById("11_p3").classList.remove("dis_none")
 
-    }else if (count==="4"){//if(getCookie(field).slice(50,51)==="4"){
+    }else if (count===4){//if(getCookie(field).slice(50,51)==="4"){
         document.getElementById("11_p4").classList.remove("dis_none")
 
     }
