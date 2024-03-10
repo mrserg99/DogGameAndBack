@@ -96,7 +96,18 @@ function one_one() {
                 document.getElementById("u1_30").classList.add("nothing");
 
 
-                addRes(var_json[0].resourceId,var_json[0].countOfResources);
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
+                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
+                    document.getElementById("b_count").innerHTML = numbRes; //добавление ресурса
+                }
+                if (parseInt(resourseID) === 203) {
+                    document.getElementById("c_count").innerHTML = numbRes;
+                }
+                if (parseInt(resourseID) === 202) {
+                    document.getElementById("m_count").innerHTML = numbRes;
+                }
 
 
             } else {
@@ -144,7 +155,18 @@ function one_two() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-
+                answer = xmlhttp.responseText;
+                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
+                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
+                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
+                    document.getElementById("b_count").innerHTML = numbRes; //добавление ресурса
+                }
+                if (parseInt(resourseID) === 203) {
+                    document.getElementById("c_count").innerHTML = numbRes;
+                }
+                if (parseInt(resourseID) === 202) {
+                    document.getElementById("m_count").innerHTML = numbRes;
+                }
 
             } else {
                 alert("serv trouble")
@@ -768,16 +790,6 @@ function tree_one() {
                 document.getElementById("u1_30").classList.add("nothing");
 
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
-                }
                 player_place();
 
             } else {
