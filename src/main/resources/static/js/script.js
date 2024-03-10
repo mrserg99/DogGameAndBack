@@ -96,9 +96,9 @@ function get_one_one(){
     if (getCookie(field).slice(27,30)==="201"){
         document.getElementById("11_b").classList.remove("dis_none")
     }else if(getCookie(field).slice(27,30)==="202"){
-        document.getElementById("11_b").classList.remove("dis_none")
+        document.getElementById("11_202").classList.remove("dis_none")
     }else if(getCookie(field).slice(27,30)==="203"){
-        document.getElementById("11_b").classList.remove("dis_none")
+        document.getElementById("11_c").classList.remove("dis_none")
 
     }
 
