@@ -29,7 +29,7 @@ class Main(val query: Query) {
     @PostMapping(value = ["/login"])
     fun login(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
         log.info("Авторизация - Логин = ${login}, Пароль = $pass")
-        if(query.authorisation(login, pass)){
+        if(query.authorisationQuery(login, pass)){
             log.info("Авторизация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -41,7 +41,7 @@ class Main(val query: Query) {
     @PostMapping(value = ["/registration"])
     fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
         log.info("Регистрация - Логин = ${login}, Пароль = $pass")
-        if(query.registration(login, pass)){
+        if(query.registrationQuery(login, pass)){
             log.info("Регистрация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -53,20 +53,14 @@ class Main(val query: Query) {
     @RequestMapping(value = ["/game"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun game(): ResponseEntity<List<Cell>> {
         log.info("Создаём игровое поле")
-        return ResponseEntity(query.createGameField(), HttpStatus.OK)
+        return ResponseEntity(query.createGameFieldQuery(), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/move"])
-    fun move(@RequestParam(value = "position") position: String): ResponseEntity<HttpStatus> {
+    fun move(@RequestParam(value = "position") position: String, @RequestParam(value = "login") login: String): ResponseEntity<HttpStatus> {
         log.info("Ход - position = $position")
-        if(true){ //TODO: обращение к БД, присваиваем ресурсы игроку
-            log.info("Ход - успешно")
-//            return ResponseEntity(login, HttpStatus.OK)
-            return ResponseEntity(HttpStatus.OK)
-        } else {
-            log.error("Ход - неудачно")
-            return ResponseEntity(HttpStatus.UNAUTHORIZED)
-        }
+        query.moveQuery(position, login)
+        return ResponseEntity(HttpStatus.OK)
     }
 
     @PostMapping(value = ["/finish"])

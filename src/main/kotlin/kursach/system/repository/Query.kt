@@ -27,7 +27,7 @@ class Query() {
     }
 
     @Procedures("call authorisation_user(?, ?)")
-    fun authorisation(login: String, password: String): Boolean {
+    fun authorisationQuery(login: String, password: String): Boolean {
         val methodName = walker.walk { frames ->
             frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
@@ -42,7 +42,7 @@ class Query() {
     }
 
     @Procedures("call registration_user(?, ?)")
-    fun registration(login: String, password: String): Boolean {
+    fun registrationQuery(login: String, password: String): Boolean {
         val methodName = walker.walk { frames ->
             frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
@@ -58,7 +58,25 @@ class Query() {
     }
 
     @Procedures("call create_game_field()")
-    fun createGameField(): List<Cell> {
+    fun createGameFieldQuery(): List<Cell> {
+        val methodName = walker.walk { frames ->
+            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
+        }.get()
+        val pr = getProcedure(methodName)
+        val query = prepareQuery(pr)
+        val result = transaction {
+            query.execAndMap {rs ->
+                Cell(cellId = rs.getLong("Cell_ID"),
+                    resourceId = rs.getLong("Resource_ID"),
+                    countOfResources = rs.getInt("Count_of_resources"))
+            }
+        }
+
+        return result
+    }
+
+    @Procedures("call create_game_field()")
+    fun moveQuery(position: String, login: String): List<Cell> {
         val methodName = walker.walk { frames ->
             frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
