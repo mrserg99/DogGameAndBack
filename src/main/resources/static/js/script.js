@@ -67,13 +67,14 @@ function single() {
         if (xmlhttp.status === 200) {
             let text = xmlhttp.responseText;
             var file = "file.txt"
-            writeTextFile(file,text)
+            writeTextFile(file,"oop")
             window.location.href = 'game_field.html';
         }
     }
 }
 
-function  writeTextFile(afilename, output){
+function  writeTextFile(afilename, output)
+{
     var txtFile = new File(afilename);
     txtFile.writeln(output);
     txtFile.close();
