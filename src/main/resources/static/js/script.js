@@ -74,7 +74,7 @@ function single() {
 }
 
 function  writeTextFile(afilename, output){
-    var txtFile = newFile(afilename);
+    var txtFile = new File(afilename);
     txtFile.writeln(output);
     txtFile.close();
 }
