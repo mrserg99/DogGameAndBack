@@ -252,6 +252,7 @@ function one_four() {
 function one_five() {
     let field = "field"
     var var_json = JSON.parse(getCookie(field));
+
     var cell = 15;
     var answer;
     var resourseID = 0;
@@ -813,14 +814,19 @@ function player_place(){
 }
 
 function addRes(resId, count){
+    let p201 = document.getElementById('b_count')
+    let p202= document.getElementById('m_count')
+    let p203= document.getElementById('c_count')
+
     if (resId === 201) {//проверка на ID ресурса
-        document.getElementById("b_count").innerHTML = +count; //добавление ресурса
+
+        document.getElementById("b_count").innerHTML = p201.value +count; //добавление ресурса
     }
     if (resId === 202) {
-        document.getElementById("m_count").innerHTML = +count;
+        document.getElementById("m_count").innerHTML = p202.value +count;
     }
     if (resId === 203) {
-        document.getElementById("c_count").innerHTML = +count;
+        document.getElementById("c_count").innerHTML = p203.value +count;
     }
 }
 
