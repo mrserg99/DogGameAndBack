@@ -61,7 +61,7 @@ function uname(){
 function single() {
     // alert(user)
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST','game', true); // Открываем асинхронное соединение
+    xmlhttp.open('GET','game', true); // Открываем асинхронное соединение
     xmlhttp.send();
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
