@@ -1,8 +1,8 @@
 package kursach.system.repository
 
-import kursach.system.annotation.Procedures
 import kursach.system.dto.Cell
 import kursach.system.dto.PlayerResources
+import kursach.system.vokabulary.Procedures
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -15,7 +15,6 @@ class Query() {
 
     companion object {
         val log = LoggerFactory.getLogger(Query::class.java)
-        val walker = StackWalker.getInstance()
     }
 
     init {
@@ -27,13 +26,10 @@ class Query() {
         )
     }
 
-    @Procedures("call authorisation_user(?, ?)")
     fun authorisationQuery(login: String, password: String): Boolean {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName, String::class.java, String::class.java)
-        val query = prepareQuery(pr, login, password)
+        log.info("Вызов процедуры авторизации")
+
+        val query = prepareQuery(Procedures.authorisationUser, login, password)
         val result = transaction {
             query.execAndMap { rs ->
                 rs.getBoolean("result")
@@ -42,13 +38,10 @@ class Query() {
         return result[0]
     }
 
-    @Procedures("call registration_user(?, ?)")
     fun registrationQuery(login: String, password: String): Boolean {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName, String::class.java, String::class.java)
-        val query = prepareQuery(pr, login, password)
+        log.info("Вызов процедуры регистрации")
+
+        val query = prepareQuery(Procedures.registrationUser, login, password)
         val result = transaction {
             query.execAndMap { rs ->
                 rs.getBoolean("result")
@@ -58,13 +51,10 @@ class Query() {
         return result[0]
     }
 
-    @Procedures("call create_game_field()")
     fun createGameFieldQuery(): List<Cell> {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName)
-        val query = prepareQuery(pr)
+        log.info("Вызов процедуры создания игрового поля")
+
+        val query = prepareQuery(Procedures.createGameField)
         val result = transaction {
             query.execAndMap {rs ->
                 Cell(cellId = rs.getLong("Cell_ID"),
@@ -76,13 +66,10 @@ class Query() {
         return result
     }
 
-    @Procedures("call move_user(?, ?)")
     fun moveQuery(position: String, login: String): List<PlayerResources> {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName, String::class.java, String::class.java)
-        val query = prepareQuery(pr, login, position)
+        log.info("Вызов процедуры хода игрока")
+
+        val query = prepareQuery(Procedures.move, login, position)
         val result = transaction {
             query.execAndMap {rs ->
                 PlayerResources(
@@ -92,13 +79,6 @@ class Query() {
         }
 
         return result
-    }
-
-    private fun getProcedure(methodName: String, vararg parameterTypes: Class<*>): String {
-        val m = this::class.java.getDeclaredMethod(methodName, *parameterTypes)
-        val procedures = m.getAnnotation(Procedures::class.java)
-        val pr = procedures.procedure
-        return pr
     }
 
     private fun prepareQuery(procedure: String, vararg arguments: String): String {
