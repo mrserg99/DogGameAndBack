@@ -597,6 +597,7 @@ button:hover {
   opacity: 0.79;
   width: 100%;
   top: 0;
+  left: 0;
   height: 100%;
   position: fixed;
   text-align: center;
@@ -605,6 +606,68 @@ button:hover {
 
 .giphy-embed {
   width: 200px;
+}
+
+.popup {
+  z-index: 8;
+  margin-left: 25%;
+  background-color: rgb(8, 17, 29);
+  opacity: 0.79;
+  position: fixed;
+  width: 550px;
+  justify-content: center;
+  height: 150px;
+  margin-top: -20%;
+  padding: 100px;
+  text-align: center;
+  border-radius: 16px;
+}
+.popup_wrapper {
+  margin-top: 40px;
+  margin-left: -4%;
+}
+.popup_btn {
+  color: rgba(13, 25, 48, 0.88);
+  font-weight: 500;
+  margin-left: 50px;
+  font-size: 16px;
+  padding: 12px 66px;
+  border: none;
+  border-right: 6px;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.inputs_text_popup {
+  margin-bottom: 40px;
+}
+
+.frame_input {
+  height: 32px;
+  z-index: inherit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.frame_input::placeholder {
+  font-size: 14px;
+  padding-left: 14px;
+}
+
+.wrapper_35 {
+  transition: 2s;
+  z-index: 8;
+  background-color: rgb(8, 17, 29);
+  opacity: 0.89;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  padding-top: 15%;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style_2.css.map */

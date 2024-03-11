@@ -22,8 +22,8 @@
 
             <div class="main_block_buttons">
                 <div class="btn_wrapper">
-                    <button onclick="single()" class="main_block_button_btn">Играть снова</button>
-                    <button onclick="exit()" class="main_block_button_btn">Выйти</button>
+                    <button onclick="open_main()" class="main_block_button_btn" style="cursor: pointer">Играть снова</button>
+                    <button onclick="exit()" class="main_block_button_btn" style="cursor: pointer">Выйти</button>
                 </div>
                 <img src="./img/Nina.png" alt="" class="dog_img">
             </div>
@@ -51,6 +51,15 @@
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
+
+    function open_main(){
+        window.location.href = 'main.html';
+    }
+
+    function exit(){
+        window.location.href = 'login.html';
+    }
+
 </script>
 <script src="js/for_field.js"></script>
 <script src="js/script.js"></script>

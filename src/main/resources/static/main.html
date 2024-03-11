@@ -153,12 +153,13 @@
 
 <div class="wrapper">
     <div class="frame2">
-        <a href="#" class="exit_link">Выйти из игры</a>
+        <a href="login.html" class="exit_link">Выйти из игры</a>
         <div class="frame3">
             <div class="user_pic" ></div>
             <p class="user_name" id="user_name"></p>
-            <button onclick="single()" class="main_btn">Играть</button>
+            <button onclick="single()" class="main_btn">Одиночная игра</button>
 
+            <button onclick="coop()" class="main_btn">Кооперативная игра</button>
         </div>
     </div>
     <!--<img src="img/enter_img_1.svg" alt="&#x1F5BC;" class="login_img">
@@ -233,6 +234,9 @@
             }
         }
         return x;
+    }
+    function coop(){
+        window.location.href = 'lobbys_page.html';
     }
 </script>
 </html>
