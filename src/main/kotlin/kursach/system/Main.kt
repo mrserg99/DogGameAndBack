@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 @Controller
 class Main(val query: Query) {
 
-    companion object{
+    companion object {
         val log = LoggerFactory.getLogger(Main::class.java)
     }
 
@@ -28,9 +28,12 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/login"])
-    fun login(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
+    fun login(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "password") pass: String
+    ): ResponseEntity<String> {
         log.info("Авторизация - Логин = ${login}, Пароль = $pass")
-        if(query.authorisationQuery(login, pass)){
+        if (query.authorisationQuery(login, pass)) {
             log.info("Авторизация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -40,9 +43,12 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/registration"])
-    fun registration(@RequestParam(value = "login") login: String, @RequestParam(value = "password") pass: String): ResponseEntity<String> {
+    fun registration(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "password") pass: String
+    ): ResponseEntity<String> {
         log.info("Регистрация - Логин = ${login}, Пароль = $pass")
-        if(query.registrationQuery(login, pass)){
+        if (query.registrationQuery(login, pass)) {
             log.info("Регистрация - вернул $login")
             return ResponseEntity(login, HttpStatus.OK)
         } else {
@@ -58,27 +64,25 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun move(@RequestParam(value = "position") position: String, @RequestParam(value = "login") login: String): ResponseEntity<List<PlayerResources>> {
+    fun move(
+        @RequestParam(value = "position") position: String,
+        @RequestParam(value = "login") login: String
+    ): ResponseEntity<List<PlayerResources>> {
         log.info("Ход - position = $position")
         return ResponseEntity(query.moveQuery(position, login), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/finish"])
-    fun finish(@RequestParam(value = "login") login: String): ResponseEntity<String> {
+    fun finish(@RequestParam(value = "login") login: String): ResponseEntity<Boolean> {
         log.info("Финиш - login = $login")
-        if(true){ //TODO: обращение к БД, получаем итоговую сумму очков
-            if(true){ //TODO: обращение к БД, если все игроки пришли то возвращаем страницу результатов
-                log.info("Финиш - результат")
-                val pos = 1
-                return ResponseEntity(pos.toString(),HttpStatus.OK)
-            } else {
-                log.info("Финиш - успешно")
-//            return ResponseEntity(login, HttpStatus.OK)
-                return ResponseEntity(HttpStatus.OK)
-            }
+        query.playerFinished(login)
+
+        if (query.everyoneFinish(login)) {
+            log.info("Финиш - результат")
+            return ResponseEntity(true, HttpStatus.OK)
         } else {
-            log.error("Финиш - неудачно")
-            return ResponseEntity(HttpStatus.UNAUTHORIZED)
+            log.info("Финиш - успешно")
+            return ResponseEntity(false, HttpStatus.OK)
         }
     }
 }
