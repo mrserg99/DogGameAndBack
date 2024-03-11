@@ -47,6 +47,9 @@ function one_one() {
     let field = "field"
     var var_json = JSON.parse(getCookie(field));
     let per = "login"
+    let game_id = "game_id"
+
+    document.cookie =game_id +"="+ gameId
     var answer;
     var resourseID = 0;
     var numbRes = 0;
@@ -55,7 +58,7 @@ function one_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=1
@@ -90,6 +93,7 @@ function one_two() {
     var cell = 12;
     let per = "login"
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<2){
@@ -97,7 +101,7 @@ function one_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=2;
@@ -131,6 +135,7 @@ function one_two() {
 function one_tree() {
     let field = "field"
     let per = "login"
+    let game_id = "game_id"
     var cell = 13;
     var answer;
     var resourseID = 0;
@@ -140,7 +145,7 @@ function one_tree() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=3;
@@ -173,6 +178,7 @@ function one_tree() {
 function one_four() {
     let field = "field"
     let per = "login"
+    let game_id = "game_id"
     var cell = 14;
     var answer;
     var resourseID = 0;
@@ -182,7 +188,7 @@ function one_four() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=4;
@@ -216,6 +222,7 @@ function one_five() {
     let field = "field"
     let per = "login"
     var cell = 15;
+    let game_id = "game_id"
     var answer;
     var resourseID = 0;
     var numbRes = 0;
@@ -224,7 +231,7 @@ function one_five() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=5;
@@ -258,6 +265,7 @@ function one_six() {
     let field = "field"
     let per = "login"
     var cell = 16;
+    let game_id = "game_id"
     var answer;
     var resourseID = 0;
     var numbRes = 0;
@@ -266,7 +274,7 @@ function one_six() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=6;
@@ -301,6 +309,7 @@ function one_seven() {
     let per = "login"
     var cell = 17;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<7 && user>4){
@@ -309,7 +318,7 @@ function one_seven() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=7;
@@ -344,6 +353,7 @@ function one_eith() {
     let per = "login"
     var cell = 18;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<8 && user>5){
@@ -351,7 +361,7 @@ function one_eith() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=8;
@@ -386,6 +396,7 @@ function one_nine() {
     let per = "login"
     var cell = 19;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<9 && user>6){
@@ -393,7 +404,7 @@ function one_nine() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=9;
@@ -424,7 +435,7 @@ function one_nine() {
 }
 
 function one_ten() {
-
+    let game_id = "game_id"
     let field = "field"
     let per = "login"
     var cell = '20';
@@ -436,7 +447,7 @@ function one_ten() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=10;
@@ -471,6 +482,7 @@ function two_one() {
     let per = "login"
     var cell = 21;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user==7 || user==6){
@@ -478,7 +490,7 @@ function two_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=30;
@@ -513,6 +525,7 @@ function two_two() {
     let per = "login"
     var cell = 22;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<31){
@@ -520,7 +533,7 @@ function two_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
@@ -555,6 +568,7 @@ function two_free() {
     let per = "login"
     var cell = 23;
     var answer;
+    let game_id = "game_id"
     var resourseID = 0;
     var numbRes = 0;
     if (user<32){
@@ -562,7 +576,7 @@ function two_free() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;

@@ -118,7 +118,6 @@ function uname(){
 
 
 function single() {
-    // alert(user)
     let per = "login"
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST','single/game', true); // Открываем асинхронное соединение
