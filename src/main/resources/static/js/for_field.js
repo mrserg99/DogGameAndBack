@@ -600,9 +600,9 @@ function tree_zero() {
     if (user==8 || user==9|| user==10){
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("login="+getCookie(per));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
@@ -640,9 +640,9 @@ function tree_one() {
     if (user==30 || user==31|| user==32 || user==33){
         // alert(user)
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
+        xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(per));
+        xmlhttp.send("login="+getCookie(per));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
