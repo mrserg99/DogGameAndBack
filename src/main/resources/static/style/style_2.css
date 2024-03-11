@@ -67,6 +67,8 @@ button:hover {
 
 .wrapper3 {
   margin-top: 119px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 .wrapper3_header {
   display: flex;
@@ -668,6 +670,22 @@ button:hover {
   text-align: center;
   padding-top: 15%;
   justify-content: center;
+}
+
+.st_wrapper {
+  justify-content: space-between;
+  display: flex;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.wr {
+  width: 80px;
+}
+
+.count {
+  font-weight: 350;
+  font-size: 30px;
 }
 
 /*# sourceMappingURL=style_2.css.map */

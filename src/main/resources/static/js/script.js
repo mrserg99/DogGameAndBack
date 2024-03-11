@@ -114,9 +114,10 @@ function uname(){
 
 function single() {
     // alert(user)
+    let per = "login"
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('GET','game', true); // Открываем асинхронное соединение
-    xmlhttp.send();
+    xmlhttp.open('POST','single/game', true); // Открываем асинхронное соединение
+    xmlhttp.send("login="+getCookie(per));
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
             let field = "field"
