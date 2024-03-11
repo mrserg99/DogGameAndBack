@@ -117,6 +117,7 @@ function single() {
     let per = "login"
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST','single/game', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login="+encodeURIComponent(getCookie(per)))
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
