@@ -36,24 +36,8 @@ function zero_zero() {
             // alert("Oops!")
         } else { // если всё прошло гладко, выводим результат
 
-            document.getElementById("u1_11").classList.remove("nothing");
-            document.getElementById("u1_12").classList.add("nothing");
-            document.getElementById("u1_13").classList.add("nothing");
-            document.getElementById("u1_14").classList.add("nothing");
-            document.getElementById("u1_15").classList.add("nothing");
-            document.getElementById("u1_16").classList.add("nothing");
-            document.getElementById("u1_17").classList.add("nothing");
-            document.getElementById("u1_18").classList.add("nothing");
-            document.getElementById("u1_19").classList.add("nothing");
-            document.getElementById("u1_1A").classList.add("nothing");
+            stay_v("u1_00", "u1_13","u1_11","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-            document.getElementById("u1_21").classList.add("nothing");
-            document.getElementById("u1_22").classList.add("nothing");
-            document.getElementById("u1_23").classList.add("nothing");
-
-            document.getElementById("u1_31").classList.add("nothing");
-            document.getElementById("u1_30").classList.add("nothing");
-            document.getElementById("u1_00").classList.add("nothing");
         }
     }
 }
@@ -76,25 +60,7 @@ function one_one() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=1
                // alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.remove("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
-
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
-
+                stay_v("u1_11", "u1_00","u1_13","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 resurse = "resurse_1_1"
                 answer = xmlhttp.responseText;
@@ -136,24 +102,8 @@ function one_two() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=2;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.remove("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_12", "u1_00","u1_11","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
 
                 resurse = "resurse_1_2"
@@ -195,24 +145,8 @@ function one_tree() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=3;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.remove("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_13", "u1_00","u1_11","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_3"
                 answer = xmlhttp.responseText;
@@ -253,24 +187,8 @@ function one_four() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=4;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.remove("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_14", "u1_00","u1_11","u1_12","u1_13","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_4"
                 answer = xmlhttp.responseText;
@@ -311,24 +229,8 @@ function one_five() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=5;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.remove("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_15", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_5"
                 answer = xmlhttp.responseText;
@@ -369,24 +271,8 @@ function one_six() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=6;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.remove("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_16", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_6"
                 answer = xmlhttp.responseText;
@@ -428,24 +314,7 @@ function one_seven() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=7;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.remove("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
-
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
+                stay_v("u1_17", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 resurse = "resurse_1_7"
                 answer = xmlhttp.responseText;
@@ -487,24 +356,8 @@ function one_eith() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=8;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.remove("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_18", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_8"
                 answer = xmlhttp.responseText;
@@ -545,24 +398,8 @@ function one_nine() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=9;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.remove("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_19", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_9"
                 answer = xmlhttp.responseText;
@@ -604,24 +441,8 @@ function one_ten() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=10;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.remove("nothing");
+                stay_v("u1_1a", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_1_10"
                 answer = xmlhttp.responseText;
@@ -662,24 +483,8 @@ function two_one() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=30;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_21", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.remove("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_2_1"
                 answer = xmlhttp.responseText;
@@ -720,24 +525,8 @@ function two_two() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
+                stay_v("u1_22", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_31", "u1_23", "u1_30")
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.remove("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
 
                 resurse = "resurse_2_2"
                 answer = xmlhttp.responseText;
@@ -778,24 +567,7 @@ function two_free() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=user+1;
                 //alert(user)
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
-
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.remove("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
-                document.getElementById("u1_30").classList.add("nothing");
+                stay_v("u1_23", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_30")
 
                 resurse = "resurse_2_3"
                 answer = xmlhttp.responseText;
@@ -835,24 +607,7 @@ function tree_zero() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
                 //alert(user)
-                document.getElementById("u1_30").classList.remove("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
-
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_31").classList.add("nothing");
+                stay_v("u1_30", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_31")
 
 
                 answer = xmlhttp.responseText;
@@ -892,26 +647,8 @@ function tree_one() {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
                 //alert(user)
-                document.getElementById("u1_31").classList.remove("nothing");
-                document.getElementById("u1_00").classList.add("nothing");
-                document.getElementById("u1_11").classList.add("nothing");
-                document.getElementById("u1_12").classList.add("nothing");
-                document.getElementById("u1_13").classList.add("nothing");
-                document.getElementById("u1_14").classList.add("nothing");
-                document.getElementById("u1_15").classList.add("nothing");
-                document.getElementById("u1_16").classList.add("nothing");
-                document.getElementById("u1_17").classList.add("nothing");
-                document.getElementById("u1_18").classList.add("nothing");
-                document.getElementById("u1_19").classList.add("nothing");
-                document.getElementById("u1_1a").classList.add("nothing");
 
-                document.getElementById("u1_21").classList.add("nothing");
-                document.getElementById("u1_22").classList.add("nothing");
-                document.getElementById("u1_23").classList.add("nothing");
-
-                document.getElementById("u1_30").classList.add("nothing");
-
-
+                stay_v("u1_31", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_30")
                 player_place();
 
             } else {
@@ -945,32 +682,29 @@ function player_place(){
     win();
 }
 
-function addRes(resId, count){
-    let p201 = document.getElementById('b_count')
-    let p202= document.getElementById('m_count')
-    let p203= document.getElementById('c_count')
-    let prev1 = count
-    let prev2 = count
-    let prev3 = count
 
-    if (resId === 201) {//проверка на ID ресурса
-        prev1 = prev1+count;
-        document.getElementById("b_count").innerHTML = prev1; //добавление ресурса
-
-    }
-    if (resId === 202) {
-
-        prev2 = prev2+count;
-        document.getElementById("m_count").innerHTML = prev2;
-    }
-    if (resId === 203) {
-
-        prev3 = prev3+count;
-        document.getElementById("c_count").innerHTML = prev3;
-    }
-}
 
 function win() {
     window.location.href = 'win.html';
+}
+
+function stay_v(remove,add1,add2,add3,add4,add5,add6,add7,add8, add9, add10, add11, add12,add13,add14, add15){
+    document.getElementById(remove).classList.remove("nothing");
+    document.getElementById(add1).classList.add("nothing");
+    document.getElementById(add2).classList.add("nothing");
+    document.getElementById(add3).classList.add("nothing");
+    document.getElementById(add4).classList.add("nothing");
+    document.getElementById(add5).classList.add("nothing");
+    document.getElementById(add6).classList.add("nothing");
+    document.getElementById(add7).classList.add("nothing");
+    document.getElementById(add8).classList.add("nothing");
+    document.getElementById(add9).classList.add("nothing");
+    document.getElementById(add10).classList.add("nothing");
+    document.getElementById(add11).classList.add("nothing");
+    document.getElementById(add12).classList.add("nothing");
+    document.getElementById(add13).classList.add("nothing");
+    document.getElementById(add14).classList.add("nothing");
+    document.getElementById(add15).classList.add("nothing");
+
 }
 
