@@ -81,6 +81,29 @@ class Query() {
         return result
     }
 
+    fun playerFinished(login: String) {
+        log.info("Вызов процедуры игрок на финише")
+
+        val query = prepareQuery(Procedures.playerFinished, login)
+        transaction {
+            query.execAndMap {
+            }
+        }
+    }
+
+    fun everyoneFinish(login: String): Boolean {
+        log.info("Вызов процедуры проверки все ли финишировали")
+
+        val query = prepareQuery(Procedures.everyoneFinish, login)
+        val result = transaction {
+            query.execAndMap {rs ->
+                rs.getBoolean("result")
+            }
+        }
+
+        return result[0]
+    }
+
     private fun prepareQuery(procedure: String, vararg arguments: String): String {
         var result = procedure
 
