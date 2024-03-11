@@ -612,7 +612,7 @@ function tree_zero() {
 
                 //player_place();
                 let value = xmlhttp.responseText;
-                if (value){
+                if (value==="true"){
                     win();
                 }else {
                     document.getElementById("wrapper_34_h1").innerHTML="Поздравляю! Вы дошли до финиша. Ждем других игроков"
@@ -648,7 +648,7 @@ function tree_one() {
                 stay_v("u1_31", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_30")
                 //player_place();
                 let value = xmlhttp.responseText;
-                if (value){
+                if (value==="true"){
                     win();
                 }else {
                     document.getElementById("wrapper_34_h1").innerHTML="Поздравляю! Вы дошли до финиша. Ждем других игроков"
