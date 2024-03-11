@@ -104,8 +104,8 @@ function one_one() {
                 var res_json = JSON.parse(getCookie(resurse));
 
                 document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
-                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
-                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
 
 
 
@@ -156,16 +156,17 @@ function one_two() {
                 document.getElementById("u1_30").classList.add("nothing");
 
 
-                 resurse = "resurse_1_2"
-                 answer = xmlhttp.responseText;
+                resurse = "resurse_1_2"
+                answer = xmlhttp.responseText;
 
                 document.cookie =resurse +"="+ answer
 
                 var res_json = JSON.parse(getCookie(resurse));
 
                 document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
-                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
-                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
 
 
             } else {
@@ -221,8 +222,8 @@ function one_tree() {
                 var res_json = JSON.parse(getCookie(resurse));
 
                 document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
-                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
-                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
 
 
 
@@ -279,8 +280,8 @@ function one_four() {
                 var res_json = JSON.parse(getCookie(resurse));
 
                 document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
-                document.getElementById("c_count").innerHTML = res_json[1].countOfResources;
-                document.getElementById("m_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
 
 
 
@@ -329,7 +330,18 @@ function one_five() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[4].resourceId,var_json[4].countOfResources);
+                resurse = "resurse_1_5"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -376,7 +388,18 @@ function one_six() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[5].resourceId,var_json[5].countOfResources);
+                resurse = "resurse_1_6"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -424,7 +447,18 @@ function one_seven() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[6].resourceId,var_json[6].countOfResources);
+                resurse = "resurse_1_7"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -472,7 +506,18 @@ function one_eith() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[7].resourceId,var_json[7].countOfResources);
+                resurse = "resurse_1_8"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -519,7 +564,18 @@ function one_nine() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[8].resourceId,var_json[8].countOfResources);
+                resurse = "resurse_1_9"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -567,7 +623,18 @@ function one_ten() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[9].resourceId,var_json[9].countOfResources);
+                resurse = "resurse_1_10"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -614,7 +681,18 @@ function two_one() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[10].resourceId,var_json[10].countOfResources);
+                resurse = "resurse_2_1"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -661,7 +739,18 @@ function two_two() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[11].resourceId,var_json[11].countOfResources);
+                resurse = "resurse_2_2"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
@@ -708,7 +797,18 @@ function two_free() {
                 document.getElementById("u1_31").classList.add("nothing");
                 document.getElementById("u1_30").classList.add("nothing");
 
-                addRes(var_json[12].resourceId,var_json[12].countOfResources);
+                resurse = "resurse_2_3"
+                answer = xmlhttp.responseText;
+
+                document.cookie =resurse +"="+ answer
+
+                var res_json = JSON.parse(getCookie(resurse));
+
+                document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
+                document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
+                document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+
 
             } else {
                 alert("serv trouble")
