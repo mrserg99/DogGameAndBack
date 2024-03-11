@@ -1,6 +1,7 @@
 package kursach.system
 
 import kursach.system.dto.Cell
+import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -56,11 +57,10 @@ class Main(val query: Query) {
         return ResponseEntity(query.createGameFieldQuery(), HttpStatus.OK)
     }
 
-    @PostMapping(value = ["/move"])
-    fun move(@RequestParam(value = "position") position: String, @RequestParam(value = "login") login: String): ResponseEntity<HttpStatus> {
+    @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun move(@RequestParam(value = "position") position: String, @RequestParam(value = "login") login: String): ResponseEntity<List<PlayerResources>> {
         log.info("Ход - position = $position")
-        query.moveQuery(position, login)
-        return ResponseEntity(HttpStatus.OK)
+        return ResponseEntity(query.moveQuery(position, login), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/finish"])

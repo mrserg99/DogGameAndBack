@@ -2,6 +2,7 @@ package kursach.system.repository
 
 import kursach.system.annotation.Procedures
 import kursach.system.dto.Cell
+import kursach.system.dto.PlayerResources
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -75,53 +76,22 @@ class Query() {
         return result
     }
 
-    @Procedures("call create_game_field()")
-    fun moveQuery(position: String, login: String): List<Cell> {
+    @Procedures("call move_user(?, ?)")
+    fun moveQuery(position: String, login: String): List<PlayerResources> {
         val methodName = walker.walk { frames ->
             frames.findFirst().map(StackWalker.StackFrame::getMethodName)
         }.get()
-        val pr = getProcedure(methodName)
-        val query = prepareQuery(pr)
+        val pr = getProcedure(methodName, String::class.java, String::class.java)
+        val query = prepareQuery(pr, login, position)
         val result = transaction {
             query.execAndMap {rs ->
-                Cell(cellId = rs.getLong("Cell_ID"),
-                    resourceId = rs.getLong("Resource_ID"),
+                PlayerResources(
+                    resourcesId = rs.getLong("Resource_ID"),
                     countOfResources = rs.getInt("Count_of_resources"))
             }
         }
 
         return result
-    }
-
-    @Procedures("select * from users where Login=?")
-    fun getUser(login: String) {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName, String::class.java)
-        val query = prepareQuery(pr, login)
-        log.info(pr)
-        log.info(query)
-        val result = transaction {
-            query.execAndMap { rs ->
-                rs.getString("Password")
-            }
-        }
-        log.info(result.toString())
-    }
-
-    @Procedures("select * from game")
-    fun getGame() {
-        val methodName = walker.walk { frames ->
-            frames.findFirst().map(StackWalker.StackFrame::getMethodName)
-        }.get()
-        val pr = getProcedure(methodName)
-        val query = prepareQuery(pr)
-        log.info(pr)
-        log.info(query)
-        transaction {
-
-        }
     }
 
     private fun getProcedure(methodName: String, vararg parameterTypes: Class<*>): String {

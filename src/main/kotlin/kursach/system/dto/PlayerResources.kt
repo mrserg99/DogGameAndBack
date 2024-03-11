@@ -1,7 +1,6 @@
 package kursach.system.dto
 
 data class PlayerResources(
-    val resourcesId: Resource,
-    val playerId: Player,
+    val resourcesId: Long = 0L,
     val countOfResources: Int = 0
 )
