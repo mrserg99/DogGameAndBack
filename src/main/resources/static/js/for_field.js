@@ -610,17 +610,14 @@ function tree_zero() {
                 stay_v("u1_30", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_31")
 
 
-                answer = xmlhttp.responseText;
-                resourseID = answer.substring(0, 2); //ID ресурса 3 цифры
-                numbRes = answer.substring(2, 3); //количество которое нужно прибавлять 1 цифра
-                if (parseInt(resourseID) === 201) {//проверка на ID ресурса
-                    document.getElementById("b_count").innerHTML = +parseInt(numbRes); //добавление ресурса
-                } else {
-                    if (parseInt(resourseID) === 203) {
-                        document.getElementById("c_count").innerHTML = +parseInt(numbRes);
-                    }
+                //player_place();
+                let value = xmlhttp.responseText;
+                if (value){
+                    win();
+                }else {
+                    document.getElementById("wrapper_34_h1").innerHTML="Поздравляю! Вы дошли до финиша. Ждем других игроков"
+                    document.getElementById("wrapper_34").classList.remove("dis_none");
                 }
-                player_place();
 
             } else {
                 alert("serv trouble")
@@ -649,7 +646,14 @@ function tree_one() {
                 //alert(user)
 
                 stay_v("u1_31", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_30")
-                player_place();
+                //player_place();
+                let value = xmlhttp.responseText;
+                if (value){
+                    win();
+                }else {
+                    document.getElementById("wrapper_34_h1").innerHTML="Поздравляю! Вы дошли до финиша. Ждем других игроков"
+                    document.getElementById("wrapper_34").classList.remove("dis_none");
+                }
 
             } else {
                 alert("serv trouble")
