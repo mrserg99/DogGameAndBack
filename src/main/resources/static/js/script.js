@@ -178,18 +178,17 @@ function create(){
     xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-           // window.location.href = 'game_field.html';
-           // document.getElementById("wrapper_34").classList.remove("dis_none");
-           // document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников");
             let flag = false;
-
             let timerId = setTimeout(function checkGameTimer(){
+                document.getElementById("wrapper_34").classList.remove("dis_none")
                 if (checkGameStart() === "true"){
                     clearTimeout(timerId)
                 } else {
                     timerId = setTimeout(checkGameTimer, 3000)
                 }
             }, 3000)
+            document.getElementById("wrapper_34").classList.add("dis_none")
+
         }
     }
 }
