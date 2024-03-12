@@ -55,6 +55,25 @@
 </div>
 </body>
 <script>
+
+    function getXmlHttp() {
+        var x = false;
+        try {
+            x = new XMLHttpRequest();
+        } catch (e) {
+            try {
+                x = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (ex) {
+                try {
+                    req = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e1) {
+                    x = false;
+                }
+            }
+        }
+        return x;
+    }
+
     function make_lobby(){
         document.getElementById("wrapper_35").classList.remove("dis_none");
     }
