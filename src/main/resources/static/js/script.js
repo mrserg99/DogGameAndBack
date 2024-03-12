@@ -181,14 +181,13 @@ function create(){
             let flag = false;
             let timerId = setTimeout(function checkGameTimer(){
                if (checkGameStart() === "true"){
-                    clearTimeout(timerId)
+                    clearTimeout(timerId);
+                    createGameField();
                 } else {
                     timerId = setTimeout(checkGameTimer, 3000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
             }, 3000)
-            //document.getElementById("wrapper_66").classList.add("dis_none")
-
         }
     }
 }
@@ -206,21 +205,32 @@ function checkGameStart(){
 
 function join(element){
     var parent = element.parentNode;
-   // alert(parent.id);
     let per = "login"
     var content = parent.querySelector("div");
-   // alert(content.id);
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/connectToGame', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login="+encodeURIComponent(getCookie(per))+"&gameId="+ encodeURIComponent(parent.id)); // Отправляем POST-запрос
-    xmlhttp.onload = function (){
-        if (xmlhttp.status === 200) {
-            let field = "field"
-            let text = xmlhttp.responseText;
-            document.cookie = field+"="+ text
-            window.location.href = 'game_field.html';
-        }
-    }
-
+    xmlhttp.onload = getGameField()
 }
+
+function createGameField(){
+    var parent = element.parentNode;
+    let game_id = "game_id"
+    var content = parent.querySelector("div");
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/getGameField', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("gameId="+ getCookie(game_id)) // Отправляем POST-запрос
+    xmlhttp.onload = getGameField()
+}
+
+function getGameField(){
+    if (xmlhttp.status === 200) {
+        let field = "field"
+        let text = xmlhttp.responseText;
+        document.cookie = field+"="+ text
+        window.location.href = 'game_field.html';
+    }
+}
+
