@@ -102,7 +102,6 @@
     }
 
     function del(){
-
         const elements = document.getElementsByClassName("wrapper3_btn");
             while(elements.length > 0){
                 elements[0].parentNode.removeChild(elements[0]);
@@ -119,9 +118,9 @@
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 let value = xmlhttp.responseText;
                 let availableGames=JSON.parse(value)
-
+                del()
                 for (let i=0;i<availableGames.length;i++){
-                    del();
+
                     add(availableGames[i]);
                 }
             }
