@@ -606,6 +606,7 @@ function two_free() {
 }
 
 function tree_zero() {
+    let game_id = "game_id"
     var cell = 30;
     var answer;
     let per = "login"
@@ -616,7 +617,7 @@ function tree_zero() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getCookie(per));
+        xmlhttp.send("login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
@@ -643,6 +644,7 @@ function tree_zero() {
 }
 
 function tree_one() {
+    let game_id = "game_id"
     var cell = 31;
     var answer;
     let per = "login"
@@ -653,7 +655,7 @@ function tree_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getCookie(per));
+        xmlhttp.send("login="+getCookie(per)+"&gameId="+getCookie(game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 user=45;
