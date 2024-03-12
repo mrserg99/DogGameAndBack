@@ -82,14 +82,14 @@
 
     }
 
-    function add(game_name, gameID){
+    function add(game){
         var itemListParent = document.getElementById('first');
         var itemList = document.querySelectorAll('.wrapper3_btn');
         //let games=["game1","game2","game3"];
 
        // for (let i=0;i<games.length;i++){
             var newElement = '<div class="wrapper3_btn">\n' +
-                '                <h2 id="'+gameID+'" class="wrapper3_btn_row1_name">' +game_name+'</h2>\n' +
+                '                <h2 id="'+game.gameId+'" class="wrapper3_btn_row1_name">' +game.name+'</h2>\n' +
                 '                <button class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
                 '            </div>'
             itemListParent.insertAdjacentHTML( 'afterend', newElement )
@@ -113,12 +113,11 @@
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 let value = xmlhttp.responseText;
-                i =0;
-                while (JSON.parse(value).gameId[i]!=null){
-                    i=i+1;
-                    add(JSON.parse(value).name[i], JSON.parse(value).gameId[i])
+                let availableGames=JSON.parse(value)
+
+                for (let i=0;i<availableGames.length;i++){
+                    add(availableGames[i])
                 }
-                JSON.parse(value)
             }
         }
     }
