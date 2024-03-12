@@ -204,7 +204,9 @@ function checkGameStart(){
     }
 }
 
-function join(){
+function join(element){
+    var parent = element.parentNode;
+    alert(parent.id);
     let per = "login"
     var content = parent.querySelector("div");
     alert(content.id);

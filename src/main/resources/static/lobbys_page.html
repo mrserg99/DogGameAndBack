@@ -84,7 +84,7 @@
         var itemList = document.querySelectorAll('.wrapper3_btn');
             var newElement = '<div id="'+game.gameId+'" class="wrapper3_btn">\n' +
                 '                <h2 class="wrapper3_btn_row1_name">' +game.name+'</h2>\n' +
-                '                <button  onclick="join()" class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
+                '                <button  onclick="join(this)" class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
                 '            </div>'
             itemListParent.insertAdjacentHTML( 'afterend', newElement )
     }
