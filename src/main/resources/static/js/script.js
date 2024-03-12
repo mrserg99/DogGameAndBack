@@ -203,3 +203,12 @@ function checkGameStart(){
         return xmlhttp.responseText;
     }
 }
+
+function join(){
+    let per = "login"
+    var parent = element.parentNode;
+    alert(parent.id);
+    var content = parent.querySelector("div");
+    alert(content.id);
+
+}
