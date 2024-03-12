@@ -199,7 +199,14 @@ function checkGameStart(){
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("gameId="+getCookie(game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function (){
-        return xmlhttp.responseText;
+
+        let game_ready = "game_ready"
+        var gameReady = xmlhttp.responseText;
+
+        document.cookie =game_ready +"="+ gameReady;
+
+
+
     }
 }
 
