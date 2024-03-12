@@ -197,6 +197,7 @@ function create(){
 
 function survay(flag2){
     let game_id = "game_id"
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/gameStarted', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("gameId="+getCookie(game_id)); // Отправляем POST-запрос
