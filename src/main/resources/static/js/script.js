@@ -186,9 +186,9 @@ function create(){
             flag=survay(flag)
         }
         if (flag===true){
-            document.getElementById("wrapper_34").classList.add("dis_none")
+         //   document.getElementById("wrapper_34").classList.add("dis_none")
         }
-        uname();
+        //uname();
     }
 }
 
