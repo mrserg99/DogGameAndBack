@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
 </head>
-<body>
+<body onload="update()">
 
 <div class="wrapper">
     <div class="bread_crumbs">
@@ -22,7 +22,7 @@
         <div class="wrapper3_header">
             <h1>Игровые лобби</h1>
             <button onclick="make_lobby()" id="make_lobby" class="wrapper3_header_btn">Создать свое</button>
-            <button onclick="add()" id="add" class="wrapper3_header_btn">Обновить</button>
+            <button onclick="update()" id="add" class="wrapper3_header_btn">Обновить</button>
 
         </div>
 
@@ -66,9 +66,8 @@
     function add(){
         var itemListParent = document.getElementById('first');
         var itemList = document.querySelectorAll('.wrapper3_btn');
-        //let game_name = "GG"
         let games=["game1","game2","game3"];
-        let i =0;
+
         for (let i=0;i<games.length;i++){
             var newElement = '<div class="wrapper3_btn">\n' +
                 '                <h2 class="wrapper3_btn_row1_name">' +games[i]+'</h2>\n' +
@@ -83,6 +82,21 @@
 
 
 
+    }
+
+    function update() {
+
+
+        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST', 'availableGames', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send(); // Отправляем POST-запрос
+        xmlhttp.onload = function () {
+            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+                let value = xmlhttp.responseText;
+                JSON.parse(value)
+            }
+        }
     }
 </script>
 </html>
