@@ -177,17 +177,20 @@ function create(){
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
-        window.location.href = 'game_field.html';
-        document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников")
-        document.getElementById("wrapper_34").classList.remove("dis_none")
-        let flag = false;
-        while (flag===false){
-            setTimeout(survay(flag),1000)
-            flag=survay(flag)
+        if (xmlhttp.status === 200) {
+            window.location.href = 'game_field.html';
+            document.getElementById("wrapper_34").classList.remove("dis_none");
+            document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников");
+            let flag = false;
+            while (flag===false){
+                setTimeout(survay(flag),1000);
+                flag=survay(flag);
+            }
+            if (flag===true){
+                //   document.getElementById("wrapper_34").classList.add("dis_none")
+            }
         }
-        if (flag===true){
-         //   document.getElementById("wrapper_34").classList.add("dis_none")
-        }
+
         //uname();
     }
 }
