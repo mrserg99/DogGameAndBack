@@ -23,9 +23,7 @@
             <h1>Игровые лобби</h1>
             <button onclick="make_lobby()" id="make_lobby" class="wrapper3_header_btn">Создать свое</button>
             <button onclick="update()" id="add" class="wrapper3_header_btn">Обновить</button>
-
         </div>
-
 
         <section id="first">
             <div class="wrapper3_btn">
@@ -103,9 +101,16 @@
 
     }
 
+    function del(){
+
+        const elements = document.getElementsByClassName("wrapper3_btn");
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+
+    }
+
     function update() {
-
-
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST', 'availableGames', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
@@ -116,7 +121,8 @@
                 let availableGames=JSON.parse(value)
 
                 for (let i=0;i<availableGames.length;i++){
-                    add(availableGames[i])
+                    del();
+                    add(availableGames[i]);
                 }
             }
         }
