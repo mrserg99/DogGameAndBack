@@ -180,11 +180,11 @@ function create(){
         if (xmlhttp.status === 200) {
             let flag = false;
             let timerId = setTimeout(function checkGameTimer(){
-                document.getElementById("wrapper_34").classList.remove("dis_none")
-                if (checkGameStart() === "true"){
+               if (checkGameStart() === "true"){
                     clearTimeout(timerId)
                 } else {
                     timerId = setTimeout(checkGameTimer, 3000)
+                    document.getElementById("wrapper_34").classList.remove("dis_none")
                 }
             }, 3000)
             document.getElementById("wrapper_34").classList.add("dis_none")
