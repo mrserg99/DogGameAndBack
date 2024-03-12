@@ -184,10 +184,10 @@ function create(){
                     clearTimeout(timerId)
                 } else {
                     timerId = setTimeout(checkGameTimer, 3000)
-                    document.getElementById("wrapper_34").classList.remove("dis_none")
+                    document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
             }, 3000)
-            document.getElementById("wrapper_34").classList.add("dis_none")
+            document.getElementById("wrapper_66").classList.add("dis_none")
 
         }
     }
