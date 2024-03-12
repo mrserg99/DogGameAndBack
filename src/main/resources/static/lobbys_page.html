@@ -22,11 +22,20 @@
         <div class="wrapper3_header">
             <h1>Игровые лобби</h1>
             <button onclick="make_lobby()" id="make_lobby" class="wrapper3_header_btn">Создать свое</button>
+            <button onclick="add()" id="add" class="wrapper3_header_btn">Обновить</button>
+
         </div>
-        <section class="wrapper3_btn">
-            <h2 class="wrapper3_btn_row1_name">Любители собак2000</h2>
-            <button class="wrapper3_btn_row1_btn">Присоедениться</button>
+
+
+        <section id="first">
+            <div class="wrapper3_btn">
+                <h2 class="wrapper3_btn_row1_name">Любители собак2000</h2>
+                <button class="wrapper3_btn_row1_btn">Присоедениться</button>
+            </div>
+
+
         </section>
+
 
         <div id="wrapper_35" class="wrapper_35 dis_none">
 
@@ -35,7 +44,9 @@
             <div class="popup_wrapper">
                 <button id="make_lobby_name" class="popup_btn">Создать</button>
                 <button onclick="cancel_lobby()" id="cancel_lobby" class="popup_btn">Отмена</button>
+
             </div>
+
 
 
         </div>
@@ -52,5 +63,26 @@
 
     }
 
+    function add(){
+        var itemListParent = document.getElementById('first');
+        var itemList = document.querySelectorAll('.wrapper3_btn');
+        //let game_name = "GG"
+        let games=["game1","game2","game3"];
+        let i =0;
+        for (let i=0;i<games.length;i++){
+            var newElement = '<div class="wrapper3_btn">\n' +
+                '                <h2 class="wrapper3_btn_row1_name">' +games[i]+'</h2>\n' +
+                '                <button class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
+                '            </div>'
+            itemListParent.insertAdjacentHTML( 'afterend', newElement )
+        }
+
+
+
+// сработает как appendChild (т.к. второй аргумент null) - поместит второй элемент в конец родительского.
+
+
+
+    }
 </script>
 </html>
