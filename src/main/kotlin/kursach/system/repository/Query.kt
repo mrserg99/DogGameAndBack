@@ -1,6 +1,7 @@
 package kursach.system.repository
 
 import kursach.system.dto.Cell
+import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
 import kursach.system.vokabulary.Procedures
 import org.jetbrains.exposed.sql.Database
@@ -51,10 +52,10 @@ class Query() {
         return result[0]
     }
 
-    fun createGameFieldQuery(): List<Cell> {
+    fun createGameFieldQuery(gameId: Int): List<Cell> {
         log.info("Вызов процедуры создания игрового поля")
 
-        val query = prepareQuery(Procedures.createGameField)
+        val query = prepareQuery(Procedures.createGameField, gameId)
         val result = transaction {
             query.execAndMap {rs ->
                 Cell(cellId = rs.getLong("Cell_ID"),
@@ -62,14 +63,14 @@ class Query() {
                     countOfResources = rs.getInt("Count_of_resources"))
             }
         }
-
+        log.info("Игровое поле создано")
         return result
     }
 
-    fun moveQuery(position: String, login: String): List<PlayerResources> {
+    fun moveQuery(position: Int, login: String, gameId: Int): List<PlayerResources> {
         log.info("Вызов процедуры хода игрока")
 
-        val query = prepareQuery(Procedures.move, login, position)
+        val query = prepareQuery(Procedures.move, login, position, gameId)
         val result = transaction {
             query.execAndMap {rs ->
                 PlayerResources(
@@ -78,23 +79,34 @@ class Query() {
             }
         }
 
+        val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, login, gameId)
+        transaction {
+            queryFinishMove.execAndMap {
+            }
+        }
+
+        val querySetNextPlayerMove = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+        transaction {
+            querySetNextPlayerMove.execAndMap {
+            }
+        }
         return result
     }
 
-    fun playerFinished(login: String) {
+    fun playerFinished(login: String, gameId: Int) {
         log.info("Вызов процедуры игрок на финише")
 
-        val query = prepareQuery(Procedures.playerFinished, login)
+        val query = prepareQuery(Procedures.playerFinished, login, gameId)
         transaction {
             query.execAndMap {
             }
         }
     }
 
-    fun everyoneFinish(login: String): Boolean {
+    fun everyoneFinish(gameId: Int): Boolean {
         log.info("Вызов процедуры проверки все ли финишировали")
 
-        val query = prepareQuery(Procedures.everyoneFinish, login)
+        val query = prepareQuery(Procedures.everyoneFinish, gameId)
         val result = transaction {
             query.execAndMap {rs ->
                 rs.getBoolean("result")
@@ -104,11 +116,52 @@ class Query() {
         return result[0]
     }
 
-    private fun prepareQuery(procedure: String, vararg arguments: String): String {
+    fun createGameQuery(gameName: String = ""): Int{
+        log.info("Вызов процедуры создания игры")
+
+        val query = prepareQuery(Procedures.createGame, gameName)
+        val result = transaction {
+            query.execAndMap {rs ->
+                rs.getInt("result")
+            }
+        }
+
+        return result[0]
+    }
+
+    fun createPlayerQuery(login: String, gameID: Int){
+        log.info("Вызов процедуры игрока")
+
+        val query = prepareQuery(Procedures.createPlayer, login, gameID)
+        transaction {
+            query.execAndMap {
+            }
+        }
+    }
+
+    fun availableGamesQuery(): List<Games>{
+        log.info("Вызов процедуры всех доступных игр")
+
+        val query = prepareQuery(Procedures.availableGames)
+        val result = transaction {
+            query.execAndMap {rs ->
+                Games(
+                    rs.getInt("Game_ID"),
+                    rs.getString("name"))
+            }
+        }
+
+        return result;
+    }
+
+    private fun prepareQuery(procedure: String, vararg arguments: Any): String {
         var result = procedure
 
         for (argument in arguments) {
-            result = result.replaceFirst("?", "'$argument'")
+            when (argument) {
+                is String -> result = result.replaceFirst("?", "'$argument'")
+                is Int -> result = result.replaceFirst("?", "$argument")
+            }
         }
 
         return result

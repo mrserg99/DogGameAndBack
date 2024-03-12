@@ -1,6 +1,8 @@
 package kursach.system
 
 import kursach.system.dto.Cell
+import kursach.system.dto.Game
+import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
@@ -57,33 +59,51 @@ class Main(val query: Query) {
         }
     }
 
-    @RequestMapping(value = ["/game"], method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun game(): ResponseEntity<List<Cell>> {
-        log.info("Создаём игровое поле")
-        return ResponseEntity(query.createGameFieldQuery(), HttpStatus.OK)
+    @PostMapping(value = ["/single/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun gameSingle(@RequestParam(value = "login") login: String): ResponseEntity<Game> {
+        log.info("Создаём одиночную игру")
+        val gameId = query.createGameQuery()
+        query.createPlayerQuery(login, gameId)
+        return ResponseEntity(Game(gameId, query.createGameFieldQuery(gameId)), HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun gameCoop(): ResponseEntity<List<Cell>> {
+        log.info("Создаём кооперативную игру")
+        val gameId = query.createGameQuery()
+        return ResponseEntity(query.createGameFieldQuery(gameId), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun move(
         @RequestParam(value = "position") position: String,
-        @RequestParam(value = "login") login: String
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<List<PlayerResources>> {
         log.info("Ход - position = $position")
-        return ResponseEntity(query.moveQuery(position, login), HttpStatus.OK)
+        return ResponseEntity(query.moveQuery(position.toInt(), login, gameId.toInt()), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/finish"])
-    fun finish(@RequestParam(value = "login") login: String): ResponseEntity<Boolean> {
+    fun finish(@RequestParam(value = "login") login: String,
+               @RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
         log.info("Финиш - login = $login")
-        query.playerFinished(login)
+        query.playerFinished(login, gameId.toInt())
 
-        if (query.everyoneFinish(login)) {
+        if (query.everyoneFinish(gameId.toInt())) {
             log.info("Финиш - результат")
             return ResponseEntity(true, HttpStatus.OK)
         } else {
             log.info("Финиш - успешно")
             return ResponseEntity(false, HttpStatus.OK)
         }
+    }
+
+    @PostMapping(value = ["/availableGames"])
+    fun availableGames(): ResponseEntity<List<Games>> {
+        log.info("Все доступные игры")
+
+        return ResponseEntity(query.availableGamesQuery(), HttpStatus.OK)
     }
 }
 
