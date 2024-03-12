@@ -130,7 +130,7 @@ class Query() {
     }
 
     fun createPlayerQuery(login: String, gameID: Int){
-        log.info("Вызов процедуры игрока")
+        log.info("Вызов процедуры создания игрока")
 
         val query = prepareQuery(Procedures.createPlayer, login, gameID)
         transaction {
@@ -154,6 +154,38 @@ class Query() {
         return result;
     }
 
+    fun gameStart(gameId: Int){
+        log.info("Вызов процедуры начала игры")
+
+        val query = prepareQuery(Procedures.game_start, gameId)
+        transaction {
+            query.execAndMap {
+            }
+        }
+    }
+
+    fun gameFinish(gameId: Int){
+        log.info("Вызов процедуры окончания игры")
+
+        val query = prepareQuery(Procedures.game_finish, gameId)
+        transaction {
+            query.execAndMap {
+            }
+        }
+    }
+
+    fun gameStarted(gameId: Int): Boolean{
+        log.info("Вызов процедуры проверни начала игры")
+
+        val query = prepareQuery(Procedures.game_started, gameId)
+        val result = transaction {
+            query.execAndMap {rs ->
+                rs.getBoolean("result")
+            }
+        }
+
+        return result[0]
+    }
     private fun prepareQuery(procedure: String, vararg arguments: Any): String {
         var result = procedure
 

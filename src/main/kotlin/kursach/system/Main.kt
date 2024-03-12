@@ -67,11 +67,35 @@ class Main(val query: Query) {
         return ResponseEntity(Game(gameId, query.createGameFieldQuery(gameId)), HttpStatus.OK)
     }
 
-    @PostMapping(value = ["/coop/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun gameCoop(): ResponseEntity<List<Cell>> {
+    @PostMapping(value = ["/coop/createGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun createGameCoop(@RequestParam(value = "login") login: String,
+                 @RequestParam(value = "name") name: String): ResponseEntity<HttpStatus> {
         log.info("Создаём кооперативную игру")
-        val gameId = query.createGameQuery()
-        return ResponseEntity(query.createGameFieldQuery(gameId), HttpStatus.OK)
+        val gameId = query.createGameQuery(name)
+        query.createPlayerQuery(login, gameId)
+        return ResponseEntity(HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/gameStarted"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun gameStartedCoop(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
+        log.info("Создаём кооперативную игру")
+        return ResponseEntity(query.gameStarted(gameId.toInt()), HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun gameCoop(@RequestParam(value = "login") login: String,
+                 @RequestParam(value = "name") name: String): ResponseEntity<HttpStatus> {
+        log.info("Создаём кооперативную игру")
+        val gameId = query.createGameQuery(name)
+        query.createPlayerQuery(login, gameId)
+        return ResponseEntity(HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/createGameField"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun createGameFieldCoop(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Game> {
+        log.info("Создаём поле для кооперативной игры")
+        query.gameStart(gameId.toInt())
+        return ResponseEntity(Game(gameId.toInt(), query.createGameFieldQuery(gameId.toInt())), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -91,6 +115,7 @@ class Main(val query: Query) {
         query.playerFinished(login, gameId.toInt())
 
         if (query.everyoneFinish(gameId.toInt())) {
+            query.gameFinish(gameId.toInt())
             log.info("Финиш - результат")
             return ResponseEntity(true, HttpStatus.OK)
         } else {

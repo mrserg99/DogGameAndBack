@@ -182,27 +182,25 @@ function create(){
            // document.getElementById("wrapper_34").classList.remove("dis_none");
            // document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников");
             let flag = false;
-            while (flag===false){
-                setTimeout(survay(flag),1000);
-                flag=survay(flag);
-            }
-            if (flag===true){
-                //   document.getElementById("wrapper_34").classList.add("dis_none")
-            }
-        }
 
-        //uname();
+            let timerId = setTimeout(function checkGameTimer(){
+                if (checkGameStart() === "true"){
+                    clearTimeout(timerId)
+                } else {
+                    timerId = setTimeout(checkGameTimer, 3000)
+                }
+            }, 3000)
+        }
     }
 }
 
-function survay(flag2){
+function checkGameStart(){
     let game_id = "game_id"
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/gameStarted', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("gameId="+getCookie(game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function (){
-        flag2 = xmlhttp.responseText;
-        return flag2
+        return xmlhttp.responseText;
     }
 }
