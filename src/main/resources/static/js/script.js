@@ -178,9 +178,9 @@ function create(){
     xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-            window.location.href = 'game_field.html';
-            document.getElementById("wrapper_34").classList.remove("dis_none");
-            document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников");
+           // window.location.href = 'game_field.html';
+           // document.getElementById("wrapper_34").classList.remove("dis_none");
+           // document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников");
             let flag = false;
             while (flag===false){
                 setTimeout(survay(flag),1000);
