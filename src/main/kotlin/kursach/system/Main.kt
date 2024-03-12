@@ -69,33 +69,32 @@ class Main(val query: Query) {
 
     @PostMapping(value = ["/coop/createGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun createGameCoop(@RequestParam(value = "login") login: String,
-                 @RequestParam(value = "name") name: String): ResponseEntity<HttpStatus> {
+                 @RequestParam(value = "name") name: String): ResponseEntity<Int> {
         log.info("Создаём кооперативную игру")
         val gameId = query.createGameQuery(name)
         query.createPlayerQuery(login, gameId)
-        return ResponseEntity(HttpStatus.OK)
+        return ResponseEntity(gameId, HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/gameStarted"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun gameStartedCoop(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
-        log.info("Создаём кооперативную игру")
+        log.info("Проверяем запустилась ли игра")
         return ResponseEntity(query.gameStarted(gameId.toInt()), HttpStatus.OK)
     }
 
-    @PostMapping(value = ["/coop/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(value = ["/coop/connectToGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun gameCoop(@RequestParam(value = "login") login: String,
-                 @RequestParam(value = "name") name: String): ResponseEntity<HttpStatus> {
-        log.info("Создаём кооперативную игру")
-        val gameId = query.createGameQuery(name)
-        query.createPlayerQuery(login, gameId)
-        return ResponseEntity(HttpStatus.OK)
-    }
-
-    @PostMapping(value = ["/coop/createGameField"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun createGameFieldCoop(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Game> {
-        log.info("Создаём поле для кооперативной игры")
+                 @RequestParam(value = "gameId") gameId: String): ResponseEntity<Game> {
+        log.info("Пользователь подключается к игре")
+        query.createPlayerQuery(login, gameId.toInt())
         query.gameStart(gameId.toInt())
         return ResponseEntity(Game(gameId.toInt(), query.createGameFieldQuery(gameId.toInt())), HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/getGameField"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun createGameFieldCoop(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Game> {
+        log.info("Возвращаем поле для игры")
+        return ResponseEntity(Game(gameId.toInt(), query.getGameFieldQuery(gameId.toInt())), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])

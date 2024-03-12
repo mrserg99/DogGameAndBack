@@ -67,6 +67,21 @@ class Query() {
         return result
     }
 
+    fun getGameFieldQuery(gameId: Int): List<Cell> {
+        log.info("Вызов процедуры получения созданного игрового поля")
+
+        val query = prepareQuery(Procedures.getGameField, gameId)
+        val result = transaction {
+            query.execAndMap {rs ->
+                Cell(cellId = rs.getLong("Cell_ID"),
+                    resourceId = rs.getLong("Resource_ID"),
+                    countOfResources = rs.getInt("Count_of_resources"))
+            }
+        }
+        log.info("Игровое поле создано")
+        return result
+    }
+
     fun moveQuery(position: Int, login: String, gameId: Int): List<PlayerResources> {
         log.info("Вызов процедуры хода игрока")
 
@@ -175,7 +190,7 @@ class Query() {
     }
 
     fun gameStarted(gameId: Int): Boolean{
-        log.info("Вызов процедуры проверни начала игры")
+        log.info("Вызов процедуры проверки начала игры")
 
         val query = prepareQuery(Procedures.game_started, gameId)
         val result = transaction {

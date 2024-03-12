@@ -143,6 +143,20 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+
+function setCookie(name, value) {
+
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+    document.cookie = updatedCookie + "; ";
+}
+
+function deleteCookie(name) {
+    setCookie(name, "", {
+        'max-age': -1
+    })
+}
+
 function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
 
     if (Res_id ===201){
@@ -178,9 +192,10 @@ function create(){
     xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-            let flag = false;
+            setCookie("game_id", xmlhttp.response)
             let timerId = setTimeout(function checkGameTimer(){
-               if (checkGameStart() === "true"){
+                checkGameStart()
+               if (getCookie("gameReady") === "true"){
                     clearTimeout(timerId);
                     createGameField();
                 } else {
@@ -199,14 +214,7 @@ function checkGameStart(){
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("gameId="+getCookie(game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function (){
-
-        let game_ready = "game_ready"
-        var gameReady = xmlhttp.responseText;
-
-        document.cookie =game_ready +"="+ gameReady;
-
-
-
+        setCookie("gameReady", xmlhttp.responseText);
     }
 }
 
@@ -222,9 +230,7 @@ function join(element){
 }
 
 function createGameField(){
-    var parent = element.parentNode;
     let game_id = "game_id"
-    var content = parent.querySelector("div");
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/getGameField', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
