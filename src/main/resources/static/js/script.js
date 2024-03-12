@@ -30,6 +30,8 @@ function name() {
     document.getElementById("user_name").innerHTML =  getCookie(per)+"\u{1F43E}";
 
 }
+
+
 function uname(){
 
     let per = "login"
@@ -164,5 +166,39 @@ function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
     }else if (count===4){
         document.getElementById(i7_p).classList.remove("dis_none")
 
+    }
+}
+
+function create(){
+    var lobby = document.getElementById("lobby_name").value; // Считываем значение
+    let per = "login"
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/createGame', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
+    xmlhttp.onload = function () {
+        window.location.href = 'game_field.html';
+        document.getElementById("wrapper_34_h1").innerHTML("Ждем соперников")
+        document.getElementById("wrapper_34").classList.remove("dis_none")
+        let flag = false;
+        while (flag===false){
+            setTimeout(survay(flag),1000)
+            flag=survay(flag)
+        }
+        if (flag===true){
+            document.getElementById("wrapper_34").classList.add("dis_none")
+        }
+        uname();
+    }
+}
+
+function survay(flag2){
+    let game_id = "game_id"
+    xmlhttp.open('POST', 'coop/gameStarted', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("gameId="+getCookie(game_id)); // Отправляем POST-запрос
+    xmlhttp.onload = function (){
+        flag2 = xmlhttp.responseText;
+        return flag2
     }
 }

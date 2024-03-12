@@ -38,9 +38,9 @@
         <div id="wrapper_35" class="wrapper_35 dis_none">
 
             <p class="inputs_text_popup">Введите название лобби</p>
-            <input type="text" class="frame_input" id="login" placeholder="Ваше название">
+            <input type="text" class="frame_input" id="lobby_name" placeholder="Ваше название">
             <div class="popup_wrapper">
-                <button id="make_lobby_name" class="popup_btn">Создать</button>
+                <button onclick="create()" id="make_lobby_name" class="popup_btn">Создать</button>
                 <button onclick="cancel_lobby()" id="cancel_lobby" class="popup_btn">Отмена</button>
 
             </div>
@@ -52,8 +52,8 @@
     </div>
 </div>
 </body>
+<script src="js/script.js"></script>
 <script>
-
     function getXmlHttp() {
         var x = false;
         try {
@@ -83,22 +83,11 @@
     function add(game){
         var itemListParent = document.getElementById('first');
         var itemList = document.querySelectorAll('.wrapper3_btn');
-        //let games=["game1","game2","game3"];
-
-       // for (let i=0;i<games.length;i++){
             var newElement = '<div class="wrapper3_btn">\n' +
                 '                <h2 id="'+game.gameId+'" class="wrapper3_btn_row1_name">' +game.name+'</h2>\n' +
                 '                <button class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
                 '            </div>'
             itemListParent.insertAdjacentHTML( 'afterend', newElement )
-       // }
-
-
-
-// сработает как appendChild (т.к. второй аргумент null) - поместит второй элемент в конец родительского.
-
-
-
     }
 
     function del(){
@@ -108,6 +97,7 @@
             }
 
     }
+
 
     function update() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
@@ -126,5 +116,7 @@
             }
         }
     }
+
+
 </script>
 </html>
