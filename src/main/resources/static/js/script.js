@@ -211,7 +211,7 @@ function join(element){
     xmlhttp.open('POST', 'coop/connectToGame', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login="+encodeURIComponent(getCookie(per))+"&gameId="+ encodeURIComponent(parent.id)); // Отправляем POST-запрос
-    xmlhttp.onload = getGameField(xmlhttp)
+    xmlhttp.onload = function() {getGameField(xmlhttp)}
 }
 
 function createGameField(){
@@ -222,7 +222,7 @@ function createGameField(){
     xmlhttp.open('POST', 'coop/getGameField', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("gameId="+ getCookie(game_id)) // Отправляем POST-запрос
-    xmlhttp.onload = getGameField(xmlhttp)
+    xmlhttp.onload = function() {getGameField(xmlhttp)}
 }
 
 function getGameField(xmlhttp){
