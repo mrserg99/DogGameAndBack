@@ -187,7 +187,7 @@ function create(){
                     timerId = setTimeout(checkGameTimer, 3000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
-            }, 3000)
+            }, 0)
         }
     }
 }
