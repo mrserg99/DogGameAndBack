@@ -206,9 +206,21 @@ function checkGameStart(){
 
 function join(element){
     var parent = element.parentNode;
-    alert(parent.id);
+   // alert(parent.id);
     let per = "login"
     var content = parent.querySelector("div");
-    alert(content.id);
+   // alert(content.id);
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/connectToGame', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login="+encodeURIComponent(getCookie(per))+"&gameId="+ encodeURIComponent(parent.id)); // Отправляем POST-запрос
+    xmlhttp.onload = function (){
+        if (xmlhttp.status === 200) {
+            let field = "field"
+            let text = xmlhttp.responseText;
+            document.cookie = field+"="+ text
+            window.location.href = 'game_field.html';
+        }
+    }
 
 }
