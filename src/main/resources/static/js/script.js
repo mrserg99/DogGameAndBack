@@ -65,6 +65,8 @@ function uname(){
 }
 
 function move(){
+
+
     let field = "field"
     var cells = JSON.parse(getCookie(field))["cells"];
 
@@ -163,7 +165,7 @@ function setCookie(name, value) {
 }
 
 function deleteCookie(name) {
-    setCookie(name, "");
+   // setCookie(name, "");
 }
 
 function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
@@ -203,7 +205,10 @@ function create(){
                 checkGameStart()
                if (getCookie("gameReady") === "true"){
                     clearTimeout(timerId);
+                    ename();
+                    move();
                     createGameField();
+
                 } else {//хде противник
                     timerId = setTimeout(checkGameTimer, 3000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
