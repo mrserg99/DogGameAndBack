@@ -342,6 +342,7 @@ function user(login) {
 
 
 function enemy(login) {
+    /*
     document.getElementById("e00_name").innerHTML = login;
     document.getElementById("e11_name").innerHTML = login;
     document.getElementById("e12_name").innerHTML = login;
@@ -360,6 +361,6 @@ function enemy(login) {
 
     document.getElementById("e30_name").innerHTML = login;
     document.getElementById("e31_name").innerHTML = login;
-
+*/
     document.getElementById("name_e2").innerHTML = login;
 }
