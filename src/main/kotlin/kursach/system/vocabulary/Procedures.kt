@@ -12,6 +12,7 @@ data object Procedures {
     const val gameFinish = "call game_finish(?)"
     const val gameStart = "call game_start(?)"
     const val gameStarted = "call game_started(?)"
+    const val gameStatus = "call game_status(?)"
     const val getEnemyLogin = "call get_enemy_login(?, ?)"
     const val getGameField = "call get_game_field(?)"
     const val move = "call move(?, ?, ?)"

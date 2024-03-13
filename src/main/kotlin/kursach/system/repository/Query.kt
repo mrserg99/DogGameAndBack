@@ -161,7 +161,7 @@ class Query() {
             }
         }
 
-        return result;
+        return result
     }
 
     fun gameStart(gameId: Int){
@@ -215,6 +215,18 @@ class Query() {
         transaction {
             query.execAndMap()
         }
+    }
+
+    fun gameStatusQuery(gameId: Int): Int {
+        log.info("Вызов процедуры проверки статуса")
+
+        val query = prepareQuery(Procedures.gameStatus, gameId)
+        val result = transaction {
+            query.execAndMap(){
+                it.getInt("result")
+            }
+        }
+        return result[0]
     }
 
     fun canMove(login: String, gameId: Int): Boolean {

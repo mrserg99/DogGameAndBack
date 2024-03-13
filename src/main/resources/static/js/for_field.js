@@ -20,7 +20,7 @@ function getXmlHttp() {
     return x;
 }
 
-function updateRecorse(recurse, xmlhttp) {
+function updateRecourse(recurse, xmlhttp) {
     setCookie(recurse, xmlhttp.responseText)
 
     let res_json = JSON.parse(getCookie(recurse));
@@ -28,8 +28,6 @@ function updateRecorse(recurse, xmlhttp) {
     document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
     document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
     document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
-
-    startGame();
 }
 
 function one_one() {
@@ -47,7 +45,7 @@ function one_one() {
 
                 let recurse = cookiesVocabulary.resurse_1_1
 
-                updateRecorse(recurse, xmlhttp);
+                updateRecourse(recurse, xmlhttp);
             } else {
                 alert("serv trouble")
             }
@@ -72,7 +70,7 @@ function one_two() {
 
                 let recurse = cookiesVocabulary.resurse_1_2
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -96,7 +94,7 @@ function one_tree() {
 
                 let recurse = cookiesVocabulary.resurse_1_3
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -120,7 +118,7 @@ function one_four() {
 
                 let recurse = cookiesVocabulary.resurse_1_4
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -131,7 +129,6 @@ function one_four() {
 }
 
 function one_five() {
-    var answer;
     if (settings.myPosition<5 && settings.myPosition>2){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -144,7 +141,7 @@ function one_five() {
 
                 let recurse = cookiesVocabulary.resurse_1_5
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -168,7 +165,7 @@ function one_six() {
 
                 let recurse = cookiesVocabulary.resurse_1_6
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -192,7 +189,7 @@ function one_seven() {
 
                 let recurse = cookiesVocabulary.resurse_1_7
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -217,7 +214,7 @@ function one_eith() {
 
                 let recurse = cookiesVocabulary.resurse_1_8
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -241,7 +238,7 @@ function one_nine() {
 
                 let recurse = cookiesVocabulary.resurse_1_9
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -265,7 +262,7 @@ function one_ten() {
 
                 let recurse = cookiesVocabulary.resurse_1_10
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -277,7 +274,7 @@ function one_ten() {
 
 function two_one() {
     var cell = 21;
-    if (settings.myPosition==7 || settings.myPosition==6){
+    if (settings.myPosition===7 || settings.myPosition===6){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
@@ -289,7 +286,7 @@ function two_one() {
 
                 let recurse = cookiesVocabulary.resurse_2_1
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -313,7 +310,7 @@ function two_two() {
 
                 let recurse = cookiesVocabulary.resurse_2_2
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -337,7 +334,7 @@ function two_free() {
 
                 let recurse = cookiesVocabulary.resurse_2_3
 
-                updateRecorse(recurse, xmlhttp)
+                updateRecourse(recurse, xmlhttp)
             } else {
                 alert("serv trouble")
             }
@@ -353,7 +350,7 @@ function finishMessage() {
 }
 
 function tree_zero() {
-    if (settings.myPosition==8 || settings.myPosition==9|| settings.myPosition==10){
+    if (settings.myPosition===8 || settings.myPosition===9|| settings.myPosition===10){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
@@ -378,7 +375,7 @@ function tree_zero() {
 }
 
 function tree_one() {
-    if (settings.myPosition==30 || settings.myPosition==31|| settings.myPosition==32 || settings.myPosition==33){
+    if (settings.myPosition===30 || settings.myPosition===31|| settings.myPosition===32 || settings.myPosition===33){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку

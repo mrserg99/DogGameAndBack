@@ -116,6 +116,14 @@ class Main(val query: Query) {
         return ResponseEntity(query.canMove(login, gameId.toInt()), HttpStatus.OK)
     }
 
+    @PostMapping(value = ["/coop/gameStatus"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun gameStatus(
+        @RequestParam(value = "gameId") gameId: String
+    ): ResponseEntity<Int> {
+        log.info("gameStatus - проверяем статут игры")
+        return ResponseEntity(query.gameStatusQuery(gameId.toInt()), HttpStatus.OK)
+    }
+
     @PostMapping(value = ["coop/whereEnemy"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun whereEnemy(
         @RequestParam(value = "login") login: String,

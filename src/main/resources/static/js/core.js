@@ -20,7 +20,8 @@ const cookiesVocabulary = {
     game_ready: "gameReady",
     game_id: "game_id",
     move_ready: "moveReady",
-    enemy_position: "enemy_position"
+    enemy_position: "enemy_position",
+    game_status: "game_status"
 }
 
 // возвращает куки с указанным name,
@@ -34,7 +35,7 @@ function getCookie(name) {
 
 
 function setCookie(name, value) {
-    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    document.cookie = name + "=" + value;
 }
 
 function deleteCookie(name) {
