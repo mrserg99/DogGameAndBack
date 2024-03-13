@@ -72,7 +72,7 @@ function name() {
 
 
 function uname() {
-    enemy(getCookie(cookiesVocabulary.login));
+    enemy(getCookie(cookiesVocabulary.enemy_log));
     user(getCookie(cookiesVocabulary.login))
 
     let gameId = JSON.parse(getCookie(cookiesVocabulary.field))["gameId"];
