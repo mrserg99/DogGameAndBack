@@ -2,28 +2,10 @@ let settings = {
     myPosition: 0
 }
 
-function getXmlHttp() {
-    var x = false;
-    try {
-        x = new XMLHttpRequest();
-    } catch (e) {
-        try {
-            x = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (ex) {
-            try {
-                req = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e1) {
-                x = false;
-            }
-        }
-    }
-    return x;
-}
-
 function updateRecourse(recurse, xmlhttp) {
-    setCookie(recurse, xmlhttp.responseText)
+    setValue(recurse, xmlhttp.responseText)
 
-    let res_json = JSON.parse(getCookie(recurse));
+    let res_json = JSON.parse(getValue(recurse));
 
     document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
     document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
@@ -37,13 +19,13 @@ function one_one() {
         let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=1
                 stay_v("u1_11", "u1_00","u1_13","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_1
+                let recurse = storageVocabulary.resurse_1_1
 
                 updateRecourse(recurse, xmlhttp);
             } else {
@@ -61,14 +43,14 @@ function one_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
 
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=2;
                 stay_v("u1_12", "u1_00","u1_11","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_2
+                let recurse = storageVocabulary.resurse_1_2
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -86,13 +68,13 @@ function one_tree() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=3;
                 stay_v("u1_13", "u1_00","u1_11","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_3
+                let recurse = storageVocabulary.resurse_1_3
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -110,13 +92,13 @@ function one_four() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=4;
                 stay_v("u1_14", "u1_00","u1_11","u1_12","u1_13","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_4
+                let recurse = storageVocabulary.resurse_1_4
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -133,13 +115,13 @@ function one_five() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=5;
                 stay_v("u1_15", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_5
+                let recurse = storageVocabulary.resurse_1_5
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -157,13 +139,13 @@ function one_six() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=6;
                 stay_v("u1_16", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_6
+                let recurse = storageVocabulary.resurse_1_6
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -181,13 +163,13 @@ function one_seven() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=7;
                 stay_v("u1_17", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_7
+                let recurse = storageVocabulary.resurse_1_7
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -206,13 +188,13 @@ function one_eith() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=8;
                 stay_v("u1_18", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_8
+                let recurse = storageVocabulary.resurse_1_8
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -230,13 +212,13 @@ function one_nine() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=9;
                 stay_v("u1_19", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_9
+                let recurse = storageVocabulary.resurse_1_9
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -254,13 +236,13 @@ function one_ten() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=10;
                 stay_v("u1_1a", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_1_10
+                let recurse = storageVocabulary.resurse_1_10
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -278,13 +260,13 @@ function two_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=30;
                 stay_v("u1_21", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_22", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_2_1
+                let recurse = storageVocabulary.resurse_2_1
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -302,13 +284,13 @@ function two_two() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=settings.myPosition+1;
                 stay_v("u1_22", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_31", "u1_23", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_2_2
+                let recurse = storageVocabulary.resurse_2_2
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -326,13 +308,13 @@ function two_free() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=settings.myPosition+1;
                 stay_v("u1_23", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_30")
 
-                let recurse = cookiesVocabulary.resurse_2_3
+                let recurse = storageVocabulary.resurse_2_3
 
                 updateRecourse(recurse, xmlhttp)
             } else {
@@ -354,7 +336,7 @@ function tree_zero() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=45;
@@ -379,7 +361,7 @@ function tree_one() {
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getCookie(cookiesVocabulary.login)+"&gameId="+getCookie(cookiesVocabulary.game_id));
+        xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
         xmlhttp.onload = function () {
             if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
                 settings.myPosition=45;

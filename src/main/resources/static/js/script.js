@@ -1,47 +1,3 @@
-function clearCookies() {
-    deleteCookie(cookiesVocabulary.place)
-    deleteCookie(cookiesVocabulary.P)
-    deleteCookie(cookiesVocabulary.resurse_2_1)
-    deleteCookie(cookiesVocabulary.resurse_2_2)
-    deleteCookie(cookiesVocabulary.resurse_2_3)
-    deleteCookie(cookiesVocabulary.resurse_1_1)
-    deleteCookie(cookiesVocabulary.resurse_1_2)
-    deleteCookie(cookiesVocabulary.resurse_1_3)
-    deleteCookie(cookiesVocabulary.resurse_1_4)
-    deleteCookie(cookiesVocabulary.resurse_1_5)
-    deleteCookie(cookiesVocabulary.resurse_1_6)
-    deleteCookie(cookiesVocabulary.resurse_1_7)
-    deleteCookie(cookiesVocabulary.resurse_1_8)
-    deleteCookie(cookiesVocabulary.resurse_1_9)
-    deleteCookie(cookiesVocabulary.resurse_1_10)
-    deleteCookie(cookiesVocabulary.login)
-    deleteCookie(cookiesVocabulary.enemy_log)
-    deleteCookie(cookiesVocabulary.field)
-    deleteCookie(cookiesVocabulary.game_ready)
-    deleteCookie(cookiesVocabulary.game_id)
-    deleteCookie(cookiesVocabulary.move_ready)
-    deleteCookie(cookiesVocabulary.enemy_position)
-    deleteCookie(cookiesVocabulary.game_status)
-}
-
-function getXmlHttp() {
-    var x = false;
-    try {
-        x = new XMLHttpRequest();
-    } catch (e) {
-        try {
-            x = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (ex) {
-            try {
-                req = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e1) {
-                x = false;
-            }
-        }
-    }
-    return x;
-}
-
 /* POST-запрос */
 var uName = uName || function log() {
     var login = document.getElementById("login").value; // Считываем значение
@@ -54,23 +10,22 @@ var uName = uName || function log() {
         if (xmlhttp.status !== 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
-            let value = xmlhttp.responseText;
-            setCookie(cookiesVocabulary.login, value)
+            setValue(storageVocabulary.login, xmlhttp.response)
             window.location.href = 'main.html';
         }
     }
 }
 
 function name() {
-    document.getElementById("user_name").innerHTML = getCookie(cookiesVocabulary.login) + "\u{1F43E}";
+    document.getElementById("user_name").innerHTML = getValue(storageVocabulary.login) + "\u{1F43E}";
 }
 
-function activateField(){
+function activateField() {
     document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
     document.getElementById("wrapper_34").classList.add("dis_none")
 }
 
-function deactivateField(){
+function deactivateField() {
     document.getElementById("wrapper_34_h1").innerHTML = "Ход соперника"
     document.getElementById("wrapper_34").classList.remove("dis_none")
 }
@@ -79,74 +34,76 @@ function whereEnemy() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/whereEnemy', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.send("login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-            setCookie(cookiesVocabulary.enemy_position, xmlhttp.responseText);
+            setValue(storageVocabulary.enemy_position, xmlhttp.responseText);
         }
     }
 }
 
-function enemyPlace(){
+function enemyPlace() {
     whereEnemy()
-    if(getCookie(cookiesVocabulary.enemy_position)==='11'){
-        stay_v("u2_11", "u2_00","u2_13","u2_12","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '11') {
+        stay_v("u2_11", "u2_00", "u2_13", "u2_12", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='12'){
-        stay_v("u2_12", "u2_00","u2_11","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '12') {
+        stay_v("u2_12", "u2_00", "u2_11", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='13'){
-        stay_v("u2_13", "u2_00","u2_11","u2_12","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '13') {
+        stay_v("u2_13", "u2_00", "u2_11", "u2_12", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='14'){
-        stay_v("u2_14", "u2_00","u2_11","u2_12","u2_13","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '14') {
+        stay_v("u2_14", "u2_00", "u2_11", "u2_12", "u2_13", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='15'){
-        stay_v("u2_15", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '15') {
+        stay_v("u2_15", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='16'){
-        stay_v("u2_16", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '16') {
+        stay_v("u2_16", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='17'){
-        stay_v("u2_17", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '17') {
+        stay_v("u2_17", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='18'){
-        stay_v("u2_18", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '18') {
+        stay_v("u2_18", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='20'){
-        stay_v("u2_1a", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '20') {
+        stay_v("u2_1a", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='21'){
-        stay_v("u2_21", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_22", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '21') {
+        stay_v("u2_21", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='22'){
-        stay_v("u2_22", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_21", "u2_31", "u2_23", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '22') {
+        stay_v("u2_22", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)==='23'){
-        stay_v("u2_23", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_30")
+    if (getValue(storageVocabulary.enemy_position) === '23') {
+        stay_v("u2_23", "u2_00", "u2_11", "u2_12", "u2_13", "u2_14", "u2_15", "u2_16", "u2_17", "u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_30")
     }
 }
 
 
 function checkGameStatus() {
-    let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', 'coop/gameStatus', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
-    xmlhttp.onload = function () {
-        if (xmlhttp.status === 200) {
-            setCookie(cookiesVocabulary.game_status, xmlhttp.responseText);
+    setTimeout(function checkGameTimer() {
+        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        xmlhttp.open('POST', 'coop/gameStatus', true); // Открываем асинхронное соединение
+        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+        xmlhttp.send("gameId=" + getValue(storageVocabulary.game_id)); // Отправляем POST-запрос
+        xmlhttp.onload = function () {
+            if (xmlhttp.status === 200) {
+                setValue(storageVocabulary.game_status, xmlhttp.responseText);
+            }
         }
-    }
+    }, 2000)
 }
 
 function startGame() {
     checkGameStatus()
-    while (getCookie(cookiesVocabulary.game_status) === '2') {
+    while (getValue(storageVocabulary.game_status) === '2') {
         let timerId = setTimeout(function checkGameTimer() {
             checkGameMove()
             enemyPlace()
-            if (getCookie(cookiesVocabulary.move_ready) === "true") {
+            if (getValue(storageVocabulary.move_ready) === "true") {
                 clearTimeout(timerId);
                 activateField()
             } else {
@@ -159,11 +116,11 @@ function startGame() {
 }
 
 function initGameField() {
-    enemy(getCookie(cookiesVocabulary.enemy_log));
-    user(getCookie(cookiesVocabulary.login))
+    enemy(getValue(storageVocabulary.enemy_log));
+    user(getValue(storageVocabulary.login))
 
-    let gameId = JSON.parse(getCookie(cookiesVocabulary.field))["gameId"];
-    setCookie(cookiesVocabulary.game_id, gameId)
+    let gameId = JSON.parse(getValue(storageVocabulary.field))["gameId"];
+    setValue(storageVocabulary.game_id, gameId)
 
     creatFieldAndSetResource();
 
@@ -173,7 +130,7 @@ function initGameField() {
 }
 
 function creatFieldAndSetResource() {
-    let cells = JSON.parse(getCookie(cookiesVocabulary.field))["cells"];
+    let cells = JSON.parse(getValue(storageVocabulary.field))["cells"];
 
     if (cells[0].cellId === 11) {
         get_cell(cells[0].resourceId, cells[0].countOfResources, "11_b", "11_202", "11_c", "11_p1", "11_p2", "11_p3", "11_p4");
@@ -229,10 +186,10 @@ function ename() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/enemyLogin', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.send("login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
-        if(xmlhttp.status ===200){
-            setCookie(cookiesVocabulary.enemy_log, xmlhttp.responseText);
+        if (xmlhttp.status === 200) {
+            setValue(storageVocabulary.enemy_log, xmlhttp.responseText);
         }
     }
 
@@ -242,11 +199,13 @@ function single() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'single/game', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + encodeURIComponent(getCookie(cookiesVocabulary.login)))
+    xmlhttp.send("login=" + encodeURIComponent(getValue(storageVocabulary.login)))
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-            setCookie(cookiesVocabulary.field, xmlhttp.responseText)
+            setValue(storageVocabulary.field, xmlhttp.responseText)
             window.location.href = 'game_field.html';
+            document.getElementById("name_e1").classList.add("dis_none")
+            document.getElementById("u2_00").classList.add("dis_none")
         }
     }
 }
@@ -275,27 +234,29 @@ function get_cell(Res_id, count, i1, i2, i3, i4_p, i5_p, i6_p, i7_p) {
 }
 
 function create() {
+    deleteValue(storageVocabulary.game_ready)
     var lobby = document.getElementById("lobby_name").value; // Считываем значение
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/createGame', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
-    xmlhttp.onload = function () {
+    xmlhttp.send("login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
+    xmlhttp.onload = async function () {
         if (xmlhttp.status === 200) {
-            setCookie(cookiesVocabulary.game_id, xmlhttp.response)
+            setValue(storageVocabulary.game_id, xmlhttp.response)
             let timerId = setTimeout(function checkGameTimer() {
                 checkGameStart()
-                if (getCookie(cookiesVocabulary.game_ready) === "true") {
+                if (getValue(storageVocabulary.game_ready) === "true") {
                     clearTimeout(timerId);
-
-                    createGameField();
-
-                } else {//хде противник
+                } else {
                     timerId = setTimeout(checkGameTimer, 1000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
             }, 0);
         }
+    }
+   // alert("asdasdasdasda")
+    if (getValue(storageVocabulary.game_ready) === "true"){
+        createGameField();
     }
 }
 
@@ -303,34 +264,34 @@ function checkGameMove() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/canMove', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.send("login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
-            if (getCookie(cookiesVocabulary.move_ready) != null || getCookie(cookiesVocabulary.move_ready) !== undefined) {
-                deleteCookie(cookiesVocabulary.move_ready)
+            if (getValue(storageVocabulary.move_ready) != null || getValue(storageVocabulary.move_ready) !== undefined) {
+                deleteValue(storageVocabulary.move_ready)
             }
-            setCookie(cookiesVocabulary.move_ready, xmlhttp.responseText);
+            setValue(storageVocabulary.move_ready, xmlhttp.responseText);
         }
     }
 }
 
 function checkGameStart() {
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/gameStarted', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.send("gameId=" + getValue(storageVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
-        setCookie(cookiesVocabulary.game_ready, xmlhttp.responseText);
+        setValue(storageVocabulary.game_ready, xmlhttp.responseText);
     }
 }
 
 function join(element) {
-    setCookie(cookiesVocabulary.game_ready, "true")
+    setValue(storageVocabulary.game_ready, "true")
     let parent = element.parentNode;
     let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/connectToGame', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + encodeURIComponent(getCookie(cookiesVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id)); // Отправляем POST-запрос
+    xmlhttp.send("login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         getGameField(xmlhttp)
     }
@@ -340,7 +301,7 @@ function createGameField() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/getGameField', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("gameId=" + getCookie(cookiesVocabulary.game_id)) // Отправляем POST-запрос
+    xmlhttp.send("gameId=" + getValue(storageVocabulary.game_id)) // Отправляем POST-запрос
     xmlhttp.onload = function () {
         getGameField(xmlhttp)
     }
@@ -348,8 +309,8 @@ function createGameField() {
 
 function getGameField(xmlhttp) {
 
-    if (xmlhttp.status === 200 && (getCookie(cookiesVocabulary.game_ready) === "true")) {
-        setCookie(cookiesVocabulary.field, xmlhttp.responseText)
+    if (xmlhttp.status === 200 && (getValue(storageVocabulary.game_ready) === "true")) {
+        setValue(storageVocabulary.field, xmlhttp.responseText)
         ename();
         window.location.href = 'game_field.html';
     }

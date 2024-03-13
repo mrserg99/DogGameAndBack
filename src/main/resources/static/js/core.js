@@ -1,4 +1,4 @@
-const cookiesVocabulary = {
+const storageVocabulary = {
     place: "place",
     P: "P",
     resurse_2_1: "resurse_2_1",
@@ -26,18 +26,33 @@ const cookiesVocabulary = {
 
 // возвращает куки с указанным name,
 // или undefined, если ничего не найдено
-function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+function getValue(key) {
+    return sessionStorage.getItem(key);
 }
 
 
-function setCookie(name, value) {
-    document.cookie = name + "=" + value;
+function setValue(key, value) {
+    sessionStorage.setItem(key, value);
 }
 
-function deleteCookie(name) {
-    setCookie(name, "");
+function deleteValue(key) {
+    sessionStorage.removeItem(key);
+}
+
+function getXmlHttp() {
+    var x = false;
+    try {
+        x = new XMLHttpRequest();
+    } catch (e) {
+        try {
+            x = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (ex) {
+            try {
+                req = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e1) {
+                x = false;
+            }
+        }
+    }
+    return x;
 }
