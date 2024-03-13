@@ -112,7 +112,7 @@ function startGame() {
 }
 
 function initGameField() {
-    // enemy(getValue(storageVocabulary.enemy_log));
+    enemy(getValue(storageVocabulary.enemy_log));
     user(getValue(storageVocabulary.login))
 
     let gameId = JSON.parse(getValue(storageVocabulary.field))["gameId"];
@@ -306,7 +306,7 @@ function getGameField(xmlhttp) {
 
     if (xmlhttp.status === 200 && (getValue(storageVocabulary.game_ready) === "true")) {
         setValue(storageVocabulary.field, xmlhttp.responseText)
-        // ename();
+        ename();
         window.location.href = 'game_field.html';
     }
 }

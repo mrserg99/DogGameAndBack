@@ -10,6 +10,8 @@ function updateRecourse(recurse, xmlhttp) {
     document.getElementById("b_count").innerHTML = res_json[0].countOfResources; //добавление ресурса
     document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
     document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
+
+    startGame();
 }
 
 function one_one() {
