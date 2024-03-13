@@ -1,6 +1,5 @@
 package kursach.system
 
-import kursach.system.dto.Cell
 import kursach.system.dto.Game
 import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
@@ -88,6 +87,7 @@ class Main(val query: Query) {
         log.info("Пользователь подключается к игре")
         query.createPlayerQuery(login, gameId.toInt())
         query.gameStart(gameId.toInt())
+        query.setFirstMoveQuery(gameId.toInt())
         return ResponseEntity(Game(gameId.toInt(), query.createGameFieldQuery(gameId.toInt())), HttpStatus.OK)
     }
 
@@ -128,6 +128,14 @@ class Main(val query: Query) {
         log.info("Все доступные игры")
 
         return ResponseEntity(query.availableGamesQuery(), HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/coop/enemyLogin"])
+    fun getEnemyLogin(@RequestParam(value = "login") login: String,
+                      @RequestParam(value = "gameId") gameId: String): ResponseEntity<String> {
+        log.info("Получение логина соперника")
+
+        return ResponseEntity(query.getEnemyLoginQuery(login, gameId.toInt()), HttpStatus.OK)
     }
 }
 

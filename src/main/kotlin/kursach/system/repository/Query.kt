@@ -3,7 +3,7 @@ package kursach.system.repository
 import kursach.system.dto.Cell
 import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
-import kursach.system.vokabulary.Procedures
+import kursach.system.vocabulary.Procedures
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -78,7 +78,6 @@ class Query() {
                     countOfResources = rs.getInt("Count_of_resources"))
             }
         }
-        log.info("Игровое поле создано")
         return result
     }
 
@@ -96,14 +95,12 @@ class Query() {
 
         val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, login, gameId)
         transaction {
-            queryFinishMove.execAndMap {
-            }
+            queryFinishMove.execAndMap()
         }
 
         val querySetNextPlayerMove = prepareQuery(Procedures.playerMoveTrue, login, gameId)
         transaction {
-            querySetNextPlayerMove.execAndMap {
-            }
+            querySetNextPlayerMove.execAndMap()
         }
         return result
     }
@@ -113,8 +110,7 @@ class Query() {
 
         val query = prepareQuery(Procedures.playerFinished, login, gameId)
         transaction {
-            query.execAndMap {
-            }
+            query.execAndMap()
         }
     }
 
@@ -149,8 +145,7 @@ class Query() {
 
         val query = prepareQuery(Procedures.createPlayer, login, gameID)
         transaction {
-            query.execAndMap {
-            }
+            query.execAndMap()
         }
     }
 
@@ -172,27 +167,25 @@ class Query() {
     fun gameStart(gameId: Int){
         log.info("Вызов процедуры начала игры")
 
-        val query = prepareQuery(Procedures.game_start, gameId)
+        val query = prepareQuery(Procedures.gameStart, gameId)
         transaction {
-            query.execAndMap {
-            }
+            query.execAndMap()
         }
     }
 
     fun gameFinish(gameId: Int){
         log.info("Вызов процедуры окончания игры")
 
-        val query = prepareQuery(Procedures.game_finish, gameId)
+        val query = prepareQuery(Procedures.gameFinish, gameId)
         transaction {
-            query.execAndMap {
-            }
+            query.execAndMap()
         }
     }
 
     fun gameStarted(gameId: Int): Boolean{
         log.info("Вызов процедуры проверки начала игры")
 
-        val query = prepareQuery(Procedures.game_started, gameId)
+        val query = prepareQuery(Procedures.gameStarted, gameId)
         val result = transaction {
             query.execAndMap {rs ->
                 rs.getBoolean("result")
@@ -201,6 +194,29 @@ class Query() {
 
         return result[0]
     }
+
+    fun getEnemyLoginQuery(login: String, gameId: Int): String{
+        log.info("Вызов процедуры получения логина соперника")
+
+        val query = prepareQuery(Procedures.getEnemyLogin, login, gameId)
+        val result = transaction {
+            query.execAndMap {rs ->
+                rs.getString("result")
+            }
+        }
+
+        return result[0]
+    }
+
+    fun setFirstMoveQuery(gameId: Int) {
+        log.info("Вызов процедуры выбора игрока для первого хода")
+
+        val query = prepareQuery(Procedures.setFirstMove, gameId)
+        transaction {
+            query.execAndMap()
+        }
+    }
+
     private fun prepareQuery(procedure: String, vararg arguments: Any): String {
         var result = procedure
 
@@ -222,5 +238,9 @@ class Query() {
             }
         }
         return result
+    }
+
+    private fun String.execAndMap() {
+        TransactionManager.current().exec(this)
     }
 }
