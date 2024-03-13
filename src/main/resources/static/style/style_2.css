@@ -688,4 +688,12 @@ button:hover {
   font-size: 30px;
 }
 
+.enemy2 {
+  background-color: cyan !important;
+}
+
+.cyan {
+  background-color: cyan !important;
+}
+
 /*# sourceMappingURL=style_2.css.map */
