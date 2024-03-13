@@ -72,13 +72,14 @@ function name() {
 
 
 function uname() {
+    enemy(getCookie(cookiesVocabulary.login));
     user(getCookie(cookiesVocabulary.login))
 
     let gameId = JSON.parse(getCookie(cookiesVocabulary.field))["gameId"];
 
     setCookie(cookiesVocabulary.game_id, gameId)
 
-    enemy(getCookie(cookiesVocabulary.login));
+
     move();
 
     document.getElementById("wrapper_34").classList.add("dis_none")
