@@ -98,25 +98,21 @@ function checkGameStatus() {
 }
 
 function startGame() {
-    checkGameStatus()
-    while (getValue(storageVocabulary.game_status) === '2') {
-        let timerId = setTimeout(function checkGameTimer() {
-            checkGameMove()
-            enemyPlace()
-            if (getValue(storageVocabulary.move_ready) === "true") {
-                clearTimeout(timerId);
-                activateField()
-            } else {
-                timerId = setTimeout(checkGameTimer, 1000)
-                deactivateField()
-            }
-        }, 0);
-        checkGameStatus()
-    }
+    let timerId = setTimeout(function checkGameTimer() {
+        checkGameMove()
+        enemyPlace()
+        if (getValue(storageVocabulary.move_ready) === "true") {
+            clearTimeout(timerId);
+            activateField()
+        } else {
+            timerId = setTimeout(checkGameTimer, 1000)
+            deactivateField()
+        }
+    }, 0);
 }
 
 function initGameField() {
-    enemy(getValue(storageVocabulary.enemy_log));
+    // enemy(getValue(storageVocabulary.enemy_log));
     user(getValue(storageVocabulary.login))
 
     let gameId = JSON.parse(getValue(storageVocabulary.field))["gameId"];
@@ -247,16 +243,15 @@ function create() {
                 checkGameStart()
                 if (getValue(storageVocabulary.game_ready) === "true") {
                     clearTimeout(timerId);
+                    if (getValue(storageVocabulary.game_ready) === "true") {
+                        createGameField();
+                    }
                 } else {
                     timerId = setTimeout(checkGameTimer, 1000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
             }, 0);
         }
-    }
-   // alert("asdasdasdasda")
-    if (getValue(storageVocabulary.game_ready) === "true"){
-        createGameField();
     }
 }
 
@@ -311,7 +306,7 @@ function getGameField(xmlhttp) {
 
     if (xmlhttp.status === 200 && (getValue(storageVocabulary.game_ready) === "true")) {
         setValue(storageVocabulary.field, xmlhttp.responseText)
-        ename();
+        // ename();
         window.location.href = 'game_field.html';
     }
 }
