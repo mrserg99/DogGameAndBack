@@ -245,12 +245,13 @@ function inquiry() {
 
                 if (getCookie(cookiesVocabulary.game_ready) === "true") {
                     clearTimeout(timerId);//если могу, то стоп таймера
+                    document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
+                    document.getElementById("wrapper_34").classList.remove("dis_none");
 
-
-                    createGameField();//контроль игрока
+                   // enemyMove()
                 } else {//хде противник
 
-                    timerId = setTimeout(checkGameTimer, 3000)
+                    timerId = setTimeout(checkGameTimer, 1000)
                     document.getElementById("wrapper_34_h1").innerHTML = "Сейчас ход соперника"
                     document.getElementById("wrapper_34").classList.remove("dis_none");
                 }
@@ -363,5 +364,9 @@ function enemy(login) {
     document.getElementById("e30_name").innerHTML = login;
     document.getElementById("e31_name").innerHTML = login;
 
+
+}
+
+function enemyMove(){
 
 }
