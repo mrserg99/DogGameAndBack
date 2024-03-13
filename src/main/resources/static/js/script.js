@@ -11,13 +11,9 @@ var uName = uName||function log() {
         if (xmlhttp.status != 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
             alert("Ваш логин или пароль не верны! Попробуйте войти еще раз")
         } else { // если всё прошло гладко, выводим результат
-
-
             let login = "login"
             let value = xmlhttp.responseText;
-
             document.cookie =login +"="+ value
-
             window.location.href = 'main.html';
         }
     }
@@ -32,29 +28,11 @@ function name() {
 }
 
 
-function uname(){
 
+function uname(){
     let per = "login"
     let field = "field"
-
-    document.getElementById("u00_name").innerHTML =  getCookie(per);
-    document.getElementById("u11_name").innerHTML =  getCookie(per);
-    document.getElementById("u12_name").innerHTML =  getCookie(per);
-    document.getElementById("u13_name").innerHTML =  getCookie(per);
-    document.getElementById("u14_name").innerHTML =  getCookie(per);
-    document.getElementById("u15_name").innerHTML =  getCookie(per);
-    document.getElementById("u16_name").innerHTML =  getCookie(per);
-    document.getElementById("u17_name").innerHTML =  getCookie(per);
-    document.getElementById("u18_name").innerHTML =  getCookie(per);
-    document.getElementById("u19_name").innerHTML =  getCookie(per);
-    document.getElementById("u1a_name").innerHTML =  getCookie(per);
-
-    document.getElementById("u21_name").innerHTML =  getCookie(per);
-    document.getElementById("u22_name").innerHTML =  getCookie(per);
-    document.getElementById("u23_name").innerHTML =  getCookie(per);
-
-    document.getElementById("u30_name").innerHTML =  getCookie(per);
-    document.getElementById("u31_name").innerHTML =  getCookie(per);
+    user(getCookie(per))
 
     let game_id = "game_id"
     var gameId = JSON.parse(getCookie(field))["gameId"];
@@ -62,9 +40,9 @@ function uname(){
     document.cookie =game_id +"="+ gameId
 
     var cells = JSON.parse(getCookie(field))["cells"];
+    ename();
 
-
-    if(cells[0].cellId===11){
+  /*  if(cells[0].cellId===11){
         get_cell(cells[0].resourceId,cells[0].countOfResources,"11_b","11_202","11_c","11_p1","11_p2","11_p3","11_p4");
     }
     if(cells[1].cellId===12){
@@ -111,13 +89,25 @@ function uname(){
 
     if(cells[12].cellId===23){
         get_cell(cells[12].resourceId,cells[12].countOfResources,"23_b","23_202","23_c","23_p1","23_p2","23_p3","23_p4");
-    }
+    }*/
     document.getElementById("wrapper_34").classList.add("dis_none")
 
 }
 
 
-
+function ename(){
+    let per = "login"
+    let game_id = "game_id"
+    let per2 = "enemy_log"
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'enemy_id', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login="+getCookie(per)+"&gameId="+getCookie(game_id)); // Отправляем POST-запрос
+    xmlhttp.onload = function (){
+        setCookie(per2, xmlhttp.responseText);
+    }
+    enemy(getCookie(per2));
+}
 
 function single() {
     let per = "login"
@@ -158,16 +148,13 @@ function deleteCookie(name) {
 }
 
 function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
-
     if (Res_id ===201){
         document.getElementById(i1).classList.remove("dis_none")
     }else if (Res_id ===202){
         document.getElementById(i2).classList.remove("dis_none")
     }else if (Res_id ===203){
         document.getElementById(i3).classList.remove("dis_none")
-
     }
-
     if (count===1){
         document.getElementById(i4_p).classList.remove("dis_none")
 
@@ -198,13 +185,43 @@ function create(){
                if (getCookie("gameReady") === "true"){
                     clearTimeout(timerId);
                     createGameField();
-                } else {
+                } else {//хде противник
                     timerId = setTimeout(checkGameTimer, 3000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
-            }, 0)
+            }, 0);
         }
     }
+}
+
+
+function inquiry(){
+    var lobby = document.getElementById("lobby_name").value; // Считываем значение
+    let per = "login";
+    let per2 = "enemy_log"
+
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/createGame', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login=" + getCookie(per) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
+    xmlhttp.onload = function () {
+        if (xmlhttp.status === 200) {
+            setCookie("game_id", xmlhttp.response)
+            let timerId = setTimeout(function checkGameTimer(){
+                checkGameMove()//могу ли я ходить? +кука
+                if (getCookie("gameReady") === "true"){
+                    clearTimeout(timerId);//если могу, то стоп таймера
+                    createGameField();//контроль игрока
+                } else {//хде противник
+                    timerId = setTimeout(checkGameTimer, 3000)
+                    document.getElementById("wrapper_66").classList.remove("dis_none")
+                }
+            }, 0)//блокировка после мув
+        }
+    }
+}
+function checkGameMove(){
+
 }
 
 function checkGameStart(){
@@ -247,3 +264,48 @@ function getGameField(xmlhttp){
     }
 }
 
+
+function user(login){
+    document.getElementById("u00_name").innerHTML =  login;
+    document.getElementById("u11_name").innerHTML =  login;
+    document.getElementById("u12_name").innerHTML =  login;
+    document.getElementById("u13_name").innerHTML =  login;
+    document.getElementById("u14_name").innerHTML =  login;
+    document.getElementById("u15_name").innerHTML =  login;
+    document.getElementById("u16_name").innerHTML =  login;
+    document.getElementById("u17_name").innerHTML =  login;
+    document.getElementById("u18_name").innerHTML =  login;
+    document.getElementById("u19_name").innerHTML =  login;
+    document.getElementById("u1a_name").innerHTML =  login;
+
+    document.getElementById("u21_name").innerHTML =  login;
+    document.getElementById("u22_name").innerHTML =  login;
+    document.getElementById("u23_name").innerHTML =  login;
+
+    document.getElementById("u30_name").innerHTML =  login;
+    document.getElementById("u31_name").innerHTML =  login;
+
+}
+
+
+function enemy(login){
+    document.getElementById("e00_name").innerHTML =  login;
+    document.getElementById("e11_name").innerHTML =  login;
+    document.getElementById("e12_name").innerHTML =  login;
+    document.getElementById("e13_name").innerHTML =  login;
+    document.getElementById("e14_name").innerHTML =  login;
+    document.getElementById("e15_name").innerHTML =  login;
+    document.getElementById("e16_name").innerHTML =  login;
+    document.getElementById("e17_name").innerHTML =  login;
+    document.getElementById("e18_name").innerHTML =  login;
+    document.getElementById("e19_name").innerHTML =  login;
+    document.getElementById("e1a_name").innerHTML =  login;
+
+    document.getElementById("e21_name").innerHTML =  login;
+    document.getElementById("e22_name").innerHTML =  login;
+    document.getElementById("e23_name").innerHTML =  login;
+
+    document.getElementById("e30_name").innerHTML =  login;
+    document.getElementById("e31_name").innerHTML =  login;
+
+}
