@@ -217,6 +217,32 @@ class Query() {
         }
     }
 
+    fun canMove(login: String, gameId: Int): Boolean {
+        log.info("Вызов процедуры выбора игрока для первого хода")
+
+        val query = prepareQuery(Procedures.canPlayerMove, login, gameId)
+        val result = transaction {
+            query.execAndMap(){rs ->
+                rs.getBoolean("result")
+            }
+        }
+
+        return result[0]
+    }
+
+    fun whereEnemyQuery(login: String, gameId: Int): Int {
+        log.info("Вызов процедуры поиска позиции соперника")
+
+        val query = prepareQuery(Procedures.enemiesPlace, login, gameId)
+        val result = transaction {
+            query.execAndMap(){rs ->
+                rs.getInt("result")
+            }
+        }
+
+        return result[0]
+    }
+
     private fun prepareQuery(procedure: String, vararg arguments: Any): String {
         var result = procedure
 

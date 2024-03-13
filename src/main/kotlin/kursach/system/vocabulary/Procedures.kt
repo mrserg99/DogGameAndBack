@@ -14,7 +14,7 @@ data object Procedures {
     const val gameStarted = "call game_started(?)"
     const val getEnemyLogin = "call get_enemy_login(?, ?)"
     const val getGameField = "call get_game_field(?)"
-    const val move = "call game_finish(?, ?, ?)"
+    const val move = "call move(?, ?, ?)"
     const val playerFinished = "call player_finished(?, ?)"
     const val playerMoveFalse = "call player_move_false(?, ?)"
     const val playerMoveTrue = "call player_move_true(?, ?)"

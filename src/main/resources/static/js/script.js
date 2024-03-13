@@ -1,31 +1,6 @@
-const cookiesVocabulary = {
-    place: "place",
-    P: "P",
-    resurse_2_1: "resurse_2_1",
-    resurse_2_2: "resurse_2_2",
-    resurse_2_3: "resurse_2_3",
-    resurse_1_1: "resurse_1_1",
-    resurse_1_2: "resurse_1_2",
-    resurse_1_3: "resurse_1_3",
-    resurse_1_4: "resurse_1_4",
-    resurse_1_5: "resurse_1_5",
-    resurse_1_6: "resurse_1_6",
-    resurse_1_7: "resurse_1_7",
-    resurse_1_8: "resurse_1_8",
-    resurse_1_9: "resurse_1_9",
-    resurse_1_10: "resurse_1_10",
-    login: "login",
-    enemy_log: "enemy_log",
-    field: "field",
-    game_ready: "gameReady",
-    game_id: "game_id",
-    move_ready: "moveReady"
-}
-
 function clearCookies() {
     setCookie(cookiesVocabulary.game_ready, "false")
 }
-
 
 function getXmlHttp() {
     var x = false;
@@ -64,29 +39,78 @@ var uName = uName || function log() {
     }
 }
 
-
 function name() {
     document.getElementById("user_name").innerHTML = getCookie(cookiesVocabulary.login) + "\u{1F43E}";
+}
+
+function activateField(){
+    document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
+    document.getElementById("wrapper_34").classList.add("dis_none")
+}
+
+function deactivateField(){
+    document.getElementById("wrapper_34_h1").innerHTML = "Ход соперника"
+    document.getElementById("wrapper_34").classList.remove("dis_none")
+}
+
+function whereEnemy() {
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/whereEnemy', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.onload = function () {
+        if (xmlhttp.status === 200) {
+            setCookie(cookiesVocabulary.enemy_position, xmlhttp.responseText);
+        }
+    }
+}
+
+function enemyPlace(){
+    whereEnemy()
+    if(getCookie(cookiesVocabulary.enemy_position)===11){
+        stay_v("u2_11", "u2_00","u2_13","u2_12","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===12){
+        stay_v("u2_12", "u2_00","u2_11","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===13){
+        stay_v("u2_13", "u2_00","u2_11","u2_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===13){
+        stay_v("u2_13", "u2_00","u2_11","u2_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
+    }
 
 }
 
+function startGame() {
+    let timerId = setTimeout(function checkGameTimer() {
+        checkGameMove()
+        enemyPlace()
+        if (getCookie(cookiesVocabulary.move_ready) === "true") {
+            clearTimeout(timerId);
+            activateField()
+        } else {
+            timerId = setTimeout(checkGameTimer, 3000)
+            deactivateField()
+        }
+    }, 0);
+}
 
-function uname() {
+function initGameField() {
     enemy(getCookie(cookiesVocabulary.enemy_log));
     user(getCookie(cookiesVocabulary.login))
 
     let gameId = JSON.parse(getCookie(cookiesVocabulary.field))["gameId"];
-
     setCookie(cookiesVocabulary.game_id, gameId)
 
+    creatFieldAndSetResource();
 
-    move();
+    document.getElementById("wrapper_34").classList.add("dis_none");
 
-    document.getElementById("wrapper_34").classList.add("dis_none")
-
+    startGame()
 }
 
-function move() {
+function creatFieldAndSetResource() {
     let cells = JSON.parse(getCookie(cookiesVocabulary.field))["cells"];
 
     if (cells[0].cellId === 11) {
@@ -145,7 +169,9 @@ function ename() {
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
-        setCookie(cookiesVocabulary.enemy_log, xmlhttp.responseText);
+        if(xmlhttp.status ===200){
+            setCookie(cookiesVocabulary.enemy_log, xmlhttp.responseText);
+        }
     }
 
 }
@@ -161,23 +187,6 @@ function single() {
             window.location.href = 'game_field.html';
         }
     }
-}
-
-
-function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-
-function setCookie(name, value) {
-    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-}
-
-function deleteCookie(name) {
-    setCookie(name, "");
 }
 
 function get_cell(Res_id, count, i1, i2, i3, i4_p, i5_p, i6_p, i7_p) {
@@ -242,18 +251,17 @@ function inquiry() {
             let timerId = setTimeout(function checkGameTimer() {
                 checkGameMove()//могу ли я ходить? +кука
 
-
-                if (getCookie(cookiesVocabulary.game_ready) === "true") {
+                if (getCookie(cookiesVocabulary.move_ready) === "true") {
                     clearTimeout(timerId);//если могу, то стоп таймера
-                    document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
-                    document.getElementById("wrapper_34").classList.remove("dis_none");
+                   // document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
+                   // document.getElementById("wrapper_34").classList.remove("dis_none");
 
                    // enemyMove()
                 } else {//хде противник
 
                     timerId = setTimeout(checkGameTimer, 1000)
-                    document.getElementById("wrapper_34_h1").innerHTML = "Сейчас ход соперника"
-                    document.getElementById("wrapper_34").classList.remove("dis_none");
+                  //  document.getElementById("wrapper_34_h1").innerHTML = "Сейчас ход соперника"
+                  //  document.getElementById("wrapper_34").classList.remove("dis_none");
                 }
             }, 0)//блокировка после мув
         }
@@ -264,7 +272,7 @@ function checkGameMove() {
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'coop/canMove', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
+    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&gameId=" + getCookie(cookiesVocabulary.game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
             if (getCookie(cookiesVocabulary.move_ready) != null || getCookie(cookiesVocabulary.move_ready) !== undefined) {
@@ -363,8 +371,6 @@ function enemy(login) {
 
     document.getElementById("e30_name").innerHTML = login;
     document.getElementById("e31_name").innerHTML = login;
-
-
 }
 
 function enemyMove(){
