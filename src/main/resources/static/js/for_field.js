@@ -38,7 +38,7 @@ function one_one() {
 }
 
 function one_two() {
-    var cell = 12;
+    let cell = 12;
     if (settings.myPosition<2){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -63,7 +63,7 @@ function one_two() {
 }
 
 function one_tree() {
-    var cell = 13;
+    let cell = 13;
     if (settings.myPosition<3){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -87,7 +87,7 @@ function one_tree() {
 }
 
 function one_four() {
-    var cell = 14;
+    let cell = 14;
     if (settings.myPosition<4 && settings.myPosition>1){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -111,6 +111,7 @@ function one_four() {
 }
 
 function one_five() {
+    let cell = 15;
     if (settings.myPosition<5 && settings.myPosition>2){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -134,7 +135,7 @@ function one_five() {
 }
 
 function one_six() {
-    var cell = 16;
+    let cell = 16;
     if (settings.myPosition<6 && settings.myPosition>3){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -158,7 +159,7 @@ function one_six() {
 }
 
 function one_seven() {
-    var cell = 17;
+    let cell = 17;
     if (settings.myPosition<7 && settings.myPosition>4){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -183,7 +184,7 @@ function one_seven() {
 }
 
 function one_eith() {
-    var cell = 18;
+    let cell = 18;
     if (settings.myPosition<8 && settings.myPosition>5){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -207,7 +208,7 @@ function one_eith() {
 }
 
 function one_nine() {
-    var cell = 19;
+    let cell = 19;
     if (settings.myPosition<9 && settings.myPosition>6){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -231,7 +232,7 @@ function one_nine() {
 }
 
 function one_ten() {
-    var cell = '20';
+    let cell = '20';
     if (settings.myPosition<10 && settings.myPosition>5){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -255,7 +256,7 @@ function one_ten() {
 }
 
 function two_one() {
-    var cell = 21;
+    let cell = 21;
     if (settings.myPosition===7 || settings.myPosition===6){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -279,7 +280,7 @@ function two_one() {
 }
 
 function two_two() {
-    var cell = 22;
+    let cell = 22;
     if (settings.myPosition<31){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -303,7 +304,7 @@ function two_two() {
 }
 
 function two_free() {
-    var cell = 23;
+    let cell = 23;
     if (settings.myPosition<32){
         var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
@@ -333,7 +334,7 @@ function finishMessage() {
 
 function tree_zero() {
     if (settings.myPosition===8 || settings.myPosition===9|| settings.myPosition===10){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
@@ -358,7 +359,7 @@ function tree_zero() {
 
 function tree_one() {
     if (settings.myPosition===30 || settings.myPosition===31|| settings.myPosition===32 || settings.myPosition===33){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
         xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
         xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
         xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
