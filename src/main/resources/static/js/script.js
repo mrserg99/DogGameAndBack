@@ -305,9 +305,10 @@ function getGameField(xmlhttp){
         let field = "field"
         let text = xmlhttp.responseText;
         document.cookie = field+"="+ text
+
+        window.location.href = 'game_field.html';
         ename();
         move();
-        window.location.href = 'game_field.html';
     }
 }
 
@@ -336,24 +337,24 @@ function user(login){
 
 
 function enemy(login){
-    document.getElementById("e00_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e11_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e12_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e13_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e14_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e15_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e16_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e17_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e18_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e19_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e1a_name").setAttribute("href","game_field.html").innerHTML =  login;
+    document.getElementById("e00_name").innerHTML =  login;
+    document.getElementById("e11_name").innerHTML =  login;
+    document.getElementById("e12_name").innerHTML =  login;
+    document.getElementById("e13_name").innerHTML =  login;
+    document.getElementById("e14_name").innerHTML =  login;
+    document.getElementById("e15_name").innerHTML =  login;
+    document.getElementById("e16_name").innerHTML =  login;
+    document.getElementById("e17_name").innerHTML =  login;
+    document.getElementById("e18_name").innerHTML =  login;
+    document.getElementById("e19_name").innerHTML =  login;
+    document.getElementById("e1a_name").innerHTML =  login;
 
-    document.getElementById("e21_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e22_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e23_name").setAttribute("href","game_field.html").innerHTML =  login;
+    document.getElementById("e21_name").innerHTML =  login;
+    document.getElementById("e22_name").innerHTML =  login;
+    document.getElementById("e23_name").innerHTML =  login;
 
-    document.getElementById("e30_name").setAttribute("href","game_field.html").innerHTML =  login;
-    document.getElementById("e31_name").setAttribute("href","game_field.html").innerHTML =  login;
+    document.getElementById("e30_name").innerHTML =  login;
+    document.getElementById("e31_name").innerHTML =  login;
 
-    document.getElementById("name_e2").setAttribute("href","game_field.html").innerHTML=login;
+    document.getElementById("name_e2").innerHTML=login;
 }
