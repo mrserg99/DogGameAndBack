@@ -205,8 +205,8 @@ function create(){
                 checkGameStart()
                if (getCookie("gameReady") === "true"){
                     clearTimeout(timerId);
-                    ename();
-                    move();
+                    //ename();
+                    //move();
                     createGameField();
 
                 } else {//хде противник
@@ -301,6 +301,8 @@ function createGameField(){
 }
 
 function getGameField(xmlhttp){
+    ename();
+    move();
     if (xmlhttp.status === 200) {
         let field = "field"
         let text = xmlhttp.responseText;
