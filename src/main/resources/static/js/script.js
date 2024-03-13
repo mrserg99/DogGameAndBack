@@ -105,7 +105,7 @@ function ename(){
     let game_id = "game_id"
     let per2 = "enemy_log"
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', 'enemy_id', true); // Открываем асинхронное соединение
+    xmlhttp.open('POST', 'coop/enemyLogin', true); // Открываем асинхронное соединение
     xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
     xmlhttp.send("login="+getCookie(per)+"&gameId="+getCookie(game_id)); // Отправляем POST-запрос
     xmlhttp.onload = function (){
@@ -140,16 +140,12 @@ function getCookie(name) {
 
 
 function setCookie(name, value) {
-
     let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
     document.cookie = updatedCookie + "; ";
 }
 
 function deleteCookie(name) {
-    setCookie(name, "", {
-        'max-age': -1
-    })
+    setCookie(name, "");
 }
 
 function get_cell(Res_id, count, i1,i2,i3,i4_p,i5_p,i6_p,i7_p){
@@ -214,19 +210,40 @@ function inquiry(){
             setCookie("game_id", xmlhttp.response)
             let timerId = setTimeout(function checkGameTimer(){
                 checkGameMove()//могу ли я ходить? +кука
-                if (getCookie("gameReady") === "true"){
+
+
+                if (getCookie("moveReady") === "true"){
                     clearTimeout(timerId);//если могу, то стоп таймера
+
+
                     createGameField();//контроль игрока
                 } else {//хде противник
+
                     timerId = setTimeout(checkGameTimer, 3000)
-                    document.getElementById("wrapper_66").classList.remove("dis_none")
+                    document.getElementById("wrapper_34_h1").innerHTML="Сейчас ход соперника"
+                    document.getElementById("wrapper_34").classList.remove("dis_none");
                 }
             }, 0)//блокировка после мув
         }
     }
 }
 function checkGameMove(){
+    let per = "login";
+    let game_id = "game_id"
+    let moveC = "moveReady"
 
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'coop/canMove', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("login=" + getCookie(per) +"gameId="+getCookie(game_id)); // Отправляем POST-запрос
+    xmlhttp.onload = function () {
+        if (xmlhttp.status === 200) {
+            if (getCookie(moveC)!=null || getCookie(moveC)!=undefined){
+                deleteCookie(moveC)
+            }
+            setCookie(moveC, xmlhttp.responseText);
+        }
+    }
 }
 
 function checkGameStart(){
@@ -313,4 +330,5 @@ function enemy(login){
     document.getElementById("e30_name").innerHTML =  login;
     document.getElementById("e31_name").innerHTML =  login;
 
+    document.getElementById("name_e2").innerHTML=login;
 }
