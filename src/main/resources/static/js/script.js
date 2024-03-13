@@ -74,13 +74,37 @@ function enemyPlace(){
         stay_v("u2_12", "u2_00","u2_11","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
     if(getCookie(cookiesVocabulary.enemy_position)===13){
-        stay_v("u2_13", "u2_00","u2_11","u2_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
+        stay_v("u2_13", "u2_00","u2_11","u2_12","u2_14","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-    if(getCookie(cookiesVocabulary.enemy_position)===13){
-        stay_v("u2_13", "u2_00","u2_11","u2_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
+    if(getCookie(cookiesVocabulary.enemy_position)===14){
+        stay_v("u2_14", "u2_00","u2_11","u2_12","u2_13","u2_15","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
     }
-
+    if(getCookie(cookiesVocabulary.enemy_position)===15){
+        stay_v("u2_15", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_16","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===16){
+        stay_v("u2_16", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_17","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===17){
+        stay_v("u2_17", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_18","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===18){
+        stay_v("u2_18", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===20){
+        stay_v("u2_1a", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_21", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===21){
+        stay_v("u2_21", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_22", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===22){
+        stay_v("u2_22", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_21", "u2_31", "u2_23", "u2_30")
+    }
+    if(getCookie(cookiesVocabulary.enemy_position)===23){
+        stay_v("u2_23", "u2_00","u2_11","u2_12","u2_13","u2_14","u2_15","u2_16","u2_17","u2_18", "u2_19", "u2_1a", "u2_21", "u2_22", "u2_31", "u2_30")
+    }
 }
+
 
 function startGame() {
     let timerId = setTimeout(function checkGameTimer() {
@@ -229,41 +253,10 @@ function create() {
                     createGameField();
 
                 } else {//хде противник
-                    timerId = setTimeout(checkGameTimer, 3000)
+                    timerId = setTimeout(checkGameTimer, 1000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
                 }
             }, 0);
-        }
-    }
-}
-
-
-function inquiry() {
-    var lobby = document.getElementById("lobby_name").value; // Считываем значение
-
-    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-    xmlhttp.open('POST', 'coop/createGame', true); // Открываем асинхронное соединение
-    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-    xmlhttp.send("login=" + getCookie(cookiesVocabulary.login) + "&name=" + encodeURIComponent(lobby)); // Отправляем POST-запрос
-    xmlhttp.onload = function () {
-        if (xmlhttp.status === 200) {
-            setCookie(cookiesVocabulary.game_id, xmlhttp.response)
-            let timerId = setTimeout(function checkGameTimer() {
-                checkGameMove()//могу ли я ходить? +кука
-
-                if (getCookie(cookiesVocabulary.move_ready) === "true") {
-                    clearTimeout(timerId);//если могу, то стоп таймера
-                   // document.getElementById("wrapper_34_h1").innerHTML = "Ваш ход"
-                   // document.getElementById("wrapper_34").classList.remove("dis_none");
-
-                   // enemyMove()
-                } else {//хде противник
-
-                    timerId = setTimeout(checkGameTimer, 1000)
-                  //  document.getElementById("wrapper_34_h1").innerHTML = "Сейчас ход соперника"
-                  //  document.getElementById("wrapper_34").classList.remove("dis_none");
-                }
-            }, 0)//блокировка после мув
         }
     }
 }
@@ -320,7 +313,6 @@ function getGameField(xmlhttp) {
 
     if (xmlhttp.status === 200 && (getCookie(cookiesVocabulary.game_ready) === "true")) {
         setCookie(cookiesVocabulary.field, xmlhttp.responseText)
-
         ename();
         window.location.href = 'game_field.html';
     }
@@ -371,8 +363,4 @@ function enemy(login) {
 
     document.getElementById("e30_name").innerHTML = login;
     document.getElementById("e31_name").innerHTML = login;
-}
-
-function enemyMove(){
-
 }
