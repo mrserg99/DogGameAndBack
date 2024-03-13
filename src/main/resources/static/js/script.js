@@ -65,8 +65,8 @@ function uname(){
 }
 
 function move(){
+    let field = "field"
     var cells = JSON.parse(getCookie(field))["cells"];
-
 
         if(cells[0].cellId===11){
           get_cell(cells[0].resourceId,cells[0].countOfResources,"11_b","11_202","11_c","11_p1","11_p2","11_p3","11_p4");
