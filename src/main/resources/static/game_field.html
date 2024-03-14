@@ -24,64 +24,63 @@
         </div>
         <div class="wrapper4_field">
             <div class="wrapper4_field_row1">
-                <button class="card_big" id="21" onclick="two_one()">
-                    <div class="card_big_bonus">
+                <button class="card_big" id="21" onclick="move(this)">
+                    <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card_big" id="22" onclick="two_two()">
-                    <div class="card_big_bonus">
+                <button class="card_big" id="22" onclick="move(this)">
+                    <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card_big" id="23" onclick="two_free()">
-                    <div class="card_big_bonus"></div>
+                <button class="card_big" id="23" onclick="move(this)">
+                    <div class="card_bonus"></div>
                 </button>
                 <button class="finish" id="31" onclick="tree_one()">
                     <div class="finish_text">FINISH</div>
                 </button>
             </div>
             <div class="wrapper4_field_row2">
-                <button class="start" id="00" onclick="zero_zero()">
-                    <div class="start_text">START</div>
-                </button>
+                <div class="start" id="00">
+                    <div class="start_text ">START</div>
+                </div>
 
                 <button class="card" id="11" onclick="move(this)">
-                    <div class="card_bonus">
-                    </div>
+                    <div class="card_bonus"></div>
                 </button>
                 <button class="card" id="12" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="13" onclick="one_tree()">
+                <button class="card" id="13" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="14" onclick="one_four()">
+                <button class="card" id="14" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="15" onclick="one_five()">
+                <button class="card" id="15" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="16" onclick="one_six()">
+                <button class="card" id="16" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="17" onclick="one_seven()">
+                <button class="card" id="17" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="18" onclick="one_eith()">
+                <button class="card" id="18" onclick="move(this)">
                     <div class="card_bonus">
 
                     </div>
                 </button>
-                <button class="card" id="19" onclick="one_nine()">
+                <button class="card" id="19" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
-                <button class="card" id="20" onclick="one_ten()">
+                <button class="card" id="20" onclick="move(this)">
                     <div class="card_bonus">
                     </div>
                 </button>
@@ -127,48 +126,4 @@
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/for_field.js"></script>
 <script type="text/javascript" src="js/changes_html.js"></script>
-
-<script>
-    function resourcesForCell(cell_id, resorce_id, count) {
-
-        var itemListParent = document.getElementById(cell_id)
-
-        var resources = ' <img id="' + cell_id + '_b" src="./img/bouns/' + resorce_id + '.png" alt="" className="card_big_bonus_img"/>\n'
-        var count = '<div id="' + cell_id + '_p1" className="card_big_bonus_text">' + count + '</div>'
-        itemListParent.insertAdjacentHTML('afterend', resources);
-        itemListParent.insertAdjacentHTML('afterend', count);
-    }
-
-    function addUserinCell(cell_id, user_place, user_login) {
-
-        var itemListParent = document.getElementById(cell_id)
-        var player = ' <div id="u1_' + cell_id + " className='player'>    <div className="+user_p+"></div>\n' "+
-        '        <p id="u' + cell_id + '_name" className="user_p_name">' + user_login + '</p>\n' +
-        '    </div>'
-        itemListParent.insertAdjacentHTML('afterend', player);
-
-
-    }
-
-    function createSquare(how, new_cell_id, old_cell_id) {
-        document.getElementById(new_cell_id).innerHTML('afterend',
-            "<div class='"+how+"_class' id='"+how+"'/>"
-        )
-    }
-
-    function deleteSquare(how, new_cell_id, old_cell_id) {
-        document.getElementById(how).remove()
-        createSquare(how, new_cell_id, old_cell_id)
-    }
-
-    function delUserinCell(cell_id) {
-
-        let per = "u1_"+cell_id;
-        element = document.getElementById(per);
-        element.remove();
-    }
-
-
-
-</script>
 </html>

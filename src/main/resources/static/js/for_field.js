@@ -11,227 +11,26 @@ function updateRecourse(recurse, result) {
     document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
     document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
 
-    deactivateField();
-    startGame();
+    if(getValue(storageVocabulary.is_single) === "true") {
+        startSingleGame();
+    } else {
+        startGame();
+    }
 }
 
-function one_one() {
-    let cell = 11;
+function move(element){
+    let new_cell_id = element.id;
 
-    if (settings.myPosition<=0){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+    if (settings.myPosition<=new_cell_id){
+        deleteSquare(USER)
+        createSquare(USER, new_cell_id, CARDBONUS, getValue(storageVocabulary.login))
+        sendPostRequest('move',"position=" + encodeURIComponent(new_cell_id)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
             .then(result => {
-                settings.myPosition=1
-                stay_v("u1_11", "u1_00","u1_13","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
+                settings.myPosition=new_cell_id
 
                 let recurse = storageVocabulary.resurse_1_1
 
                 updateRecourse(recurse, result);
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_two() {
-    let cell = 12;
-    if (settings.myPosition<2){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=2;
-                stay_v("u1_12", "u1_00","u1_11","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_2
-
-                updateRecourse(recurse, result);
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_tree() {
-    let cell = 13;
-    if (settings.myPosition<3){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=3;
-                stay_v("u1_13", "u1_00","u1_11","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_3
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_four() {
-    let cell = 14;
-    if (settings.myPosition<4 && settings.myPosition>1){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=4;
-                stay_v("u1_14", "u1_00","u1_11","u1_12","u1_13","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_4
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_five() {
-    let cell = 15;
-    if (settings.myPosition<5 && settings.myPosition>2){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=5;
-                stay_v("u1_15", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_5
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_six() {
-    let cell = 16;
-    if (settings.myPosition<6 && settings.myPosition>3){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=6;
-                stay_v("u1_16", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_6
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_seven() {
-    let cell = 17;
-    if (settings.myPosition<7 && settings.myPosition>4){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=7;
-                stay_v("u1_17", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_7
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-
-}
-
-function one_eith() {
-    let cell = 18;
-    if (settings.myPosition<8 && settings.myPosition>5){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=8;
-                stay_v("u1_18", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_8
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_nine() {
-    let cell = 19;
-    if (settings.myPosition<9 && settings.myPosition>6){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=9;
-                stay_v("u1_19", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_9
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function one_ten() {
-    let cell = '20';
-    if (settings.myPosition<10 && settings.myPosition>5){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=10;
-                stay_v("u1_1a", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_1_10
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function two_one() {
-    let cell = 21;
-    if (settings.myPosition===7 || settings.myPosition===6){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=30;
-                stay_v("u1_21", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_22", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_2_1
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function two_two() {
-    let cell = 22;
-    if (settings.myPosition<31){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=settings.myPosition+1;
-                stay_v("u1_22", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_31", "u1_23", "u1_30")
-
-                let recurse = storageVocabulary.resurse_2_2
-
-                updateRecourse(recurse, result)
-            })
-    }else {
-        alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
-    }
-}
-
-function two_free() {
-    let cell = 23;
-    if (settings.myPosition<32){
-        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
-            .then(result => {
-                settings.myPosition=settings.myPosition+1;
-                stay_v("u1_23", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_30")
-
-                let recurse = storageVocabulary.resurse_2_3
-
-                updateRecourse(recurse, result)
             })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")

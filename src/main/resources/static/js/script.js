@@ -1,3 +1,8 @@
+const ENEMY = "enemy"
+const USER = "user"
+const CARDBONUS = "card_bonus"
+const START = "start_te"
+
 /* POST-запрос */
 function authorisation() {
     let login = document.getElementById("login").value; // Считываем значение
@@ -14,46 +19,63 @@ function whereEnemy() {
     sendPostRequest('coop/whereEnemy', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.enemy_position, result);
+            deleteSquare(ENEMY)
+            createSquare(ENEMY, getValue(storageVocabulary.enemy_position, CARDBONUS, getValue(storageVocabulary.enemy_log)))
         })
 }
 
 function enemyPlace() {
-    if(getValue(storageVocabulary.is_single) === "false") {
+    if (getValue(storageVocabulary.is_single) === "false") {
         whereEnemy()
-        printEnemyPosition();
     }
 }
 
 function startGame() {
-    if(getValue(storageVocabulary.is_single) === "true"){
-        deleteEnemyImegeInSingleGame();
-    }
-    let timerId = setTimeout(function checkGameTimer() {
-        checkGameMove()
-        enemyPlace()
-        if (getValue(storageVocabulary.move_ready) === "true" || getValue(storageVocabulary.is_single) === "true") {
-            activateField()
-            clearTimeout(timerId);
-        } else {
-            timerId = setTimeout(checkGameTimer, 1000)
+    enemyPlace()
+    checkGameMove().then(res => {
+        if (getValue(storageVocabulary.move_ready) !== "true") {
             deactivateField()
         }
-    }, 0);
+        let timerId = setTimeout(function checkGameTimer() {
+            checkGameMove().then(res => {
+                enemyPlace()
+                if (getValue(storageVocabulary.move_ready) === "true") {
+                    activateField()
+                    clearTimeout(timerId);
+                } else {
+                    timerId = setTimeout(checkGameTimer, 1000)
+                }
+            })
+        }, 0);
+    })
+}
+
+function startSingleGame() {
+        if (getValue(storageVocabulary.is_single) === "true") {
+            deleteEnemyImegeInSingleGame();
+        }
+        activateField()
 }
 
 function initGameField() {
-    printEnemyLogin(getValue(storageVocabulary.enemy_log));
-    printUserLogin(getValue(storageVocabulary.login))
-
     let gameId = JSON.parse(getValue(storageVocabulary.field))["gameId"];
     setValue(storageVocabulary.game_id, gameId)
     deleteValue(storageVocabulary.enemy_position)
 
-    creatFieldAndSetResource();
+    creatResources();
 
     document.getElementById("wrapper_34").classList.add("dis_none");
 
-    startGame()
+    if (getValue(storageVocabulary.is_single) !== "true") {
+        createStartSquare(ENEMY, getValue(storageVocabulary.enemy_log));
+    }
+    createStartSquare(USER, getValue(storageVocabulary.login))
+
+    if(getValue(storageVocabulary.is_single) === "true") {
+        startSingleGame();
+    } else {
+        startGame();
+    }
 }
 
 function ename() {
@@ -66,7 +88,7 @@ function ename() {
 function single() {
     setValue(storageVocabulary.is_single, true)
 
-    sendPostRequest('single/game',"login=" + encodeURIComponent(getValue(storageVocabulary.login)))
+    sendPostRequest('single/game', "login=" + encodeURIComponent(getValue(storageVocabulary.login)))
         .then(result => {
             setValue(storageVocabulary.field, result)
             window.location.href = 'game_field.html';
@@ -74,20 +96,19 @@ function single() {
 }
 
 function create() {
+    setValue(storageVocabulary.is_single, false)
     deleteValue(storageVocabulary.game_ready)
     setValue(storageVocabulary.is_single, false)
     let lobby = document.getElementById("lobby_name").value;
 
-    sendPostRequest('coop/createGame',"login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby))
+    sendPostRequest('coop/createGame', "login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby))
         .then(result => {
             setValue(storageVocabulary.game_id, result)
             let timerId = setTimeout(function checkGameTimer() {
                 checkGameStart()
                 if (getValue(storageVocabulary.game_ready) === "true") {
                     clearTimeout(timerId);
-                    if (getValue(storageVocabulary.game_ready) === "true") {
-                        createGameField();
-                    }
+                    createGameField();
                 } else {
                     timerId = setTimeout(checkGameTimer, 1000)
                     document.getElementById("wrapper_66").classList.remove("dis_none")
@@ -96,15 +117,15 @@ function create() {
         })
 }
 
-function checkGameMove() {
-    sendPostRequest('coop/canMove',"login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
+async function checkGameMove() {
+    await sendPostRequest('coop/canMove', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.move_ready, result);
         })
 }
 
 function checkGameStart() {
-    sendPostRequest('coop/gameStarted',"gameId=" + getValue(storageVocabulary.game_id))
+    sendPostRequest('coop/gameStarted', "gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.game_ready, result);
         })
@@ -115,14 +136,14 @@ function join(element) {
     setValue(storageVocabulary.is_single, false)
     let parent = element.parentNode;
 
-    sendPostRequest('coop/connectToGame',"login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id))
+    sendPostRequest('coop/connectToGame', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id))
         .then(result => {
             getGameField(result)
         })
 }
 
 function createGameField() {
-    sendPostRequest('coop/getGameField',"gameId=" + getValue(storageVocabulary.game_id))
+    sendPostRequest('coop/getGameField', "gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             getGameField(result)
         })
