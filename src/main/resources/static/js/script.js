@@ -1,7 +1,6 @@
 const ENEMY = "enemy"
 const USER = "user"
 const CARDBONUS = "card_bonus"
-const START = "start_te"
 
 /* POST-запрос */
 function authorisation() {
@@ -32,12 +31,12 @@ function enemyPlace() {
 
 function startGame() {
     enemyPlace()
-    checkGameMove().then(res => {
+    checkGameMove().then(function () {
         if (getValue(storageVocabulary.move_ready) !== "true") {
             deactivateField()
         }
         let timerId = setTimeout(function checkGameTimer() {
-            checkGameMove().then(res => {
+            checkGameMove().then(function () {
                 enemyPlace()
                 if (getValue(storageVocabulary.move_ready) === "true") {
                     activateField()
@@ -88,7 +87,7 @@ function ename() {
 function single() {
     setValue(storageVocabulary.is_single, true)
 
-    sendPostRequest('single/game', "login=" + encodeURIComponent(getValue(storageVocabulary.login)))
+    sendPostRequest('single/game', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             setValue(storageVocabulary.field, result)
             window.location.href = 'game_field.html';
@@ -121,6 +120,13 @@ async function checkGameMove() {
     await sendPostRequest('coop/canMove', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.move_ready, result);
+        })
+}
+
+async function checkGameFinish() {
+    await sendPostRequest('coop/everyoneFinish', "gameId=" + getValue(storageVocabulary.game_id))
+        .then(result => {
+            setValue(storageVocabulary.all_finish, result);
         })
 }
 

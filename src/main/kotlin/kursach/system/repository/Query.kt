@@ -147,12 +147,21 @@ class Query() {
         return result[0]
     }
 
-    fun createPlayerQuery(login: String, gameID: Int){
+    fun createPlayerQuery(login: String, gameID: Int, dogId: String){
         log.info("Вызов процедуры создания игрока")
 
-        val query = prepareQuery(Procedures.createPlayer, login, gameID)
+        val query = prepareQuery(Procedures.createPlayer, login, gameID, mapDog(dogId))
         transaction {
             query.execAndMap()
+        }
+    }
+
+    private fun mapDog(dogId: String): Int {
+        return when(dogId){
+            "001" -> return 1
+            "002" -> return 2
+            "005" -> return 3
+            else -> 1
         }
     }
 

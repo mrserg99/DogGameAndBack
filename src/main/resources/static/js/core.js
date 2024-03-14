@@ -21,8 +21,9 @@ const storageVocabulary = {
     game_id: "game_id",
     move_ready: "moveReady",
     enemy_position: "enemy_position",
-    game_status: "game_status",
-    is_single: "is_single"
+    all_finish: "all_finish",
+    is_single: "is_single",
+    dog: "dog"
 }
 
 // возвращает куки с указанным name,

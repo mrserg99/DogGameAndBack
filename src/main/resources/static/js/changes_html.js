@@ -26,6 +26,17 @@ function deleteEnemyImegeInSingleGame() {
     document.getElementById("k2").classList.add("nothing")
 }
 
+function createSquare(how, new_cell_id, clazz, login) {
+    document.getElementById(new_cell_id)
+        .getElementsByClassName(clazz).item(0)
+        .insertAdjacentHTML('afterend',
+            "<div class='player' id='" + how + "'>" +
+            "<div class='user_p'/>" +
+            "<p class='user_p_name'>" + login + "</p>" +
+            "</div>"
+        )
+}
+
 function createStartSquare(how, login){
     document.getElementById("00")
         .insertAdjacentHTML('afterend',
@@ -36,9 +47,8 @@ function createStartSquare(how, login){
         )
 }
 
-function createSquare(how, new_cell_id, clazz, login) {
-    document.getElementById(new_cell_id)
-        .getElementsByClassName(clazz).item(0)
+function createFinishSquare(how, finish_id, login) {
+    document.getElementById(finish_id)
         .insertAdjacentHTML('afterend',
             "<div class='player' id='" + how + "'>" +
                     "<div class='user_p'/>" +
@@ -54,8 +64,8 @@ function deleteSquare(how) {
 function printRecourse(cell_id, recourse_id, count){
     document.getElementById(cell_id)
         .getElementsByClassName(CARDBONUS)
-        .item(0).insertAdjacentHTML('afterend',
+        .item(0).insertAdjacentHTML('afterbegin',
         "<img src='../img/bouns/"+recourse_id+".png' class='card_bonus_img'>"
-            + "<div class='card_big_bonus_text'>"+count+"</div>"
+            + "<div class='card_bonus_text'>+"+count+"</div>"
     )
 }

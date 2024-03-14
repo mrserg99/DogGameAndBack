@@ -241,12 +241,12 @@ button:hover{
 
 .card_big:hover{
   scale: 1;
-  background: none;
+  //background: none;
   cursor: pointer;
 }
 .card_big{
   border: none;
-  background: none;
+ // background: none;
   &_bonus{
     width: 96px;
     height: 204px;
@@ -265,9 +265,7 @@ button:hover{
     }
   }
 }
-.svg{
 
-}
 .finish:hover{
   height: 204px;
   scale: 1;
@@ -319,8 +317,8 @@ button:hover{
   color: #07131B!important;
   border: none !important;
   background: linear-gradient(180deg, rgba(234, 241, 242, 0.00) -0.08%, #EAF1F2 61.59%) !important;
-
 }
+
 .card{
   border-radius: 0px 0px 8px 8px;
   background: linear-gradient(180deg, rgba(234, 241, 242, 0.00) -0.08%, #EAF1F2 61.59%);
@@ -340,6 +338,15 @@ button:hover{
       color: white;
     }
   }
+}
+.card_bonus{
+  transition: 1s;
+}
+.card:hover{
+  cursor: pointer;
+}
+.card:hover, .card_bonus{
+  margin-top: -10px;
 }
 .resource{
   display: flex;

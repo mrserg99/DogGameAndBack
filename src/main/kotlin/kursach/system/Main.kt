@@ -6,15 +6,12 @@ import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.ssl.SslProperties
 import org.springframework.boot.runApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import java.io.File
-import java.net.URL
 
 
 @SpringBootApplication
@@ -51,7 +48,7 @@ class Main(val query: Query) {
         @RequestParam(value = "login") login: String,
         @RequestParam(value = "password") pass: String
     ): ResponseEntity<String> {
-      //  val test = URL("https://mysql.lavro.ru/call.php?db=263879&").readText()
+        //  val test = URL("https://mysql.lavro.ru/call.php?db=263879&").readText()
         log.info("registration - Логин = ${login}, Пароль = $pass")
         if (query.registrationQuery(login, pass)) {
             log.info("registration - вернул $login")
@@ -63,20 +60,26 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/single/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun gameSingle(@RequestParam(value = "login") login: String): ResponseEntity<Game> {
+    fun gameSingle(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "dog") dog: String
+    ): ResponseEntity<Game> {
         log.info("single/game- Создаём одиночную игру")
         val gameId = query.createGameQuery()
-        query.createPlayerQuery(login, gameId)
+        query.createPlayerQuery(login, gameId, dog)
         query.takeMeMoveQuery(login, gameId)
         return ResponseEntity(Game(gameId, query.createGameFieldQuery(gameId)), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/createGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun createGameCoop(@RequestParam(value = "login") login: String,
-                 @RequestParam(value = "name") name: String): ResponseEntity<Int> {
+    fun createGameCoop(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "name") name: String,
+        @RequestParam(value = "dog") dog: String
+    ): ResponseEntity<Int> {
         log.info("coop/createGame - Создаём кооперативную игру")
         val gameId = query.createGameQuery(name)
-        query.createPlayerQuery(login, gameId)
+        query.createPlayerQuery(login, gameId, dog)
         return ResponseEntity(gameId, HttpStatus.OK)
     }
 
@@ -87,10 +90,13 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/coop/connectToGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun gameCoop(@RequestParam(value = "login") login: String,
-                 @RequestParam(value = "gameId") gameId: String): ResponseEntity<Game> {
+    fun gameCoop(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "gameId") gameId: String,
+        @RequestParam(value = "dog") dog: String
+    ): ResponseEntity<Game> {
         log.info("coop/connectToGame - Пользователь подключается к игре")
-        query.createPlayerQuery(login, gameId.toInt())
+        query.createPlayerQuery(login, gameId.toInt(), dog)
         query.gameStart(gameId.toInt())
         query.setFirstMoveQuery(gameId.toInt())
         return ResponseEntity(Game(gameId.toInt(), query.createGameFieldQuery(gameId.toInt())), HttpStatus.OK)
@@ -139,11 +145,23 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/finish"])
-    fun finish(@RequestParam(value = "login") login: String,
-               @RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
+    fun finish(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "gameId") gameId: String
+    ): ResponseEntity<Boolean> {
         log.info("finish - login = $login")
         query.playerFinished(login, gameId.toInt())
 
+        return checkFinish(gameId)
+    }
+
+    @PostMapping(value = ["/everyoneFinish"])
+    fun everyoneFinish(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
+        log.info("everyoneFinish - проверяем все ли финишировали")
+        return checkFinish(gameId)
+    }
+
+    private fun checkFinish(gameId: String): ResponseEntity<Boolean> {
         if (query.everyoneFinish(gameId.toInt())) {
             query.gameFinish(gameId.toInt())
             log.info("finish - результат")
@@ -162,8 +180,10 @@ class Main(val query: Query) {
     }
 
     @PostMapping(value = ["/coop/enemyLogin"])
-    fun getEnemyLogin(@RequestParam(value = "login") login: String,
-                      @RequestParam(value = "gameId") gameId: String): ResponseEntity<String> {
+    fun getEnemyLogin(
+        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "gameId") gameId: String
+    ): ResponseEntity<String> {
         log.info("coop/enemyLogin - Получение логина соперника")
 
         return ResponseEntity(query.getEnemyLoginQuery(login, gameId.toInt()), HttpStatus.OK)
