@@ -35,21 +35,10 @@
 <script>
     function place(){
 
-        let per="login"
-        let per2="p"
-
-        var place_player = "Вы заняли <br></br>" + getCookie_w(per2)+" место";
-        var name_p = "Поздравляем, " + getCookie_w(per)+"!";
+        var place_player = "Вы прошли игру!";
+        var name_p = "Поздравляем, " + getValue(storageVocabulary.login)+"!";
         document.getElementById("numb").innerHTML = place_player;
         document.getElementById("winner").innerHTML = name_p;
-    }
-
-
-    function getCookie_w(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
 
     function open_main(){
@@ -64,4 +53,5 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/for_field.js"></script>
+<script type="text/javascript" src="js/changes_html.js"></script>
 </html>

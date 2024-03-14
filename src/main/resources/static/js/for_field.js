@@ -2,8 +2,8 @@ let settings = {
     myPosition: 0
 }
 
-function updateRecourse(recurse, xmlhttp) {
-    setValue(recurse, xmlhttp.responseText)
+function updateRecourse(recurse, result) {
+    setValue(recurse, result)
 
     let res_json = JSON.parse(getValue(recurse));
 
@@ -11,6 +11,7 @@ function updateRecourse(recurse, xmlhttp) {
     document.getElementById("c_count").innerHTML = res_json[2].countOfResources;
     document.getElementById("m_count").innerHTML = res_json[1].countOfResources;
 
+    deactivateField();
     startGame();
 }
 
@@ -18,22 +19,15 @@ function one_one() {
     let cell = 11;
 
     if (settings.myPosition<=0){
-        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=1
                 stay_v("u1_11", "u1_00","u1_13","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_1
 
-                updateRecourse(recurse, xmlhttp);
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result);
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -42,23 +36,15 @@ function one_one() {
 function one_two() {
     let cell = 12;
     if (settings.myPosition<2){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=2;
                 stay_v("u1_12", "u1_00","u1_11","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_2
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result);
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -67,22 +53,15 @@ function one_two() {
 function one_tree() {
     let cell = 13;
     if (settings.myPosition<3){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=3;
                 stay_v("u1_13", "u1_00","u1_11","u1_12","u1_14","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_3
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -91,22 +70,15 @@ function one_tree() {
 function one_four() {
     let cell = 14;
     if (settings.myPosition<4 && settings.myPosition>1){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=4;
                 stay_v("u1_14", "u1_00","u1_11","u1_12","u1_13","u1_15","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_4
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -115,22 +87,15 @@ function one_four() {
 function one_five() {
     let cell = 15;
     if (settings.myPosition<5 && settings.myPosition>2){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=5;
                 stay_v("u1_15", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_16","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_5
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -139,22 +104,15 @@ function one_five() {
 function one_six() {
     let cell = 16;
     if (settings.myPosition<6 && settings.myPosition>3){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=6;
                 stay_v("u1_16", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_17","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_6
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -163,22 +121,15 @@ function one_six() {
 function one_seven() {
     let cell = 17;
     if (settings.myPosition<7 && settings.myPosition>4){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=7;
                 stay_v("u1_17", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_18","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_7
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -188,22 +139,15 @@ function one_seven() {
 function one_eith() {
     let cell = 18;
     if (settings.myPosition<8 && settings.myPosition>5){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=8;
                 stay_v("u1_18", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_8
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -212,22 +156,15 @@ function one_eith() {
 function one_nine() {
     let cell = 19;
     if (settings.myPosition<9 && settings.myPosition>6){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=9;
                 stay_v("u1_19", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_9
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -236,22 +173,15 @@ function one_nine() {
 function one_ten() {
     let cell = '20';
     if (settings.myPosition<10 && settings.myPosition>5){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=10;
                 stay_v("u1_1a", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_21", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_1_10
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -260,22 +190,15 @@ function one_ten() {
 function two_one() {
     let cell = 21;
     if (settings.myPosition===7 || settings.myPosition===6){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=30;
                 stay_v("u1_21", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_22", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_2_1
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -284,22 +207,15 @@ function two_one() {
 function two_two() {
     let cell = 22;
     if (settings.myPosition<31){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=settings.myPosition+1;
                 stay_v("u1_22", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_31", "u1_23", "u1_30")
 
                 let recurse = storageVocabulary.resurse_2_2
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -308,22 +224,15 @@ function two_two() {
 function two_free() {
     let cell = 23;
     if (settings.myPosition<32){
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','move', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('move',"position=" + encodeURIComponent(cell)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=settings.myPosition+1;
                 stay_v("u1_23", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_31", "u1_30")
 
                 let recurse = storageVocabulary.resurse_2_3
 
-                updateRecourse(recurse, xmlhttp)
-            } else {
-                alert("serv trouble")
-            }
-        }
+                updateRecourse(recurse, result)
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -336,24 +245,16 @@ function finishMessage() {
 
 function tree_zero() {
     if (settings.myPosition===8 || settings.myPosition===9|| settings.myPosition===10){
-        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('finish',"login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=45;
                 stay_v("u1_30", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_31")
-                if (xmlhttp.responseText === "true"){
+                if (result.responseText === "true"){
                     win();
                 }else {
                     finishMessage()
                 }
-
-            } else {
-                alert("serv trouble")
-            }
-        }
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }
@@ -361,23 +262,16 @@ function tree_zero() {
 
 function tree_one() {
     if (settings.myPosition===30 || settings.myPosition===31|| settings.myPosition===32 || settings.myPosition===33){
-        let xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST','finish', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send("login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id));
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
+        sendPostRequest('finish',"login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+            .then(result => {
                 settings.myPosition=45;
                 stay_v("u1_31", "u1_00","u1_11","u1_12","u1_13","u1_14","u1_15","u1_16","u1_17","u1_18", "u1_19", "u1_1a", "u1_21", "u1_22", "u1_23", "u1_30")
-                if (xmlhttp.response === "true"){
+                if (result.response === "true"){
                     win();
                 }else {
                     finishMessage();
                 }
-            } else {
-                alert("serv trouble")
-            }
-        }
+            })
     }else {
         alert("Вы можете передвинутся только вперед на 3 ближайшие клетки")
     }

@@ -6,12 +6,15 @@ import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.ssl.SslProperties
 import org.springframework.boot.runApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import java.io.File
+import java.net.URL
 
 
 @SpringBootApplication
@@ -48,6 +51,7 @@ class Main(val query: Query) {
         @RequestParam(value = "login") login: String,
         @RequestParam(value = "password") pass: String
     ): ResponseEntity<String> {
+      //  val test = URL("https://mysql.lavro.ru/call.php?db=263879&").readText()
         log.info("registration - Логин = ${login}, Пароль = $pass")
         if (query.registrationQuery(login, pass)) {
             log.info("registration - вернул $login")
@@ -63,6 +67,7 @@ class Main(val query: Query) {
         log.info("single/game- Создаём одиночную игру")
         val gameId = query.createGameQuery()
         query.createPlayerQuery(login, gameId)
+        query.takeMeMoveQuery(login, gameId)
         return ResponseEntity(Game(gameId, query.createGameFieldQuery(gameId)), HttpStatus.OK)
     }
 

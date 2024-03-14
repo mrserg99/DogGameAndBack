@@ -98,11 +98,18 @@ class Query() {
             queryFinishMove.execAndMap()
         }
 
-        val querySetNextPlayerMove = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+        val querySetNextPlayerMove = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
         transaction {
             querySetNextPlayerMove.execAndMap()
         }
         return result
+    }
+
+    fun takeMeMoveQuery(login: String, gameId: Int){
+        val query = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+        transaction {
+            query.execAndMap()
+        }
     }
 
     fun playerFinished(login: String, gameId: Int) {

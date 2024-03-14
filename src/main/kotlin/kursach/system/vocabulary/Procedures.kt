@@ -21,4 +21,5 @@ data object Procedures {
     const val playerMoveTrue = "call player_move_true(?, ?)"
     const val registrationUser = "call registration_user(?, ?)"
     const val setFirstMove = "call set_first_move(?)"
+    const val setMoveNextPlayer = "call set_move_next_player(?, ?)"
 }

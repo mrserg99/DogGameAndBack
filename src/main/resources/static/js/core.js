@@ -21,7 +21,8 @@ const storageVocabulary = {
     game_id: "game_id",
     move_ready: "moveReady",
     enemy_position: "enemy_position",
-    game_status: "game_status"
+    game_status: "game_status",
+    is_single: "is_single"
 }
 
 // возвращает куки с указанным name,
@@ -29,7 +30,6 @@ const storageVocabulary = {
 function getValue(key) {
     return sessionStorage.getItem(key);
 }
-
 
 function setValue(key, value) {
     sessionStorage.setItem(key, value);
@@ -39,20 +39,14 @@ function deleteValue(key) {
     sessionStorage.removeItem(key);
 }
 
-function getXmlHttp() {
-    var x = false;
-    try {
-        x = new XMLHttpRequest();
-    } catch (e) {
-        try {
-            x = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (ex) {
-            try {
-                req = new ActiveXObject("Msxml2.XMLHTTP");
-            } catch (e1) {
-                x = false;
-            }
-        }
-    }
-    return x;
+async function sendPostRequest(url, body) {
+    let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body
+    })
+
+    return await response.text()
 }

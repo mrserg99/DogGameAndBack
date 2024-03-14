@@ -33,19 +33,8 @@
 </body>
 <script>
     function edu(){
-
-        let per="login"
-
-      var name_p = "Поздравляем, " + getCookie_w(per)+"!";
+      var name_p = "Поздравляем, " + getValue(storageVocabulary.login)+"!";
         document.getElementById("name").innerHTML = name_p;
-    }
-
-
-    function getCookie_w(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
 
     function open_main(){
@@ -60,4 +49,5 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/for_field.js"></script>
+<script type="text/javascript" src="js/changes_html.js"></script>
 </html>

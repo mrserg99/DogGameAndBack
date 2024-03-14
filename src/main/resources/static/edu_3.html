@@ -160,10 +160,12 @@
         <div class="frame3">
             <div class="user_pic"></div>
             <p class="user_name" id="user_name"></p>
-            <button class="main_btn none" id="single">Одиночная игра</button>
 
-            <button onclick="coop()" class="main_btn">Кооперативная игра</button>
+            <!--
+            <button onclick="edu_field()" class="main_btn" id="single">Одиночная игра</button>
 
+            <button class="main_btn none">Кооперативная игра</button>
+-->
         </div>
     </div>
     <div>
@@ -212,6 +214,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/core.js"></script>
 <script type="text/javascript" src="js/for_field.js"></script>
+<script type="text/javascript" src="js/changes_html.js"></script>
 
 <script>
     /*Смена картинки*/
@@ -267,6 +270,10 @@
     }
     function coop(){
         window.location.href = 'lobbys_page.html';
+    }
+
+    function edu_field(){
+        window.location.href="edu_4.html"
     }
 </script>
 </html>
