@@ -233,13 +233,11 @@ button:hover {
 
 .card_big:hover {
   scale: 1;
-  background: none;
   cursor: pointer;
 }
 
 .card_big {
   border: none;
-  background: none;
 }
 .card_big_bonus {
   width: 96px;
@@ -333,6 +331,18 @@ button:hover {
   margin-top: -27px;
   font-size: 24px;
   color: white;
+}
+
+.card_bonus {
+  transition: 1s;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card:hover, .card_bonus {
+  margin-top: -10px;
 }
 
 .resource {
