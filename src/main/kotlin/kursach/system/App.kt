@@ -7,23 +7,22 @@ import kursach.system.repository.Query
 import kursach.system.repository.QueryLocal
 import kursach.system.repository.QueryRemove
 import org.slf4j.LoggerFactory
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 
-@SpringBootApplication
 @Controller
-class Main() {
+class App {
 
     val query: Query = if (false) QueryLocal() else QueryRemove()
 
     companion object {
-        val log = LoggerFactory.getLogger(Main::class.java)
+        val log = LoggerFactory.getLogger(App::class.java)
     }
 
     @RequestMapping(value = ["/"])
@@ -52,8 +51,6 @@ class Main() {
         @RequestParam(value = "login") login: String,
         @RequestParam(value = "password") pass: String
     ): ResponseEntity<String> {
-        //  val test = URL("https://mysql.lavro.ru/call.php?db=263879&").readText()
-
         log.info("registration - Логин = ${login}, Пароль = $pass")
         if (query.registrationQuery(login, pass)) {
             log.info("registration - вернул $login")
@@ -194,8 +191,4 @@ class Main() {
 
         return ResponseEntity(query.getEnemyLoginQuery(login, gameId.toInt()), HttpStatus.OK)
     }
-}
-
-fun main(args: Array<String>) {
-    runApplication<Main>(*args)
 }

@@ -113,7 +113,7 @@ class QueryLocal: Query {
     }
 
     override fun setMoveNextPlayerQuery(login: String, gameId: Int){
-        val query = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+        val query = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
         transaction {
             query.execAndMap()
         }
