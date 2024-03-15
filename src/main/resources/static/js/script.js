@@ -10,8 +10,13 @@ function authorisation() {
     sendPostRequest('login', "login=" + encodeURIComponent(login) + "&password=" + encodeURIComponent(password))
         .then(result => {
             setValue(storageVocabulary.login, result)
-            window.location.href = 'main.html';
+            window.location.href = 'doggy.html';
         })
+}
+
+function setDoggy(dog){
+    setValue(storageVocabulary.dog, dog)
+    window.location.href = 'main.html';
 }
 
 function whereEnemy() {
@@ -19,7 +24,11 @@ function whereEnemy() {
         .then(result => {
             setValue(storageVocabulary.enemy_position, result);
             deleteSquare(ENEMY)
-            createSquare(ENEMY, getValue(storageVocabulary.enemy_position, CARDBONUS, getValue(storageVocabulary.enemy_log)))
+            if (result === "0"){
+                createStartSquare(ENEMY, getValue(storageVocabulary.enemy_log))
+            } else {
+                createSquare(ENEMY, getValue(storageVocabulary.enemy_position), CARDBONUS, getValue(storageVocabulary.enemy_log))
+            }
         })
 }
 
@@ -77,7 +86,7 @@ function initGameField() {
     }
 }
 
-function ename() {
+function setEnemyName() {
     sendPostRequest('coop/enemyLogin', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.enemy_log, result);
@@ -100,7 +109,7 @@ function create() {
     setValue(storageVocabulary.is_single, false)
     let lobby = document.getElementById("lobby_name").value;
 
-    sendPostRequest('coop/createGame', "login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby))
+    sendPostRequest('coop/createGame', "login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby) + "&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             setValue(storageVocabulary.game_id, result)
             let timerId = setTimeout(function checkGameTimer() {
@@ -142,7 +151,7 @@ function join(element) {
     setValue(storageVocabulary.is_single, false)
     let parent = element.parentNode;
 
-    sendPostRequest('coop/connectToGame', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id))
+    sendPostRequest('coop/connectToGame', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id) +"&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             getGameField(result)
         })
@@ -158,7 +167,18 @@ function createGameField() {
 function getGameField(result) {
     if (getValue(storageVocabulary.game_ready) === "true") {
         setValue(storageVocabulary.field, result)
-        ename();
+        setEnemyName();
         window.location.href = 'game_field.html';
     }
+}
+
+function updateLobby(){
+    sendPostRequest('availableGames')
+        .then(result => {
+            let availableGames=JSON.parse(result)
+            deleteLobby()
+            for (let i=0;i<availableGames.length;i++){
+                addLobby(availableGames[i]);
+            }
+        })
 }

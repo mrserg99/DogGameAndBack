@@ -69,3 +69,20 @@ function printRecourse(cell_id, recourse_id, count){
             + "<div class='card_bonus_text'>+"+count+"</div>"
     )
 }
+
+function addLobby(game){
+    let itemListParent = document.getElementById('first');
+    let newElement = '<div id="'+game.gameId+'" class="wrapper3_btn">\n' +
+        '                <h2 class="wrapper3_btn_row1_name">' +game.name+'</h2>\n' +
+        '                <button  onclick="join(this)" class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
+        '            </div>'
+    itemListParent.insertAdjacentHTML( 'afterend', newElement )
+}
+
+function deleteLobby(){
+    const elements = document.getElementsByClassName("wrapper3_btn");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+
+}

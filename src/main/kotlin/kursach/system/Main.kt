@@ -4,6 +4,8 @@ import kursach.system.dto.Game
 import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
+import kursach.system.repository.QueryLocal
+import kursach.system.repository.QueryRemove
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.*
 
 @SpringBootApplication
 @Controller
-class Main(val query: Query) {
+class Main() {
+
+    val query: Query = if (false) QueryLocal() else QueryRemove()
 
     companion object {
         val log = LoggerFactory.getLogger(Main::class.java)
@@ -49,6 +53,7 @@ class Main(val query: Query) {
         @RequestParam(value = "password") pass: String
     ): ResponseEntity<String> {
         //  val test = URL("https://mysql.lavro.ru/call.php?db=263879&").readText()
+
         log.info("registration - Логин = ${login}, Пароль = $pass")
         if (query.registrationQuery(login, pass)) {
             log.info("registration - вернул $login")
@@ -115,7 +120,7 @@ class Main(val query: Query) {
         @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<List<PlayerResources>> {
         log.info("move - position = $position")
-        return ResponseEntity(query.moveQuery(position.toInt(), login, gameId.toInt()), HttpStatus.OK)
+        return ResponseEntity(query.moveQuery(login, position.toInt(), gameId.toInt()), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/canMove"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -151,6 +156,7 @@ class Main(val query: Query) {
     ): ResponseEntity<Boolean> {
         log.info("finish - login = $login")
         query.playerFinished(login, gameId.toInt())
+        query.setMoveNextPlayerQuery(login, gameId.toInt())
 
         return checkFinish(gameId)
     }

@@ -221,23 +221,6 @@
             fade_to_next();
         }, interval
     );
-    function getXmlHttp() {
-        var x = false;
-        try {
-            x = new XMLHttpRequest();
-        } catch (e) {
-            try {
-                x = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (ex) {
-                try {
-                    req = new ActiveXObject("Msxml2.XMLHTTP");
-                } catch (e1) {
-                    x = false;
-                }
-            }
-        }
-        return x;
-    }
 </script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/core.js"></script>

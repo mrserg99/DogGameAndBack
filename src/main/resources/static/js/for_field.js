@@ -34,7 +34,7 @@ function checkPosition(old_cell_position, new_cell_id) {
             && (new_cell_id < old_cell_position + 3 || new_cell_id === 21)
     }
 
-    if(old_cell_position >= 19){
+    if(old_cell_position >= 19 && old_cell_position < 21){
         return old_cell_position < new_cell_id
             && (new_cell_id < old_cell_position + 3 || new_cell_id === 30)
     }
@@ -94,7 +94,7 @@ function finish(element){
         createFinishSquare(USER, new_cell_id, getValue(storageVocabulary.login))
         sendPostRequest('finish',"position=" + encodeURIComponent(new_cell_id)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
             .then(result => {
-                if (result.responseText === "true"){
+                if (result === "true"){
                     win();
                 }else {
                     waitFinishOverPlayers()

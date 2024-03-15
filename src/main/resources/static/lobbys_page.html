@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
 </head>
-<body onload="update()">
+<body onload="updateLobby()">
 
 <div class="wrapper">
     <div class="bread_crumbs">
@@ -22,7 +22,7 @@
         <div class="wrapper3_header">
             <h1>Игровые лобби</h1>
             <button onclick="make_lobby()" id="make_lobby" class="wrapper3_header_btn">Создать свое</button>
-            <button onclick="update()" id="add" class="wrapper3_header_btn">Обновить</button>
+            <button onclick="updateLobby()" id="add" class="wrapper3_header_btn">Обновить</button>
         </div>
 
         <section id="first">
@@ -80,44 +80,5 @@
         document.getElementById("wrapper_35").classList.add("dis_none");
 
     }
-
-    function add(game){
-        var itemListParent = document.getElementById('first');
-        var itemList = document.querySelectorAll('.wrapper3_btn');
-            var newElement = '<div id="'+game.gameId+'" class="wrapper3_btn">\n' +
-                '                <h2 class="wrapper3_btn_row1_name">' +game.name+'</h2>\n' +
-                '                <button  onclick="join(this)" class="wrapper3_btn_row1_btn">Присоедениться</button>\n' +
-                '            </div>'
-            itemListParent.insertAdjacentHTML( 'afterend', newElement )
-    }
-
-    function del(){
-        const elements = document.getElementsByClassName("wrapper3_btn");
-            while(elements.length > 0){
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-
-    }
-
-
-    function update() {
-        var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-        xmlhttp.open('POST', 'availableGames', true); // Открываем асинхронное соединение
-        xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
-        xmlhttp.send(); // Отправляем POST-запрос
-        xmlhttp.onload = function () {
-            if (xmlhttp.status === 200) { // анализируем HTTP-статус ответа, если статус не 200, то произошла ошибка
-                let value = xmlhttp.responseText;
-                let availableGames=JSON.parse(value)
-                del()
-                for (let i=0;i<availableGames.length;i++){
-
-                    add(availableGames[i]);
-                }
-            }
-        }
-    }
-
-
 </script>
 </html>
