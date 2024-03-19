@@ -4,7 +4,6 @@ import kursach.system.dto.Game
 import kursach.system.dto.Games
 import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
-import kursach.system.repository.QueryLocal
 import kursach.system.repository.QueryRemove
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -19,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class App {
 
-    val query: Query = if (false) QueryLocal() else QueryRemove()
+    val query: Query = QueryRemove()
 
     companion object {
         val log = LoggerFactory.getLogger(App::class.java)
     }
 
-    @RequestMapping(value = ["/"])
+    @RequestMapping(value = ["/welcome"])
     fun welcome(): String {
         log.info("Подключение к сервису")
         return "login"

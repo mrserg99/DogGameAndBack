@@ -25,7 +25,7 @@ interface Query {
 
     fun everyoneFinish(gameId: Int): Boolean
 
-    fun createGameQuery(gameName: String = ""): Int
+    fun createGameQuery(gameName: String = "singleGame"): Int
 
     fun createPlayerQuery(login: String, gameID: Int, dogId: String)
 

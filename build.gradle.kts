@@ -21,25 +21,13 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.exposed:exposed-core:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-crypt:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-dao:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-jdbc:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-json:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-money:0.47.0")
-	implementation("org.jetbrains.exposed:exposed-spring-boot-starter:0.47.0")
-	runtimeOnly("com.mysql:mysql-connector-j")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.security:spring-security-test")
 }
 
 configurations.implementation {
@@ -56,7 +44,3 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-//
-//tasks.named("bootJar") {
-//	mainC = 'com.example.ExampleApplication'
-//}

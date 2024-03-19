@@ -73,6 +73,9 @@ function initGameField() {
     creatResources();
 
     document.getElementById("wrapper_34").classList.add("dis_none");
+    let itemListParent = document.getElementById('w4bd');
+    let elem = "<img id='dog_img' src='../img/dogs/"+getValue(storageVocabulary.dog)+".png' alt='dog5' class='wrapper4_bottom_dog_img'>"
+    itemListParent.insertAdjacentHTML("beforeend", elem);
 
     if (getValue(storageVocabulary.is_single) !== "true") {
         createStartSquare(ENEMY, getValue(storageVocabulary.enemy_log));
@@ -133,7 +136,7 @@ async function checkGameMove() {
 }
 
 async function checkGameFinish() {
-    await sendPostRequest('coop/everyoneFinish', "gameId=" + getValue(storageVocabulary.game_id))
+    await sendPostRequest('everyoneFinish', "gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.all_finish, result);
         })
@@ -150,7 +153,6 @@ function join(element) {
     setValue(storageVocabulary.game_ready, true)
     setValue(storageVocabulary.is_single, false)
     let parent = element.parentNode;
-
     sendPostRequest('coop/connectToGame', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id) +"&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             getGameField(result)
