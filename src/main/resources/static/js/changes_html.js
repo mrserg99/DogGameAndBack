@@ -1,7 +1,7 @@
 function creatResources() {
     let cells = JSON.parse(getValue(storageVocabulary.field))["cells"];
 
-    for (let i = 0; i<cells.length; i++){
+    for (let i = 1; i<cells.length-2; i++){
         let cell = cells[i]
         printRecourse(cell.cellId, cell.resourceId, cell.countOfResources)
     }

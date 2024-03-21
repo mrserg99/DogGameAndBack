@@ -34,14 +34,14 @@ function checkPosition(old_cell_position, new_cell_id) {
             && (new_cell_id < old_cell_position + 3 || new_cell_id === 21)
     }
 
-    if(old_cell_position >= 19 && old_cell_position < 21){
+    if(old_cell_position === 19 || old_cell_position === 20){
         return old_cell_position < new_cell_id
-            && (new_cell_id < old_cell_position + 3 || new_cell_id === 30)
+            && (new_cell_id === 20 || new_cell_id === 30)
     }
 
     if(old_cell_position >= 21){
         return old_cell_position < new_cell_id
-            && (new_cell_id < old_cell_position + 3 || new_cell_id === 31)
+            && (new_cell_id > 24 || new_cell_id === 31)
     }
 
     return false;
@@ -53,7 +53,7 @@ function move(element){
     if (checkPosition(settings.myPosition, new_cell_id)){
         deleteSquare(USER)
         createSquare(USER, new_cell_id, CARDBONUS, getValue(storageVocabulary.login))
-        sendPostRequest('move',"position=" + encodeURIComponent(new_cell_id)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+        sendPostRequest('move',"position=" + encodeURIComponent(new_cell_id)+"&token="+getValue(storageVocabulary.token)+"&gameId="+getValue(storageVocabulary.game_id))
             .then(result => {
                 settings.myPosition=new_cell_id
 
@@ -88,11 +88,17 @@ function waitFinishOverPlayers() {
 
 function finish(element){
     let new_cell_id = Number(element.id);
-
     if (checkPosition(settings.myPosition, new_cell_id)){
+        if (getValue(storageVocabulary.is_single) === 'true'){
+            sendPostRequest('finish',"position=" + encodeURIComponent(new_cell_id)+"&token="+getValue(storageVocabulary.token)+"&gameId="+getValue(storageVocabulary.game_id))
+                .then(result => {
+                    win();
+                })
+        }
+
         deleteSquare(USER)
         createFinishSquare(USER, new_cell_id, getValue(storageVocabulary.login))
-        sendPostRequest('finish',"position=" + encodeURIComponent(new_cell_id)+"&login="+getValue(storageVocabulary.login)+"&gameId="+getValue(storageVocabulary.game_id))
+        sendPostRequest('finish',"position=" + encodeURIComponent(new_cell_id)+"&token="+getValue(storageVocabulary.token)+"&gameId="+getValue(storageVocabulary.game_id))
             .then(result => {
                 if (result === "true"){
                     win();

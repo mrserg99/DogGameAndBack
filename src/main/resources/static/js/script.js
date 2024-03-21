@@ -9,7 +9,8 @@ function authorisation() {
 
     sendPostRequest('login', "login=" + encodeURIComponent(login) + "&password=" + encodeURIComponent(password))
         .then(result => {
-            setValue(storageVocabulary.login, result)
+            setValue(storageVocabulary.token, result)
+            setValue(storageVocabulary.login, login)
             window.location.href = 'doggy.html';
         })
 }
@@ -20,7 +21,7 @@ function setDoggy(dog){
 }
 
 function whereEnemy() {
-    sendPostRequest('coop/whereEnemy', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
+    sendPostRequest('coop/whereEnemy', "token=" + getValue(storageVocabulary.token) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.enemy_position, result);
             deleteSquare(ENEMY)
@@ -86,8 +87,8 @@ function initGameField() {
     }
 }
 
-function setEnemyName() {
-    sendPostRequest('coop/enemyLogin', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
+async function setEnemyName() {
+    await sendPostRequest('coop/enemyLogin', "token=" + getValue(storageVocabulary.token) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.enemy_log, result);
         })
@@ -96,7 +97,7 @@ function setEnemyName() {
 function single() {
     setValue(storageVocabulary.is_single, true)
 
-    sendPostRequest('single/game', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&dog=" + getValue(storageVocabulary.dog))
+    sendPostRequest('single/game', "token=" + encodeURIComponent(getValue(storageVocabulary.token)) + "&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             setValue(storageVocabulary.field, result)
             window.location.href = 'game_field.html';
@@ -109,7 +110,7 @@ function create() {
     setValue(storageVocabulary.is_single, false)
     let lobby = document.getElementById("lobby_name").value;
 
-    sendPostRequest('coop/createGame', "login=" + getValue(storageVocabulary.login) + "&name=" + encodeURIComponent(lobby) + "&dog=" + getValue(storageVocabulary.dog))
+    sendPostRequest('coop/createGame', "token=" + getValue(storageVocabulary.token) + "&name=" + encodeURIComponent(lobby) + "&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             setValue(storageVocabulary.game_id, result)
             let timerId = setTimeout(function checkGameTimer() {
@@ -126,7 +127,7 @@ function create() {
 }
 
 async function checkGameMove() {
-    await sendPostRequest('coop/canMove', "login=" + getValue(storageVocabulary.login) + "&gameId=" + getValue(storageVocabulary.game_id))
+    await sendPostRequest('coop/canMove', "token=" + getValue(storageVocabulary.token) + "&gameId=" + getValue(storageVocabulary.game_id))
         .then(result => {
             setValue(storageVocabulary.move_ready, result);
         })
@@ -149,9 +150,11 @@ function checkGameStart() {
 function join(element) {
     setValue(storageVocabulary.game_ready, true)
     setValue(storageVocabulary.is_single, false)
-    let parent = element.parentNode;
+    let game_id = element.parentNode.id;
 
-    sendPostRequest('coop/connectToGame', "login=" + encodeURIComponent(getValue(storageVocabulary.login)) + "&gameId=" + encodeURIComponent(parent.id) +"&dog=" + getValue(storageVocabulary.dog))
+    setValue(storageVocabulary.game_id, game_id)
+
+    sendPostRequest('coop/connectToGame', "token=" + encodeURIComponent(getValue(storageVocabulary.token)) + "&gameId=" + getValue(storageVocabulary.game_id) +"&dog=" + getValue(storageVocabulary.dog))
         .then(result => {
             getGameField(result)
         })
@@ -167,8 +170,10 @@ function createGameField() {
 function getGameField(result) {
     if (getValue(storageVocabulary.game_ready) === "true") {
         setValue(storageVocabulary.field, result)
-        setEnemyName();
-        window.location.href = 'game_field.html';
+        setEnemyName().then( function () {
+                window.location.href = 'game_field.html'
+            }
+        )
     }
 }
 

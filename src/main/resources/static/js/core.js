@@ -15,6 +15,7 @@ const storageVocabulary = {
     resurse_1_9: "resurse_1_9",
     resurse_1_10: "resurse_1_10",
     login: "login",
+    token: "token",
     enemy_log: "enemy_log",
     field: "field",
     game_ready: "gameReady",

@@ -17,16 +17,16 @@ class QueryRemove : Query {
         val mapper = jacksonObjectMapper()
     }
 
-    override fun authorisationQuery(login: String, password: String): Boolean {
+    override fun authorisationQuery(login: String, password: String): String {
         log.info("Вызов процедуры авторизации")
 
         val query = prepareQuery(Procedures.authorisationUser, login, password)
 
         val json = URL(query).readText()
 
-        val result = mapper.readValue<Map<String, List<Int>>>(json)
+        val result = mapper.readValue<Map<String, List<String>>>(json)
 
-        return result.getBoolean("result")
+        return result["result"]?.get(0) ?: "error"
     }
 
     override fun registrationQuery(login: String, password: String): Boolean {
@@ -65,38 +65,42 @@ class QueryRemove : Query {
         return cells.getCells()
     }
 
-    override fun moveQuery(login: String, position: Int, gameId: Int): List<PlayerResources> {
+    override fun moveQuery(token: String, position: Int, gameId: Int): List<PlayerResources> {
         log.info("Вызов процедуры хода игрока")
-        val query = prepareQuery(Procedures.move, login, position, gameId)
+        val query = prepareQuery(Procedures.move, token, position, gameId)
 
         val json = URL(query).readText()
 
         val result = mapper.readValue<Map<String, List<Int>>>(json)
 
-        val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, login, gameId)
+        val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, token, gameId)
         URL(queryFinishMove).readText()
 
-        val querySetNextPlayerMove = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
+        val querySetNextPlayerMove = prepareQuery(Procedures.setMoveNextPlayer, token, gameId)
         URL(querySetNextPlayerMove).readText()
 
         return result.getPlayerResources()
     }
 
-    override fun takeMeMoveQuery(login: String, gameId: Int) {
-        val query = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+    override fun takeMeMoveQuery(token: String, gameId: Int) {
+        val query = prepareQuery(Procedures.playerMoveTrue, token, gameId)
         URL(query).readText()
     }
 
-    override fun setMoveNextPlayerQuery(login: String, gameId: Int) {
-        val query = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
+    override fun setMoveNextPlayerQuery(token: String, gameId: Int) {
+        val query = prepareQuery(Procedures.setMoveNextPlayer, token, gameId)
         URL(query).readText()
     }
 
-    override fun playerFinished(login: String, gameId: Int) {
+    override fun playerFinished(token: String, position: String, gameId: Int): String {
         log.info("Вызов процедуры игрок на финише")
 
-        val query = prepareQuery(Procedures.playerFinished, login, gameId)
-        URL(query).readText()
+        val query = prepareQuery(Procedures.playerFinished, token, position, gameId)
+        val json = URL(query).readText()
+        val result = mapper.readValue<Map<String, List<String>>>(json)
+
+        return result["result"]?.get(0) ?: "you finished"
+
     }
 
     override fun everyoneFinish(gameId: Int): Boolean {
@@ -121,10 +125,10 @@ class QueryRemove : Query {
         return result.getInt("result")
     }
 
-    override fun createPlayerQuery(login: String, gameID: Int, dogId: String) {
+    override fun createPlayerQuery(token: String, gameID: Int, dogId: String) {
         log.info("Вызов процедуры создания игрока")
 
-        val query = prepareQuery(Procedures.createPlayer, login, gameID, mapDog(dogId))
+        val query = prepareQuery(Procedures.createPlayer, token, gameID, mapDog(dogId))
         URL(query).readText()
     }
 
@@ -175,10 +179,10 @@ class QueryRemove : Query {
         return result.getBoolean("result")
     }
 
-    override fun getEnemyLoginQuery(login: String, gameId: Int): String {
+    override fun getEnemyLoginQuery(token: String, gameId: Int): String {
         log.info("Вызов процедуры получения логина соперника")
 
-        val query = prepareQuery(Procedures.getEnemyLogin, login, gameId)
+        val query = prepareQuery(Procedures.getEnemyLogin, token, gameId)
 
         val json = URL(query).readText()
         val result = mapper.readValue<Map<String, List<String>>>(json)
@@ -203,10 +207,10 @@ class QueryRemove : Query {
         return result.getInt("result")
     }
 
-    override fun canMove(login: String, gameId: Int): Boolean {
+    override fun canMove(token: String, gameId: Int): Boolean {
         log.info("Вызов процедуры выбора игрока для первого хода")
 
-        val query = prepareQuery(Procedures.canPlayerMove, login, gameId)
+        val query = prepareQuery(Procedures.canPlayerMove, token, gameId)
 
         val json = URL(query).readText()
         val result = mapper.readValue<Map<String, List<Int>>>(json)
@@ -214,15 +218,26 @@ class QueryRemove : Query {
         return result.getBoolean("result")
     }
 
-    override fun whereEnemyQuery(login: String, gameId: Int): Int {
+    override fun whereEnemyQuery(token: String, gameId: Int): Int {
         log.info("Вызов процедуры поиска позиции соперника")
 
-        val query = prepareQuery(Procedures.enemiesPlace, login, gameId)
+        val query = prepareQuery(Procedures.enemiesPlace, token, gameId)
 
         val json = URL(query).readText()
         val result = mapper.readValue<Map<String, List<Int>>>(json)
 
         return result.getInt("result")
+    }
+
+    override fun isEnemyFinishQuery(token: String, gameId: Int): Boolean {
+        QueryLocal.log.info("Вызов процедуры проверки что соперник закончил игру ")
+
+        val query = prepareQuery(Procedures.isEnemyFinish, token, gameId)
+
+        val json = URL(query).readText()
+        val result = mapper.readValue<Map<String, List<Int>>>(json)
+
+        return result.getBoolean("result")
     }
 
     private fun prepareQuery(procedure: String, vararg arguments: Any): String {
@@ -251,7 +266,7 @@ class QueryRemove : Query {
     }
 
     private fun Map<String, List<Int>>.getInt(key: String): Int {
-        return if(this[key]!![0] == null) return 0 else return this[key]!![0]
+        return if(this[key]!![0] == null)  0 else this[key]!![0]
     }
 }
 

@@ -2,7 +2,6 @@ package kursach.system
 
 import kursach.system.dto.Game
 import kursach.system.dto.Games
-import kursach.system.dto.PlayerResources
 import kursach.system.repository.Query
 import kursach.system.repository.QueryLocal
 import kursach.system.repository.QueryRemove
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class App {
 
-    val query: Query = if (false) QueryLocal() else QueryRemove()
+    val query: Query = if (true) QueryLocal() else QueryRemove()
 
     companion object {
         val log = LoggerFactory.getLogger(App::class.java)
@@ -37,9 +36,10 @@ class App {
         @RequestParam(value = "password") pass: String
     ): ResponseEntity<String> {
         log.info("login - Логин = ${login}, Пароль = $pass")
-        if (query.authorisationQuery(login, pass)) {
-            log.info("login - вернул $login")
-            return ResponseEntity(login, HttpStatus.OK)
+        val token = query.authorisationQuery(login, pass)
+        if (token != "error") {
+            log.info("login - вернул $token")
+            return ResponseEntity(token, HttpStatus.OK)
         } else {
             log.error("login - ошибка, некорректные данные")
             return ResponseEntity(HttpStatus.UNAUTHORIZED)
@@ -63,25 +63,26 @@ class App {
 
     @PostMapping(value = ["/single/game"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun gameSingle(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "dog") dog: String
     ): ResponseEntity<Game> {
         log.info("single/game- Создаём одиночную игру")
         val gameId = query.createGameQuery()
-        query.createPlayerQuery(login, gameId, dog)
-        query.takeMeMoveQuery(login, gameId)
+        query.createPlayerQuery(token, gameId, dog)
+        query.gameStart(gameId)
+        query.setFirstMoveQuery(gameId)
         return ResponseEntity(Game(gameId, query.createGameFieldQuery(gameId)), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/createGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun createGameCoop(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "name") name: String,
         @RequestParam(value = "dog") dog: String
     ): ResponseEntity<Int> {
         log.info("coop/createGame - Создаём кооперативную игру")
         val gameId = query.createGameQuery(name)
-        query.createPlayerQuery(login, gameId, dog)
+        query.createPlayerQuery(token, gameId, dog)
         return ResponseEntity(gameId, HttpStatus.OK)
     }
 
@@ -93,15 +94,16 @@ class App {
 
     @PostMapping(value = ["/coop/connectToGame"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun gameCoop(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "gameId") gameId: String,
         @RequestParam(value = "dog") dog: String
     ): ResponseEntity<Game> {
         log.info("coop/connectToGame - Пользователь подключается к игре")
-        query.createPlayerQuery(login, gameId.toInt(), dog)
+        query.createPlayerQuery(token, gameId.toInt(), dog)
+        val gameField = query.createGameFieldQuery(gameId.toInt())
         query.gameStart(gameId.toInt())
         query.setFirstMoveQuery(gameId.toInt())
-        return ResponseEntity(Game(gameId.toInt(), query.createGameFieldQuery(gameId.toInt())), HttpStatus.OK)
+        return ResponseEntity(Game(gameId.toInt(), gameField), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/getGameField"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -113,20 +115,25 @@ class App {
     @PostMapping(value = ["/move"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun move(
         @RequestParam(value = "position") position: String,
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") login: String,
         @RequestParam(value = "gameId") gameId: String
-    ): ResponseEntity<List<PlayerResources>> {
+    ): ResponseEntity<Any> {
         log.info("move - position = $position")
         return ResponseEntity(query.moveQuery(login, position.toInt(), gameId.toInt()), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/canMove"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun canMove(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<Boolean> {
         log.info("coop/canMove - проверяем можно ли ходить")
-        return ResponseEntity(query.canMove(login, gameId.toInt()), HttpStatus.OK)
+
+        if (query.isEnemyFinishQuery(token, gameId.toInt())) {
+            return ResponseEntity(true, HttpStatus.OK)
+        }
+
+        return ResponseEntity(query.canMove(token, gameId.toInt()), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/coop/gameStatus"], produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -139,26 +146,27 @@ class App {
 
     @PostMapping(value = ["coop/whereEnemy"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun whereEnemy(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<Int> {
         log.info("whereEnemy - проверяем где противник")
-        return ResponseEntity(query.whereEnemyQuery(login, gameId.toInt()), HttpStatus.OK)
+        return ResponseEntity(query.whereEnemyQuery(token, gameId.toInt()), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/finish"])
     fun finish(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
+        @RequestParam(value = "position") position: String,
         @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<Boolean> {
-        log.info("finish - login = $login")
-        query.playerFinished(login, gameId.toInt())
-        query.setMoveNextPlayerQuery(login, gameId.toInt())
+        log.info("finish - token = $token")
+        query.playerFinished(token, position, gameId.toInt())
+        query.setMoveNextPlayerQuery(token, gameId.toInt())
 
         return checkFinish(gameId)
     }
 
-    @PostMapping(value = ["/everyoneFinish"])
+    @PostMapping(value = ["coop/everyoneFinish"])
     fun everyoneFinish(@RequestParam(value = "gameId") gameId: String): ResponseEntity<Boolean> {
         log.info("everyoneFinish - проверяем все ли финишировали")
         return checkFinish(gameId)
@@ -184,11 +192,11 @@ class App {
 
     @PostMapping(value = ["/coop/enemyLogin"])
     fun getEnemyLogin(
-        @RequestParam(value = "login") login: String,
+        @RequestParam(value = "token") token: String,
         @RequestParam(value = "gameId") gameId: String
     ): ResponseEntity<String> {
-        log.info("coop/enemyLogin - Получение логина соперника")
+        log.info("$token coop/enemyLogin - Получение логина соперника")
 
-        return ResponseEntity(query.getEnemyLoginQuery(login, gameId.toInt()), HttpStatus.OK)
+        return ResponseEntity(query.getEnemyLoginQuery(token, gameId.toInt()), HttpStatus.OK)
     }
 }

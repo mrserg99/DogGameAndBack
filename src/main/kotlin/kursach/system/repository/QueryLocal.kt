@@ -20,20 +20,20 @@ class QueryLocal: Query {
 
     init {
         Database.connect(
-            "jdbc:mysql://localhost:3306",
+            "jdbc:mysql://localhost:3306/kursach",
             driver = "com.mysql.cj.jdbc.Driver",
-            user = "admin",
-            password = ""
+            user = "root",
+            password = "password"
         )
     }
 
-    override fun authorisationQuery(login: String, password: String): Boolean {
+    override fun authorisationQuery(login: String, password: String): String {
         log.info("Вызов процедуры авторизации")
 
         val query = prepareQuery(Procedures.authorisationUser, login, password)
         val result = transaction {
             query.execAndMap { rs ->
-                rs.getBoolean("result")
+                rs.getString("result")
             }
         }
         return result[0]
@@ -81,51 +81,55 @@ class QueryLocal: Query {
         return result
     }
 
-    override fun moveQuery(login: String, position: Int, gameId: Int): List<PlayerResources> {
+    override fun moveQuery(token: String, position: Int, gameId: Int): Any {
         log.info("Вызов процедуры хода игрока")
 
-        val query = prepareQuery(Procedures.move, login, position, gameId)
+        val query = prepareQuery(Procedures.move, token, position, gameId)
         val result = transaction {
-            query.execAndMap {rs ->
-                PlayerResources(
-                    resourcesId = rs.getLong("Resource_ID"),
-                    countOfResources = rs.getInt("Count_of_resources"))
+            query.execAndMap { rs ->
+                if (rs.metaData.columnCount != 1) {
+                    PlayerResources(
+                        resourcesId = rs.getLong("Resource_ID"),
+                        countOfResources = rs.getInt("Count_of_resources")
+                    )
+                } else {
+                    rs.getString("result")
+                }
             }
         }
 
-        val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, login, gameId)
-        transaction {
-            queryFinishMove.execAndMap()
+        return if (result.size == 1){
+            result[0] as String
+        } else {
+            result as List<PlayerResources>
         }
-
-        val querySetNextPlayerMove = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
-        transaction {
-            querySetNextPlayerMove.execAndMap()
-        }
-        return result
     }
 
-    override fun takeMeMoveQuery(login: String, gameId: Int){
-        val query = prepareQuery(Procedures.playerMoveTrue, login, gameId)
+    override fun takeMeMoveQuery(token: String, gameId: Int){
+        val query = prepareQuery(Procedures.playerMoveTrue, token, gameId)
         transaction {
             query.execAndMap()
         }
     }
 
-    override fun setMoveNextPlayerQuery(login: String, gameId: Int){
-        val query = prepareQuery(Procedures.setMoveNextPlayer, login, gameId)
+    override fun setMoveNextPlayerQuery(token: String, gameId: Int){
+        val query = prepareQuery(Procedures.setMoveNextPlayer, token, gameId)
         transaction {
             query.execAndMap()
         }
     }
 
-    override fun playerFinished(login: String, gameId: Int) {
+    override fun playerFinished(token: String, position: String, gameId: Int): String {
         log.info("Вызов процедуры игрок на финише")
 
-        val query = prepareQuery(Procedures.playerFinished, login, gameId)
-        transaction {
-            query.execAndMap()
+        val query = prepareQuery(Procedures.playerFinished, token, position, gameId)
+        val result = transaction {
+            query.execAndMap { rs ->
+                    rs.getString("result")
+            }
         }
+
+        return result[0]
     }
 
     override fun everyoneFinish(gameId: Int): Boolean {
@@ -154,10 +158,10 @@ class QueryLocal: Query {
         return result[0]
     }
 
-    override fun createPlayerQuery(login: String, gameID: Int, dogId: String){
+    override fun createPlayerQuery(token: String, gameID: Int, dogId: String){
         log.info("Вызов процедуры создания игрока")
 
-        val query = prepareQuery(Procedures.createPlayer, login, gameID, mapDog(dogId))
+        val query = prepareQuery(Procedures.createPlayer, token, gameID, mapDog(dogId))
         transaction {
             query.execAndMap()
         }
@@ -218,10 +222,10 @@ class QueryLocal: Query {
         return result[0]
     }
 
-    override fun getEnemyLoginQuery(login: String, gameId: Int): String{
+    override fun getEnemyLoginQuery(token: String, gameId: Int): String{
         log.info("Вызов процедуры получения логина соперника")
 
-        val query = prepareQuery(Procedures.getEnemyLogin, login, gameId)
+        val query = prepareQuery(Procedures.getEnemyLogin, token, gameId)
         val result = transaction {
             query.execAndMap {rs ->
                 rs.getString("result")
@@ -252,10 +256,10 @@ class QueryLocal: Query {
         return result[0]
     }
 
-    override fun canMove(login: String, gameId: Int): Boolean {
+    override fun canMove(token: String, gameId: Int): Boolean {
         log.info("Вызов процедуры выбора игрока для первого хода")
 
-        val query = prepareQuery(Procedures.canPlayerMove, login, gameId)
+        val query = prepareQuery(Procedures.canPlayerMove, token, gameId)
         val result = transaction {
             query.execAndMap(){rs ->
                 rs.getBoolean("result")
@@ -265,10 +269,23 @@ class QueryLocal: Query {
         return result[0]
     }
 
-    override fun whereEnemyQuery(login: String, gameId: Int): Int {
+    override fun isEnemyFinishQuery(token: String, gameId: Int): Boolean {
+        log.info("Вызов процедуры проверки что соперник закончил игру ")
+
+        val query = prepareQuery(Procedures.isEnemyFinish, token, gameId)
+        val result = transaction {
+            query.execAndMap(){rs ->
+                rs.getBoolean("result")
+            }
+        }
+
+        return result[0]
+    }
+
+    override fun whereEnemyQuery(token: String, gameId: Int): Int {
         log.info("Вызов процедуры поиска позиции соперника")
 
-        val query = prepareQuery(Procedures.enemiesPlace, login, gameId)
+        val query = prepareQuery(Procedures.enemiesPlace, token, gameId)
         val result = transaction {
             query.execAndMap(){rs ->
                 rs.getInt("result")
