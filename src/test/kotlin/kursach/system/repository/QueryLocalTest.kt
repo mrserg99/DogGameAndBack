@@ -3,12 +3,26 @@ package kursach.system.repository
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeAll
 import java.util.UUID
 
 class QueryLocalTest {
 
     companion object {
         val query: Query = if (false) QueryLocal() else QueryRemove()
+
+        @JvmStatic
+        @BeforeAll
+        fun createUsers() {
+            val login1 = "user1"
+            val password1 = "password1"
+
+            val login2 = "user2"
+            val password2 = "password2"
+
+            query.registrationQuery(login1, password1)
+            query.registrationQuery(login2, password2)
+        }
     }
 
     @Test
@@ -125,9 +139,8 @@ class QueryLocalTest {
         assertNotNull(actual[i].countOfResources)
     }
 
-
     @Test
-    fun moveQueryNotYourTurnTest() {
+    fun moveQuerySingleNotYourTurnTest() {
         val login = "user1"
         val password = "password1"
         val dog = "2"
@@ -144,7 +157,7 @@ class QueryLocalTest {
     }
 
     @Test
-    fun moveQueryIncorrectPositionTest() {
+    fun moveQuerySingleIncorrectPositionTest() {
         val login = "user1"
         val password = "password1"
         val dog = "2"
@@ -1136,7 +1149,6 @@ class QueryLocalTest {
         }
     }
 
-
     @Test
     fun moveQueryCoopGameStepInCorrectFinishNotTurnTest() {
         val login1 = "user1"
@@ -1730,15 +1742,15 @@ class QueryLocalTest {
         query.gameStart(gameId)
         query.setFirstMoveQuery(gameId)
 
-        assertTrue(query.canMove(token,gameId))
+        assertTrue(query.canMove(token, gameId))
 
         query.moveQuery(token, 12, gameId)
 
-        assertTrue(query.canMove(token,gameId))
+        assertTrue(query.canMove(token, gameId))
     }
 
     @Test
-    fun canMoveCoopTest(){
+    fun canMoveCoopTest() {
         val login1 = "user1"
         val password1 = "password1"
         val dog1 = "2"
@@ -1766,23 +1778,23 @@ class QueryLocalTest {
         val isSecondCanMove = query.canMove(token2, gameId)
 
         if (isFirstCanMove) {
-            assertTrue(query.canMove(token1,gameId))
-            assertFalse(query.canMove(token2,gameId))
+            assertTrue(query.canMove(token1, gameId))
+            assertFalse(query.canMove(token2, gameId))
 
             query.moveQuery(token1, 11, gameId)
 
-            assertTrue(query.canMove(token2,gameId))
-            assertFalse(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token2, gameId))
+            assertFalse(query.canMove(token1, gameId))
 
             query.moveQuery(token2, 11, gameId)
 
-            assertTrue(query.canMove(token1,gameId))
-            assertFalse(query.canMove(token2,gameId))
+            assertTrue(query.canMove(token1, gameId))
+            assertFalse(query.canMove(token2, gameId))
 
             query.moveQuery(token1, 12, gameId)
 
-            assertTrue(query.canMove(token2,gameId))
-            assertFalse(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token2, gameId))
+            assertFalse(query.canMove(token1, gameId))
 
             query.moveQuery(token2, 12, gameId)
             query.moveQuery(token1, 14, gameId)
@@ -1796,11 +1808,11 @@ class QueryLocalTest {
 
             query.playerFinished(token1, "30", gameId)
 
-            assertTrue(query.canMove(token2,gameId))
+            assertTrue(query.canMove(token2, gameId))
 
             query.moveQuery(token2, 17, gameId)
 
-            assertTrue(query.canMove(token2,gameId))
+            assertTrue(query.canMove(token2, gameId))
 
             query.moveQuery(token2, 18, gameId)
             query.moveQuery(token2, 19, gameId)
@@ -1809,18 +1821,18 @@ class QueryLocalTest {
         }
 
         if (isSecondCanMove) {
-            assertTrue(query.canMove(token2,gameId))
-            assertFalse(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token2, gameId))
+            assertFalse(query.canMove(token1, gameId))
 
             query.moveQuery(token2, 11, gameId)
 
-            assertTrue(query.canMove(token1,gameId))
-            assertFalse(query.canMove(token2,gameId))
+            assertTrue(query.canMove(token1, gameId))
+            assertFalse(query.canMove(token2, gameId))
 
             query.moveQuery(token1, 11, gameId)
 
-            assertTrue(query.canMove(token2,gameId))
-            assertFalse(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token2, gameId))
+            assertFalse(query.canMove(token1, gameId))
 
             query.moveQuery(token2, 13, gameId)
             query.moveQuery(token1, 12, gameId)
@@ -1835,11 +1847,11 @@ class QueryLocalTest {
 
             query.playerFinished(token2, "30", gameId)
 
-            assertTrue(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token1, gameId))
 
             query.moveQuery(token1, 17, gameId)
 
-            assertTrue(query.canMove(token1,gameId))
+            assertTrue(query.canMove(token1, gameId))
 
             query.moveQuery(token1, 18, gameId)
             query.moveQuery(token1, 19, gameId)
@@ -1891,11 +1903,11 @@ class QueryLocalTest {
             query.moveQuery(token1, 20, gameId)
             query.moveQuery(token2, 16, gameId)
 
-            assertFalse(query.isEnemyFinishQuery(token2,gameId))
+            assertFalse(query.isEnemyFinishQuery(token2, gameId))
 
             query.playerFinished(token1, "30", gameId)
 
-            assertTrue(query.isEnemyFinishQuery(token2,gameId))
+            assertTrue(query.isEnemyFinishQuery(token2, gameId))
 
             query.moveQuery(token2, 17, gameId)
             query.moveQuery(token2, 18, gameId)
@@ -1918,11 +1930,11 @@ class QueryLocalTest {
             query.moveQuery(token2, 20, gameId)
             query.moveQuery(token1, 16, gameId)
 
-            assertFalse(query.isEnemyFinishQuery(token1,gameId))
+            assertFalse(query.isEnemyFinishQuery(token1, gameId))
 
             query.playerFinished(token2, "30", gameId)
 
-            assertTrue(query.isEnemyFinishQuery(token1,gameId))
+            assertTrue(query.isEnemyFinishQuery(token1, gameId))
 
             query.moveQuery(token1, 17, gameId)
             query.moveQuery(token1, 18, gameId)
@@ -1962,21 +1974,21 @@ class QueryLocalTest {
         val isSecondCanMove = query.canMove(token2, gameId)
 
         if (isFirstCanMove) {
-            assertEquals(0,query.whereEnemyQuery(token2,gameId))
+            assertEquals(0, query.whereEnemyQuery(token2, gameId))
 
             query.moveQuery(token1, 11, gameId)
             query.moveQuery(token2, 11, gameId)
             query.moveQuery(token1, 12, gameId)
             query.moveQuery(token2, 12, gameId)
 
-            assertEquals(12,query.whereEnemyQuery(token2,gameId))
+            assertEquals(12, query.whereEnemyQuery(token2, gameId))
 
             query.moveQuery(token1, 14, gameId)
             query.moveQuery(token2, 13, gameId)
             query.moveQuery(token1, 16, gameId)
 
 
-            assertEquals(16,query.whereEnemyQuery(token2,gameId))
+            assertEquals(16, query.whereEnemyQuery(token2, gameId))
 
             query.moveQuery(token2, 14, gameId)
             query.moveQuery(token1, 18, gameId)
@@ -1984,11 +1996,11 @@ class QueryLocalTest {
             query.moveQuery(token1, 20, gameId)
             query.moveQuery(token2, 16, gameId)
 
-            assertEquals(20,query.whereEnemyQuery(token2,gameId))
+            assertEquals(20, query.whereEnemyQuery(token2, gameId))
 
             query.playerFinished(token1, "30", gameId)
 
-            assertEquals(30,query.whereEnemyQuery(token2,gameId))
+            assertEquals(30, query.whereEnemyQuery(token2, gameId))
 
             query.moveQuery(token2, 17, gameId)
             query.moveQuery(token2, 18, gameId)
@@ -1998,19 +2010,19 @@ class QueryLocalTest {
         }
 
         if (isSecondCanMove) {
-            assertEquals(0,query.whereEnemyQuery(token1,gameId))
+            assertEquals(0, query.whereEnemyQuery(token1, gameId))
 
             query.moveQuery(token2, 11, gameId)
             query.moveQuery(token1, 11, gameId)
             query.moveQuery(token2, 13, gameId)
 
-            assertEquals(13,query.whereEnemyQuery(token1,gameId))
+            assertEquals(13, query.whereEnemyQuery(token1, gameId))
 
             query.moveQuery(token1, 12, gameId)
             query.moveQuery(token2, 15, gameId)
             query.moveQuery(token1, 13, gameId)
 
-            assertEquals(15,query.whereEnemyQuery(token1,gameId))
+            assertEquals(15, query.whereEnemyQuery(token1, gameId))
 
             query.moveQuery(token2, 16, gameId)
             query.moveQuery(token1, 14, gameId)
@@ -2019,11 +2031,11 @@ class QueryLocalTest {
             query.moveQuery(token2, 20, gameId)
             query.moveQuery(token1, 16, gameId)
 
-            assertEquals(20,query.whereEnemyQuery(token1,gameId))
+            assertEquals(20, query.whereEnemyQuery(token1, gameId))
 
             query.playerFinished(token2, "30", gameId)
 
-            assertEquals(30,query.whereEnemyQuery(token1,gameId))
+            assertEquals(30, query.whereEnemyQuery(token1, gameId))
 
             query.moveQuery(token1, 17, gameId)
             query.moveQuery(token1, 18, gameId)

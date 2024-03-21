@@ -65,21 +65,19 @@ class QueryRemove : Query {
         return cells.getCells()
     }
 
-    override fun moveQuery(token: String, position: Int, gameId: Int): List<PlayerResources> {
+    override fun moveQuery(token: String, position: Int, gameId: Int): Any {
         log.info("Вызов процедуры хода игрока")
         val query = prepareQuery(Procedures.move, token, position, gameId)
 
         val json = URL(query).readText()
 
-        val result = mapper.readValue<Map<String, List<Int>>>(json)
+        val result = mapper.readValue<Map<String, List<String>>>(json)
 
-        val queryFinishMove = prepareQuery(Procedures.playerMoveFalse, token, gameId)
-        URL(queryFinishMove).readText()
-
-        val querySetNextPlayerMove = prepareQuery(Procedures.setMoveNextPlayer, token, gameId)
-        URL(querySetNextPlayerMove).readText()
-
-        return result.getPlayerResources()
+        return if (result.size == 1){
+            result["result"]?.get(0) ?: "error"
+        } else {
+            result.getPlayerResources()
+        }
     }
 
     override fun takeMeMoveQuery(token: String, gameId: Int) {
@@ -270,13 +268,13 @@ class QueryRemove : Query {
     }
 }
 
-private fun Map<String, List<Int>>.getPlayerResources(): List<PlayerResources> {
+private fun Map<String, List<String>>.getPlayerResources(): List<PlayerResources> {
     val result = mutableListOf<PlayerResources>()
 
     for(i in this["Player_ID"]!!.indices) {
         val cell = PlayerResources(
             resourcesId = this["Resource_ID"]!![i].toLong(),
-            countOfResources = this["Count_of_resources"]!![i]
+            countOfResources = this["Count_of_resources"]!![i].toInt()
         )
         result.add(i, cell)
     }
