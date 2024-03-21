@@ -1,5 +1,6 @@
 package kursach.system.repository
 
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -67,8 +68,15 @@ class QueryLocalTest {
 
     @Test
     fun createGameFieldQueryTest() {
+        val login = "user1"
+        val password = "password1"
+        val dog = "2"
 
+        val token = query.authorisationQuery(login, password)
         val gameId = query.createGameQuery("testGame")
+        query.createGameFieldQuery(gameId)
+        query.createPlayerQuery(token, gameId, dog)
+        query.gameStart(gameId)
 
         val actual = query.createGameFieldQuery(gameId)
 
@@ -137,6 +145,8 @@ class QueryLocalTest {
         assertEquals(31, actual[i].cellId)
         assertNotNull(actual[i].resourceId)
         assertNotNull(actual[i].countOfResources)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -154,6 +164,8 @@ class QueryLocalTest {
         val move0to12 = query.moveQuery(token, 12, gameId)
 
         assertEquals("not your turn", move0to12)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -172,6 +184,8 @@ class QueryLocalTest {
         query.moveQuery(token, 12, gameId)
         val move12to19 = query.moveQuery(token, 19, gameId)
         assertEquals("incorrect position", move12to19)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -226,6 +240,9 @@ class QueryLocalTest {
         val move19to20 = query.moveQuery(token, 20, gameId)
         assertNotNull(move19to20)
         assertTrue(move19to20 is List<*>)
+
+        query.playerFinished(token, "30", gameId)
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -260,6 +277,9 @@ class QueryLocalTest {
         val move18to20 = query.moveQuery(token, 20, gameId)
         assertNotNull(move18to20)
         assertTrue(move18to20 is List<*>)
+
+        query.playerFinished(token, "30", gameId)
+        query.gameFinish(gameId)
     }
 
 
@@ -295,6 +315,8 @@ class QueryLocalTest {
         val move16to17 = query.moveQuery(token, 17, gameId)
         assertNotNull(move16to17)
         assertTrue(move16to17 is List<*>)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -333,6 +355,9 @@ class QueryLocalTest {
         val move21to22 = query.moveQuery(token, 22, gameId)
         assertNotNull(move21to22)
         assertTrue(move21to22 is List<*>)
+
+        query.playerFinished(token, "31", gameId)
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -371,6 +396,9 @@ class QueryLocalTest {
         val move21to22 = query.moveQuery(token, 22, gameId)
         assertNotNull(move21to22)
         assertTrue(move21to22 is List<*>)
+
+        query.playerFinished(token, "31", gameId)
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -478,15 +506,16 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token1, "30", gameId)
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
 
         if (isSecondCanMove) {
-
             val secondMove0to11 = query.moveQuery(token2, 11, gameId)
             assertNotNull(secondMove0to11)
             assertTrue(secondMove0to11 is List<*>)
@@ -567,6 +596,9 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
+            query.playerFinished(token1, "30", gameId)
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
     }
 
@@ -659,15 +691,15 @@ class QueryLocalTest {
             assertNotNull(secondMove18to19)
             assertTrue(secondMove18to19 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
 
         if (isSecondCanMove) {
-
             val secondMove0to11 = query.moveQuery(token2, 11, gameId)
             assertNotNull(secondMove0to11)
             assertTrue(secondMove0to11 is List<*>)
@@ -727,11 +759,12 @@ class QueryLocalTest {
             assertNotNull(secondMove18to19)
             assertTrue(secondMove18to19 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
     }
 
@@ -793,7 +826,6 @@ class QueryLocalTest {
             assertNotNull(firstMove13to14)
             assertTrue(firstMove13to14 is List<*>)
 
-
             val secondMove13to14 = query.moveQuery(token2, 14, gameId)
             assertNotNull(secondMove13to14)
             assertTrue(secondMove13to14 is List<*>)
@@ -846,15 +878,16 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token1, "30", gameId)
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
 
         if (isSecondCanMove) {
-
             val secondMove0to11 = query.moveQuery(token2, 11, gameId)
             assertNotNull(secondMove0to11)
             assertTrue(secondMove0to11 is List<*>)
@@ -939,6 +972,9 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.playerFinished(token1, "30", gameId)
+            query.gameFinish(gameId)
         }
     }
 
@@ -1000,7 +1036,6 @@ class QueryLocalTest {
             assertNotNull(firstMove13to14)
             assertTrue(firstMove13to14 is List<*>)
 
-
             val secondMove13to14 = query.moveQuery(token2, 14, gameId)
             assertNotNull(secondMove13to14)
             assertTrue(secondMove13to14 is List<*>)
@@ -1052,15 +1087,16 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token1, "30", gameId)
+            query.playerFinished(token2, "30", gameId)
+            query.gameFinish(gameId)
         }
 
         if (isSecondCanMove) {
-
             val secondMove0to11 = query.moveQuery(token2, 11, gameId)
             assertNotNull(secondMove0to11)
             assertTrue(secondMove0to11 is List<*>)
@@ -1089,10 +1125,8 @@ class QueryLocalTest {
             assertNotNull(secondMove13to14)
             assertTrue(secondMove13to14 is List<*>)
 
-
             val firstFinish = query.playerFinished(token1, "30", gameId)
             assertEquals("incorrect position", firstFinish)
-
 
             val firstMove13to14 = query.moveQuery(token1, 14, gameId)
             assertNotNull(firstMove13to14)
@@ -1146,6 +1180,9 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.playerFinished(token1, "30", gameId)
+            query.gameFinish(gameId)
         }
     }
 
@@ -1206,7 +1243,6 @@ class QueryLocalTest {
             assertNotNull(firstMove13to14)
             assertTrue(firstMove13to14 is List<*>)
 
-
             val secondMove13to14 = query.moveQuery(token2, 14, gameId)
             assertNotNull(secondMove13to14)
             assertTrue(secondMove13to14 is List<*>)
@@ -1258,15 +1294,16 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
-
             val secondMove19to20 = query.moveQuery(token2, 20, gameId)
             assertNotNull(secondMove19to20)
             assertTrue(secondMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.playerFinished(token1, "30", gameId)
+            query.gameFinish(gameId)
         }
 
         if (isSecondCanMove) {
-
             val secondMove0to11 = query.moveQuery(token2, 11, gameId)
             assertNotNull(secondMove0to11)
             assertTrue(secondMove0to11 is List<*>)
@@ -1350,6 +1387,9 @@ class QueryLocalTest {
             assertNotNull(firstMove19to20)
             assertTrue(firstMove19to20 is List<*>)
 
+            query.playerFinished(token2, "30", gameId)
+            query.playerFinished(token1, "30", gameId)
+            query.gameFinish(gameId)
         }
     }
 
@@ -1386,15 +1426,14 @@ class QueryLocalTest {
             query.setMoveNextPlayerQuery(token1, gameId)
             val action = query.canMove(token2, gameId)
             assertTrue(action)
-
         }
         if (isSecondCanMove) {
             assertFalse(isFirstCanMove)
             query.setMoveNextPlayerQuery(token2, gameId)
             val action = query.canMove(token1, gameId)
             assertTrue(action)
-
         }
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1423,6 +1462,8 @@ class QueryLocalTest {
 
         val actual = query.playerFinished(token, "31", gameId)
         assertEquals("you finished", actual)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1524,6 +1565,8 @@ class QueryLocalTest {
             val firstFinishActual = query.playerFinished(token1, "30", gameId)
             assertEquals("you finished", firstFinishActual)
         }
+
+        query.gameFinish(gameId)
     }
 
 
@@ -1554,6 +1597,8 @@ class QueryLocalTest {
 
         val everyoneFinishActual = query.everyoneFinish(gameId)
         assertTrue(everyoneFinishActual)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1649,6 +1694,7 @@ class QueryLocalTest {
 
             assertTrue(query.everyoneFinish(gameId))
         }
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1680,6 +1726,8 @@ class QueryLocalTest {
         assertEquals("user2", enemyLogonForFirstActual)
         val enemyLogonForSecondActual = query.getEnemyLoginQuery(token2, gameId)
         assertEquals("user1", enemyLogonForSecondActual)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1696,6 +1744,8 @@ class QueryLocalTest {
         assertFalse(query.canMove(token, gameId))
         query.setFirstMoveQuery(gameId)
         assertTrue(query.canMove(token, gameId))
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1727,6 +1777,8 @@ class QueryLocalTest {
         assertTrue(query.canMove(token1, gameId) || query.canMove(token2, gameId))
         //game started(first player)
         query.getGameFieldQuery(gameId)
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1747,6 +1799,8 @@ class QueryLocalTest {
         query.moveQuery(token, 12, gameId)
 
         assertTrue(query.canMove(token, gameId))
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1859,6 +1913,8 @@ class QueryLocalTest {
 
             query.playerFinished(token1, "30", gameId)
         }
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -1942,6 +1998,8 @@ class QueryLocalTest {
             query.moveQuery(token1, 20, gameId)
             query.playerFinished(token1, "30", gameId)
         }
+
+        query.gameFinish(gameId)
     }
 
     @Test
@@ -2043,5 +2101,7 @@ class QueryLocalTest {
             query.moveQuery(token1, 20, gameId)
             query.playerFinished(token1, "30", gameId)
         }
+
+        query.gameFinish(gameId)
     }
 }
