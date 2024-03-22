@@ -73,11 +73,9 @@ class QueryTest {
 
         val token = query.authorisationQuery(login, password)
         val gameId = query.createGameQuery("testGame")
-        query.createGameFieldQuery(gameId)
+        val actual = query.createGameFieldQuery(gameId)
         query.createPlayerQuery(token, gameId, dog)
         query.gameStart(gameId)
-
-        val actual = query.createGameFieldQuery(gameId)
 
         var i = 0
         assertNotNull(actual)

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @Controller
 class App {
 
-    val query: Query = if (true) QueryLocal() else QueryRemove()
+    val query: Query = if (false) QueryLocal() else QueryRemove()
 
     companion object {
         val log = LoggerFactory.getLogger(App::class.java)
